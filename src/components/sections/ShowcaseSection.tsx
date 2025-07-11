@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { motion, useInView } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 import type { Swiper as SwiperClass } from "swiper/types";
@@ -74,15 +74,18 @@ const ShowcaseSection = () => {
   const [swiper, setSwiper] = useState<SwiperClass | null>(null);
   const [flippedCardId, setFlippedCardId] = useState<number | null>(null);
   const [headlineIndex, setHeadlineIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   
+  // Optimized headline animation with reduced frequency
   useEffect(() => {
     const interval = setInterval(() => {
       setHeadlineIndex((i) => (i + 1) % headlineEmojis.length);
-    }, 1800);
+    }, 3000); // Increased from 1800ms to reduce CPU usage
     return () => clearInterval(interval);
   }, []);
 
-  const handleCardClick = (clickedIndex: number, clickedId: number) => {
+  // Optimized card click handler
+  const handleCardClick = useCallback((clickedIndex: number, clickedId: number) => {
     if (!swiper) return;
 
     if (swiper.realIndex === clickedIndex) {
@@ -96,22 +99,38 @@ const ShowcaseSection = () => {
       swiper.on("slideChangeTransitionEnd", flipAfterSlide);
       swiper.slideToLoop(clickedIndex);
     }
-  };
+  }, [swiper]);
 
+  // Optimized swiper event handling
   useEffect(() => {
     if (swiper) {
-      swiper.on('sliderMove', () => setFlippedCardId(null));
-    }
-    return () => {
-      if (swiper) {
-        swiper.off('sliderMove', () => setFlippedCardId(null));
-      }
+      const handleSliderMove = () => setFlippedCardId(null);
+      swiper.on('sliderMove', handleSliderMove);
+      return () => {
+        swiper.off('sliderMove', handleSliderMove);
+      };
     }
   }, [swiper]);
 
+  // Intersection observer for performance
+  const sectionRef = useCallback((node: HTMLElement | null) => {
+    if (node) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(node);
+    }
+  }, []);
+
   return (
-    <section id="portfolio" className="relative bg-neutral-dark py-24 overflow-hidden">
-      {/* Floating SVG Stickers */}
+    <section ref={sectionRef} id="portfolio" className="relative bg-neutral-dark py-24 overflow-hidden">
+      {/* Floating SVG Stickers - Optimized loading */}
       {floatingStickers.map((sticker, i) => (
         <Image
           key={i}
@@ -119,17 +138,17 @@ const ShowcaseSection = () => {
           alt={sticker.alt}
           width={48}
           height={48}
+          priority={i === 0} // Only prioritize first sticker
           className={`pointer-events-none select-none opacity-60 absolute z-0 ${sticker.style}`}
         />
       ))}
       
       <div className="mx-auto max-w-7xl px-6">
-        {/* Section Header */}
+        {/* Section Header - Optimized animations */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-6">
@@ -138,7 +157,7 @@ const ShowcaseSection = () => {
               key={headlineIndex}
               initial={{ scale: 0.8, rotate: -10 }}
               animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.5, type: "spring", bounce: 0.6 }}
+              transition={{ duration: 0.4, type: "spring", bounce: 0.4 }}
               className="inline-block text-accent-green"
             >
               {headlineEmojis[headlineIndex]}
@@ -149,7 +168,7 @@ const ShowcaseSection = () => {
           </p>
         </motion.div>
 
-        {/* Showcase Carousel */}
+        {/* Showcase Carousel - Optimized Swiper config */}
         <div className="relative">
           <Swiper
             onSwiper={setSwiper}
@@ -161,8 +180,8 @@ const ShowcaseSection = () => {
             coverflowEffect={{
               rotate: 0,
               stretch: 0,
-              depth: 100,
-              modifier: 2.5,
+              depth: 80, // Reduced from 100
+              modifier: 2, // Reduced from 2.5
             }}
             pagination={{ el: ".swiper-pagination", clickable: true }}
             navigation={{
@@ -171,17 +190,18 @@ const ShowcaseSection = () => {
             }}
             modules={[EffectCoverflow, Pagination, Navigation]}
             className="h-[500px] w-full"
+            speed={600} // Reduced from default for better performance
+            autoplay={false} // Disabled autoplay to reduce CPU usage
           >
             {projects.map((project, index) => (
               <SwiperSlide key={project.id} className="!w-[400px]">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                  animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ 
                     scale: 1.02,
-                    transition: { duration: 0.3 }
+                    transition: { duration: 0.2 }
                   }}
                   className="relative group"
                 >
@@ -195,11 +215,11 @@ const ShowcaseSection = () => {
             ))}
           </Swiper>
 
-          {/* Navigation Controls */}
+          {/* Navigation Controls - Simplified animations */}
           <div className="relative mx-auto mt-8 flex w-64 items-center justify-center gap-8">
             <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className="swiper-button-prev !static !h-14 !w-14 rounded-full bg-primary-purple/50 !text-white transition-colors hover:bg-primary-purple flex items-center justify-center cursor-pointer"
             >
               <ChevronLeft className="h-8 w-8" />
@@ -208,8 +228,8 @@ const ShowcaseSection = () => {
             <div className="swiper-pagination !static !w-auto"></div>
             
             <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className="swiper-button-next !static !h-14 !w-14 rounded-full bg-primary-purple/50 !text-white transition-colors hover:bg-primary-purple flex items-center justify-center cursor-pointer"
             >
               <ChevronRight className="h-8 w-8" />
@@ -217,21 +237,20 @@ const ShowcaseSection = () => {
           </div>
         </div>
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA - Optimized animation */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          viewport={{ once: true }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-16"
         >
           <p className="text-lg text-neutral-gray mb-6">
             Ready to create your own viral moment?
           </p>
           <motion.button
-            whileHover={{ scale: 1.05, rotate: 1 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-accent-green to-highlight-pink text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all duration-300"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="bg-gradient-to-r from-accent-green to-highlight-pink text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all duration-200"
           >
             Let's Make Magic! ✨
           </motion.button>
