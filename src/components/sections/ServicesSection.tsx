@@ -102,14 +102,18 @@ const ServicesSection = () => {
           {serviceCards.map((service, index) => (
             <div
               key={index}
-              className={`relative rounded-3xl border-4 ${service.color} shadow-xl p-8 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:-rotate-2 group`}
+              className={`relative rounded-3xl border-4 ${service.color} shadow-xl p-8 flex flex-col items-center text-center transition-transform duration-300 
+                ${index === 0 ? 'hover:-rotate-3 hover:scale-105' : ''}
+                ${index === 1 ? 'hover:bg-accent-green/20 hover:scale-105' : ''}
+                ${index === 2 ? 'hover:scale-105 hover:translate-y-2' : ''}
+                group`}
             >
               <div className="w-20 h-20 mb-4 flex items-center justify-center relative">
                 <Image src={service.icon} alt={service.title} width={64} height={64} className="w-16 h-16 drop-shadow-lg" />
-                <span className="absolute -top-3 -right-3 text-2xl animate-bounce">{service.emoji}</span>
+                <span className="absolute -top-3 -right-3 text-2xl">{service.emoji}</span>
               </div>
-              <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
-              <p className="text-neutral-medium mb-4">{service.description}</p>
+              <h3 className="text-2xl font-bold mb-2" style={{color: '#1F2937'}}>{service.title}</h3>
+              <p className="text-neutral-medium mb-4" style={{color: '#374151'}}>{service.description}</p>
               {service.badge && (
                 <span className="mt-2 inline-block bg-accent-green text-neutral-dark text-xs font-semibold px-3 py-1 rounded-full">
                   {service.badge}
@@ -121,10 +125,6 @@ const ServicesSection = () => {
                   <span className="ml-1">{service.counter.suffix}</span>
                 </div>
               )}
-              {/* Emoji burst on hover */}
-              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-0">
-                <span className="text-2xl animate-bounce">😂🔥🎉</span>
-              </span>
             </div>
           ))}
         </div>

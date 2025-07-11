@@ -152,12 +152,8 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.7 }}
             className="mt-8 flex items-center gap-4"
           >
-            <Button className="text-lg md:text-xl px-8 py-5 font-extrabold bg-primary-purple text-white rounded-full shadow-lg relative overflow-hidden group">
-              <span className="relative z-10">Make Memes, Make Impact 🚀</span>
-              {/* Emoji burst on hover */}
-              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-0">
-                <span className="text-2xl animate-bounce">😂🔥🎉</span>
-              </span>
+            <Button className="text-lg md:text-xl px-8 py-5 font-extrabold bg-primary-purple text-white rounded-full shadow-lg hover:bg-accent-green hover:text-primary-purple transition-all duration-200">
+              Make Memes, Make Impact 🚀
             </Button>
             <a
               href="#"

@@ -153,16 +153,16 @@ const ShowcaseSection = () => {
         >
           {projects.map((project, index) => (
             <SwiperSlide key={project.id} className="!w-[400px]">
-              <div className="relative group">
+              <div className={`relative group 
+                ${index === 0 ? 'hover:shadow-2xl hover:scale-105' : ''}
+                ${index === 1 ? 'hover:border-4 hover:border-accent-green' : ''}
+                ${index === 2 ? 'hover:scale-105 hover:brightness-110' : ''}
+              `}>
                 <ShowcaseCard 
                   {...project} 
                   isFlipped={flippedCardId === project.id}
                   onCardClick={() => handleCardClick(index, project.id)}
                 />
-                {/* Emoji burst on hover */}
-                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-10">
-                  <span className="text-2xl animate-bounce">😂🔥🎉</span>
-                </span>
               </div>
             </SwiperSlide>
           ))}

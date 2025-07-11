@@ -93,25 +93,25 @@ const WhyDifferentSection = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`flex items-start gap-4 rounded-2xl border-4 ${feature.color} p-6 shadow-lg transition-transform duration-300 hover:scale-105 hover:rotate-1 group`}
+                className={`flex items-start gap-4 rounded-2xl border-4 ${feature.color} p-6 shadow-lg transition-transform duration-300 
+                  ${index === 0 ? 'hover:scale-105 hover:animate-pulse' : ''}
+                  ${index === 1 ? 'hover:bg-highlight-pink/10 hover:scale-105' : ''}
+                  ${index === 2 ? 'hover:scale-105 hover:-rotate-2' : ''}
+                  group`}
               >
                 <div className="w-16 h-16 flex items-center justify-center relative">
                   <Image src={feature.icon} alt={feature.title} width={48} height={48} className="w-12 h-12 drop-shadow-lg" />
-                  <span className="absolute -top-2 -right-2 text-xl animate-bounce">{feature.emoji}</span>
+                  <span className="absolute -top-2 -right-2 text-xl">{feature.emoji}</span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-1">{feature.title}</h3>
-                  <p className="text-neutral-gray mb-1">{feature.description}</p>
+                  <h3 className="text-xl font-bold mb-1" style={{color: '#F9FAFB'}}>{feature.title}</h3>
+                  <p className="text-neutral-gray mb-1" style={{color: '#E5E7EB'}}>{feature.description}</p>
                   {feature.badge && (
                     <span className="mt-2 inline-block bg-highlight-pink text-white text-xs font-semibold px-3 py-1 rounded-full">
                       {feature.badge}
                     </span>
                   )}
                 </div>
-                {/* Emoji burst on hover */}
-                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-0">
-                  <span className="text-xl animate-bounce">😂🔥🎉</span>
-                </span>
               </div>
             ))}
           </div>
