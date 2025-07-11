@@ -43,7 +43,13 @@ const features = [
 
 const WhyDifferentSection = () => {
   return (
-    <section className="bg-neutral-dark text-neutral-light py-28">
+    <section className="relative bg-neutral-dark text-neutral-light py-28 overflow-hidden">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 animated-gradient opacity-20 -z-10" />
+      {/* Subtle Pattern Overlay (optional) */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        {/* Example: SVG pattern or sparkles can be added here */}
+      </div>
       <div className="container mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         {/* Left Column: Text Content */}
         <div>
@@ -52,7 +58,7 @@ const WhyDifferentSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-extrabold mb-4"
+            className="text-4xl font-extrabold mb-4 fade-in-up"
           >
             Not Just Another Agency—Your Strategic Meme & Data Powerhouse
           </motion.h2>
@@ -61,7 +67,7 @@ const WhyDifferentSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-neutral-gray mb-12"
+            className="text-xl text-neutral-gray mb-12 fade-in-up"
           >
             We blend viral creativity with AI-driven insights, giving you the
             best of both worlds.
@@ -75,16 +81,16 @@ const WhyDifferentSection = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 0.5, delay: 0.2 * index }}
-                className="flex items-start gap-4"
+                className="flex items-start gap-4 bounce-in"
               >
-                <div className="flex-shrink-0">{feature.icon}</div>
+                <div className="flex-shrink-0 glow-animate">{feature.icon}</div>
                 <div>
-                  <h3 className="text-xl font-bold">{feature.title}</h3>
-                  <p className="text-neutral-gray mt-1">
+                  <h3 className="text-xl font-bold fade-in-up">{feature.title}</h3>
+                  <p className="text-neutral-gray mt-1 fade-in-up">
                     {feature.description}
                   </p>
                   {feature.badge && (
-                    <span className="mt-2 inline-block bg-highlight-pink text-white text-xs font-semibold px-3 py-1 rounded-full">
+                    <span className="mt-2 inline-block bg-highlight-pink text-white text-xs font-semibold px-3 py-1 rounded-full fade-in-up">
                       {feature.badge}
                     </span>
                   )}
@@ -95,7 +101,7 @@ const WhyDifferentSection = () => {
         </div>
 
         {/* Right Column: Interactive Graphic Placeholder */}
-        <div className="flex items-center justify-center h-full min-h-[400px]">
+        <div className="flex items-center justify-center h-full min-h-[400px] fade-in-up">
           <FeatureMap />
         </div>
       </div>

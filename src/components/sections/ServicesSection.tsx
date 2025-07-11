@@ -71,7 +71,13 @@ const itemVariants = {
 
 const ServicesSection = () => {
   return (
-    <section className="py-28 bg-white">
+    <section className="relative py-28 bg-white overflow-hidden">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 animated-gradient opacity-10 -z-10" />
+      {/* Subtle Pattern Overlay (optional) */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        {/* Example: SVG pattern or sparkles can be added here */}
+      </div>
       <div className="container mx-auto px-8">
         <motion.div
           variants={containerVariants}
@@ -81,18 +87,18 @@ const ServicesSection = () => {
           className="grid grid-cols-1 md:grid-cols-3 gap-10"
         >
           {services.map((service, index) => (
-            <motion.div key={index} variants={itemVariants}>
-              <Card>
-                {service.icon}
-                <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
-                <p className="text-neutral-medium">{service.description}</p>
+            <motion.div key={index} variants={itemVariants} className="bounce-in">
+              <Card className="transition-all duration-300 hover:glow-animate">
+                <div className="float-animate mb-2">{service.icon}</div>
+                <h3 className="text-2xl font-bold mb-2 fade-in-up">{service.title}</h3>
+                <p className="text-neutral-medium fade-in-up">{service.description}</p>
                 {service.badge && (
-                  <span className="mt-4 inline-block bg-accent-green text-neutral-dark text-xs font-semibold px-3 py-1 rounded-full">
+                  <span className="mt-4 inline-block bg-accent-green text-neutral-dark text-xs font-semibold px-3 py-1 rounded-full fade-in-up">
                     {service.badge}
                   </span>
                 )}
                 {service.counter && (
-                  <div className="mt-4 text-lg font-bold">
+                  <div className="mt-4 text-lg font-bold fade-in-up">
                     <LiveCounter
                       from={service.counter.from}
                       to={service.counter.to}

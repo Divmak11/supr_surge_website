@@ -101,12 +101,18 @@ const ShowcaseSection = () => {
 
 
   return (
-    <section className="bg-neutral-dark py-20">
+    <section className="relative bg-neutral-dark py-20 overflow-hidden">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 animated-gradient opacity-20 -z-10" />
+      {/* Subtle Pattern Overlay (optional) */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        {/* Example: SVG pattern or sparkles can be added here */}
+      </div>
       <div className="mx-auto max-w-screen-xl px-4">
-        <h2 className="text-center font-montserrat text-4xl font-bold text-white">
+        <h2 className="text-center font-montserrat text-4xl font-bold text-white fade-in-up">
           Our Top Works
         </h2>
-        <p className="mt-4 text-center font-sans text-lg text-neutral-gray">
+        <p className="mt-4 text-center font-sans text-lg text-neutral-gray fade-in-up">
           Where creativity meets data, and pixels meet purpose.
         </p>
       </div>
@@ -134,11 +140,13 @@ const ShowcaseSection = () => {
         >
           {projects.map((project, index) => (
             <SwiperSlide key={project.id} className="!w-[400px]">
-              <ShowcaseCard 
-                {...project} 
-                isFlipped={flippedCardId === project.id}
-                onCardClick={() => handleCardClick(index, project.id)}
-              />
+              <div className="glow-animate">
+                <ShowcaseCard 
+                  {...project} 
+                  isFlipped={flippedCardId === project.id}
+                  onCardClick={() => handleCardClick(index, project.id)}
+                />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
