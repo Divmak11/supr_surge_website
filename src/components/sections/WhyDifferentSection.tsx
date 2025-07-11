@@ -67,7 +67,7 @@ const WhyDifferentSection = () => {
   }, []);
 
   return (
-    <section className="relative bg-neutral-dark text-neutral-light py-28 overflow-hidden">
+    <section id="why-different" className="relative bg-neutral-dark text-neutral-light py-28 overflow-hidden">
       {/* Floating SVG Stickers */}
       {floatingStickers.map((sticker, i) => (
         <Image
@@ -79,46 +79,148 @@ const WhyDifferentSection = () => {
           className={`pointer-events-none select-none opacity-60 absolute z-0 ${sticker.style}`}
         />
       ))}
-      <div className="container mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        {/* Left Column: Text Content */}
-        <div>
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 flex items-center gap-4">
-            Why We’re Different
-            <span className="text-4xl md:text-5xl animate-bounce inline-block">{headlineEmojis[headlineIndex]}</span>
-          </h2>
-          <p className="text-xl text-neutral-gray mb-12">
-            Viral creativity meets AI-driven insights, giving you the best of both worlds.
-          </p>
-          <div className="space-y-8">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className={`flex items-start gap-4 rounded-2xl border-4 ${feature.color} p-6 shadow-lg transition-transform duration-300 
-                  ${index === 0 ? 'hover:scale-105 hover:animate-pulse' : ''}
-                  ${index === 1 ? 'hover:bg-highlight-pink/10 hover:scale-105' : ''}
-                  ${index === 2 ? 'hover:scale-105 hover:-rotate-2' : ''}
-                  group`}
-              >
-                <div className="w-16 h-16 flex items-center justify-center relative">
-                  <Image src={feature.icon} alt={feature.title} width={48} height={48} className="w-12 h-12 drop-shadow-lg" />
-                  <span className="absolute -top-2 -right-2 text-xl">{feature.emoji}</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-1" style={{color: '#F9FAFB'}}>{feature.title}</h3>
-                  <p className="text-neutral-gray mb-1" style={{color: '#E5E7EB'}}>{feature.description}</p>
-                  {feature.badge && (
-                    <span className="mt-2 inline-block bg-highlight-pink text-white text-xs font-semibold px-3 py-1 rounded-full">
-                      {feature.badge}
-                    </span>
-                  )}
-                </div>
+      
+      <div className="container mx-auto px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Left Column: Text Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            {/* Section Header */}
+            <div className="mb-12">
+              <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-white">
+                Why We're{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
+                  Different
+                </span>
+                <motion.span
+                  key={headlineIndex}
+                  initial={{ scale: 0.8, rotate: -10 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.5, type: "spring", bounce: 0.6 }}
+                  className="inline-block ml-4 text-accent-green"
+                >
+                  {headlineEmojis[headlineIndex]}
+                </motion.span>
+              </h2>
+              <p className="text-xl text-neutral-gray leading-relaxed">
+                While others chase trends, we create them. Our unique blend of viral creativity and AI-driven insights gives you the best of both worlds.
+              </p>
+            </div>
+
+            {/* Features */}
+            <div className="space-y-6">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ 
+                    scale: 1.02,
+                    x: 10,
+                    transition: { duration: 0.3 }
+                  }}
+                  className={`flex items-start gap-4 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 p-6 shadow-lg hover:bg-white/15 transition-all duration-300 group cursor-pointer`}
+                >
+                  <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center relative">
+                    <Image 
+                      src={feature.icon} 
+                      alt={feature.title} 
+                      width={48} 
+                      height={48} 
+                      className="w-12 h-12 drop-shadow-lg group-hover:scale-110 transition-transform duration-300" 
+                    />
+                    <motion.span
+                      animate={{ 
+                        rotate: [0, 10, -10, 0],
+                        scale: [1, 1.1, 1] 
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        delay: index * 0.3 
+                      }}
+                      className="absolute -top-2 -right-2 text-xl"
+                    >
+                      {feature.emoji}
+                    </motion.span>
+                  </div>
+                  
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-xl font-bold text-white group-hover:text-accent-green transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      {feature.badge && (
+                        <span className="bg-highlight-pink text-white text-xs font-semibold px-3 py-1 rounded-full animate-pulse">
+                          {feature.badge}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-neutral-gray leading-relaxed group-hover:text-white transition-colors duration-300">
+                      {feature.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right Column: Interactive Graphic */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="flex items-center justify-center h-full min-h-[400px]"
+          >
+            <div className="relative w-full max-w-lg">
+              {/* Background Glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-purple/20 to-accent-green/20 rounded-3xl blur-xl"></div>
+              
+              {/* Main Graphic Container */}
+              <div className="relative bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+                <FeatureMap />
               </div>
-            ))}
-          </div>
-        </div>
-        {/* Right Column: Interactive Graphic Placeholder */}
-        <div className="flex items-center justify-center h-full min-h-[400px]">
-          <FeatureMap />
+              
+              {/* Floating Elements */}
+              <motion.div
+                animate={{ 
+                  y: [0, -10, 0],
+                  rotate: [0, 5, 0] 
+                }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity,
+                  ease: "easeInOut" 
+                }}
+                className="absolute -top-4 -right-4 w-12 h-12 bg-accent-green rounded-full flex items-center justify-center text-white font-bold shadow-lg"
+              >
+                AI
+              </motion.div>
+              
+              <motion.div
+                animate={{ 
+                  y: [0, 10, 0],
+                  rotate: [0, -5, 0] 
+                }}
+                transition={{ 
+                  duration: 4, 
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1 
+                }}
+                className="absolute -bottom-4 -left-4 w-12 h-12 bg-highlight-pink rounded-full flex items-center justify-center text-white text-xl shadow-lg"
+              >
+                🔥
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

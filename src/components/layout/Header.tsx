@@ -13,7 +13,8 @@ const Header = () => {
     { name: "Home", href: "#", emoji: "🏠" },
     { name: "About Us", href: "#about", emoji: "👥" },
     { name: "Services", href: "#services", emoji: "🚀" },
-    { name: "Contact Us", href: "#contact", emoji: "💬" },
+    { name: "Portfolio", href: "#portfolio", emoji: "🎨" },
+    { name: "Contact", href: "#contact", emoji: "💬" },
   ];
 
   useEffect(() => {
@@ -23,6 +24,16 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = (href: string) => {
+    setIsMobileMenuOpen(false);
+    if (href !== "#") {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <motion.header
@@ -41,7 +52,8 @@ const Header = () => {
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center space-x-2"
+            className="flex items-center space-x-2 cursor-pointer"
+            onClick={() => handleNavClick("#")}
           >
             <Logo />
             <span className="font-extrabold text-2xl text-primary-purple">
@@ -58,9 +70,9 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navigationItems.map((item, index) => (
-              <motion.a
+              <motion.button
                 key={item.name}
-                href={item.href}
+                onClick={() => handleNavClick(item.href)}
                 className="relative text-neutral-dark hover:text-primary-purple font-semibold transition-colors duration-200"
                 onMouseEnter={() => setHoveredItem(item.name)}
                 onMouseLeave={() => setHoveredItem(null)}
@@ -91,7 +103,7 @@ const Header = () => {
                     exit={{ opacity: 0 }}
                   />
                 )}
-              </motion.a>
+              </motion.button>
             ))}
           </nav>
 
@@ -99,6 +111,7 @@ const Header = () => {
           <motion.button
             whileHover={{ scale: 1.05, rotate: 1 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => handleNavClick("#contact")}
             className="hidden md:flex items-center space-x-2 bg-gradient-to-r from-primary-purple to-highlight-pink text-white px-6 py-3 rounded-full font-bold hover:shadow-lg transition-all duration-200"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -152,23 +165,23 @@ const Header = () => {
             >
               <div className="p-6 space-y-4">
                 {navigationItems.map((item, index) => (
-                  <motion.a
+                  <motion.button
                     key={item.name}
-                    href={item.href}
+                    onClick={() => handleNavClick(item.href)}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-center space-x-3 text-neutral-dark hover:text-primary-purple font-semibold text-lg transition-colors duration-200"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center space-x-3 text-neutral-dark hover:text-primary-purple font-semibold text-lg transition-colors duration-200 w-full text-left"
                   >
                     <span className="text-2xl">{item.emoji}</span>
                     <span>{item.name}</span>
-                  </motion.a>
+                  </motion.button>
                 ))}
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
+                  onClick={() => handleNavClick("#contact")}
                   className="w-full mt-4 bg-gradient-to-r from-primary-purple to-highlight-pink text-white px-6 py-3 rounded-full font-bold flex items-center justify-center space-x-2"
                 >
                   <Sparkles className="w-4 h-4" />
