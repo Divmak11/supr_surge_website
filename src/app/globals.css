@@ -14,3 +14,9 @@
   --font-sans: "Open Sans", sans-serif;
   --font-montserrat: "Montserrat", sans-serif;
 }
+
+/* Custom Swiper Navigation Styles */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: none !important;
+}

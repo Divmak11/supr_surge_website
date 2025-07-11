@@ -153,13 +153,13 @@ This section details the requirements and implementation tasks for each part of 
 
 -   **Micro-Tasks & Implementation Steps**:
     1.  **Task: Select and Implement a Carousel Library**
-        -   *Step*: Choose a library that supports 3D effects and dragging, such as `Swiper.js` or `Framer Motion`.
+        -   [x] *Step*: Choose a library that supports 3D effects and dragging, such as `Swiper.js` or `Framer Motion`.
     2.  **Task: Build the Project Card**
-        -   *Step*: Create the card component with its content (image, title, badge).
-        -   *Step*: Implement the 3D flip effect on hover using CSS `transform` with `rotateY(180deg)` and `backface-visibility: hidden`.
+        -   [x] *Step*: Create the card component with its content (image, title, badge).
+        -   [x] *Step*: Implement the 3D flip effect on hover using CSS `transform` with `rotateY(180deg)` and `backface-visibility: hidden`.
     3.  **Task: Configure the Carousel**
-        -   *Step*: Set up the carousel with the specified options (3 slides per view on desktop, responsiveness, navigation arrows, pagination).
-        -   *Step*: Implement the spring-like snap animation on drag release, a feature often configurable in modern carousel libraries.
+        -   [x] *Step*: Set up the carousel with the specified options (3 slides per view on desktop, responsiveness, navigation arrows, pagination).
+        -   [x] *Step*: Implement the spring-like snap animation on drag release, a feature often configurable in modern carousel libraries.
 
 ---
 
