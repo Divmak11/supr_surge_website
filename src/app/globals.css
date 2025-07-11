@@ -99,3 +99,18 @@
 .scroll-indicator svg {
   animation: float 2s infinite;
 }
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+@keyframes float-medium {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float-medium {
+  animation: float-medium 4.5s ease-in-out infinite;
+}
