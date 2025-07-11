@@ -12,6 +12,14 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import ShowcaseCard from "../ui/ShowcaseCard";
+import Image from "next/image";
+
+const floatingStickers = [
+  { src: "/file.svg", alt: "File Sticker", style: "top-8 left-8 w-10 animate-float-slow" },
+  { src: "/globe.svg", alt: "Globe Sticker", style: "bottom-8 right-8 w-12 animate-float-medium" },
+];
+
+const headlineEmojis = ["🎬", "🔥", "😂", "🚀", "🎉", "👑"];
 
 const projects = [
   {
@@ -64,30 +72,30 @@ const projects = [
 const ShowcaseSection = () => {
   const [swiper, setSwiper] = useState<SwiperClass | null>(null);
   const [flippedCardId, setFlippedCardId] = useState<number | null>(null);
+  const [headlineIndex, setHeadlineIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeadlineIndex((i) => (i + 1) % headlineEmojis.length);
+    }, 1800);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleCardClick = (clickedIndex: number, clickedId: number) => {
     if (!swiper) return;
 
     if (swiper.realIndex === clickedIndex) {
-      // Card is already in the center, toggle flip
       setFlippedCardId((current) => (current === clickedId ? null : clickedId));
     } else {
-      // Card is not in the center, slide to it
-      // Unflip any currently flipped card
       setFlippedCardId(null);
-      
-      // Set up a one-time event listener to flip the card *after* the slide transition ends
       const flipAfterSlide = () => {
         setFlippedCardId(clickedId);
         swiper.off("slideChangeTransitionEnd", flipAfterSlide);
       };
       swiper.on("slideChangeTransitionEnd", flipAfterSlide);
-      
       swiper.slideToLoop(clickedIndex);
     }
   };
-  
-  // When the user drags the slider, unflip the card
+
   useEffect(() => {
     if (swiper) {
       swiper.on('sliderMove', () => setFlippedCardId(null));
@@ -99,18 +107,23 @@ const ShowcaseSection = () => {
     }
   }, [swiper]);
 
-
   return (
     <section className="relative bg-neutral-dark py-20 overflow-hidden">
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 animated-gradient opacity-20 -z-10" />
-      {/* Subtle Pattern Overlay (optional) */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Example: SVG pattern or sparkles can be added here */}
-      </div>
+      {/* Floating SVG Stickers */}
+      {floatingStickers.map((sticker, i) => (
+        <Image
+          key={i}
+          src={sticker.src}
+          alt={sticker.alt}
+          width={48}
+          height={48}
+          className={`pointer-events-none select-none opacity-60 absolute z-0 ${sticker.style}`}
+        />
+      ))}
       <div className="mx-auto max-w-screen-xl px-4">
-        <h2 className="text-center font-montserrat text-4xl font-bold text-white fade-in-up">
-          Our Top Works
+        <h2 className="text-center font-montserrat text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+          Our Top Memes
+          <span className="text-4xl md:text-5xl animate-bounce inline-block">{headlineEmojis[headlineIndex]}</span>
         </h2>
         <p className="mt-4 text-center font-sans text-lg text-neutral-gray fade-in-up">
           Where creativity meets data, and pixels meet purpose.
@@ -140,12 +153,16 @@ const ShowcaseSection = () => {
         >
           {projects.map((project, index) => (
             <SwiperSlide key={project.id} className="!w-[400px]">
-              <div className="glow-animate">
+              <div className="relative group">
                 <ShowcaseCard 
                   {...project} 
                   isFlipped={flippedCardId === project.id}
                   onCardClick={() => handleCardClick(index, project.id)}
                 />
+                {/* Emoji burst on hover */}
+                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-10">
+                  <span className="text-2xl animate-bounce">😂🔥🎉</span>
+                </span>
               </div>
             </SwiperSlide>
           ))}

@@ -4,39 +4,41 @@ import { motion } from "framer-motion";
 import Card from "../ui/Card";
 import { Lightbulb, Presentation, TrendingUp } from "lucide-react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 const LiveCounter = dynamic(() => import("../ui/LiveCounter"), {
   ssr: false,
 });
 
-const services = [
+const floatingStickers = [
+  { src: "/window.svg", alt: "Window Sticker", style: "top-8 left-8 w-10 animate-float-slow" },
+  { src: "/file.svg", alt: "File Sticker", style: "bottom-8 right-8 w-12 animate-float-medium" },
+];
+
+const headlineEmojis = ["💡", "🚀", "📈", "🎨", "🔥", "😂"];
+
+const serviceCards = [
   {
-    icon: (
-      <motion.div whileHover={{ rotate: 360 }}>
-        <Lightbulb size={40} className="mb-4 text-primary-purple" />
-      </motion.div>
-    ),
+    icon: "/globe.svg",
+    emoji: "💡",
+    color: "bg-[#F9FAFB] border-[#8B5CF6]",
     title: "Ideate & Strategize",
     description:
-      "We start by decoding your brand’s voice and audience DNA—combining memetic trends with data-backed insights to craft a blueprint that’s both playful and precise.",
+      "We decode your brand’s voice and audience DNA—combining memetic trends with data-backed insights to craft a blueprint that’s both playful and precise.",
   },
   {
-    icon: (
-      <motion.div whileHover={{ rotate: 360 }}>
-        <Presentation size={40} className="mb-4 text-primary-purple" />
-      </motion.div>
-    ),
+    icon: "/window.svg",
+    emoji: "🚀",
+    color: "bg-[#F0F5FF] border-[#22C55E]",
     title: "Create & Amplify",
     description:
       "From scroll-stopping memes to influencer collabs, we roll out content on the ideal channels—powered by AI-driven curation and real-time campaign boosts.",
     badge: "AI-Powered",
   },
   {
-    icon: (
-      <motion.div whileHover={{ rotate: 360 }}>
-        <TrendingUp size={40} className="mb-4 text-primary-purple" />
-      </motion.div>
-    ),
+    icon: "/file.svg",
+    emoji: "📈",
+    color: "bg-[#FFF7F0] border-[#EC4899]",
     title: "Analyze & Optimize",
     description:
       "We track every click, view and share—using custom dashboards and ML-powered insights to double down on winners and pivot from duds.",
@@ -70,46 +72,62 @@ const itemVariants = {
 };
 
 const ServicesSection = () => {
+  const [headlineIndex, setHeadlineIndex] = React.useState(0);
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setHeadlineIndex((i) => (i + 1) % headlineEmojis.length);
+    }, 1800);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative py-28 bg-white overflow-hidden">
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 animated-gradient opacity-10 -z-10" />
-      {/* Subtle Pattern Overlay (optional) */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Example: SVG pattern or sparkles can be added here */}
-      </div>
+      {/* Floating SVG Stickers */}
+      {floatingStickers.map((sticker, i) => (
+        <Image
+          key={i}
+          src={sticker.src}
+          alt={sticker.alt}
+          width={48}
+          height={48}
+          className={`pointer-events-none select-none opacity-60 absolute z-0 ${sticker.style}`}
+        />
+      ))}
       <div className="container mx-auto px-8">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-10"
-        >
-          {services.map((service, index) => (
-            <motion.div key={index} variants={itemVariants} className="bounce-in">
-              <Card className="transition-all duration-300 hover:glow-animate">
-                <div className="float-animate mb-2">{service.icon}</div>
-                <h3 className="text-2xl font-bold mb-2 fade-in-up">{service.title}</h3>
-                <p className="text-neutral-medium fade-in-up">{service.description}</p>
-                {service.badge && (
-                  <span className="mt-4 inline-block bg-accent-green text-neutral-dark text-xs font-semibold px-3 py-1 rounded-full fade-in-up">
-                    {service.badge}
-                  </span>
-                )}
-                {service.counter && (
-                  <div className="mt-4 text-lg font-bold fade-in-up">
-                    <LiveCounter
-                      from={service.counter.from}
-                      to={service.counter.to}
-                    />
-                    <span className="ml-1">{service.counter.suffix}</span>
-                  </div>
-                )}
-              </Card>
-            </motion.div>
+        <h2 className="text-4xl md:text-5xl font-extrabold text-neutral-dark mb-12 flex items-center gap-4">
+          Our Services
+          <span className="text-4xl md:text-5xl animate-bounce inline-block">{headlineEmojis[headlineIndex]}</span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {serviceCards.map((service, index) => (
+            <div
+              key={index}
+              className={`relative rounded-3xl border-4 ${service.color} shadow-xl p-8 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:-rotate-2 group`}
+            >
+              <div className="w-20 h-20 mb-4 flex items-center justify-center relative">
+                <Image src={service.icon} alt={service.title} width={64} height={64} className="w-16 h-16 drop-shadow-lg" />
+                <span className="absolute -top-3 -right-3 text-2xl animate-bounce">{service.emoji}</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
+              <p className="text-neutral-medium mb-4">{service.description}</p>
+              {service.badge && (
+                <span className="mt-2 inline-block bg-accent-green text-neutral-dark text-xs font-semibold px-3 py-1 rounded-full">
+                  {service.badge}
+                </span>
+              )}
+              {service.counter && (
+                <div className="mt-4 text-lg font-bold">
+                  <LiveCounter from={service.counter.from} to={service.counter.to} />
+                  <span className="ml-1">{service.counter.suffix}</span>
+                </div>
+              )}
+              {/* Emoji burst on hover */}
+              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-0">
+                <span className="text-2xl animate-bounce">😂🔥🎉</span>
+              </span>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
