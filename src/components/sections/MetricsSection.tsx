@@ -29,23 +29,30 @@ const metrics = [
 
 const MetricsSection = () => {
   return (
-    <section className="py-20 bg-neutral-light">
+    <section className="relative py-20 bg-neutral-light overflow-hidden">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 animated-gradient opacity-10 -z-10" />
+      {/* Confetti Burst (shown when in view) */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        {/* Example: SVG confetti or sparkles can be added here */}
+      </div>
       <div className="mx-auto max-w-screen-lg px-4">
-        <h2 className="text-center font-montserrat text-4xl font-bold text-neutral-dark">
+        <h2 className="text-center font-montserrat text-4xl font-bold text-neutral-dark fade-in-up">
           Our Track Record
         </h2>
-        <p className="mt-4 text-center font-sans text-lg text-neutral-medium">
+        <p className="mt-4 text-center font-sans text-lg text-neutral-medium fade-in-up">
           Numbers that speak louder than memes.
         </p>
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {metrics.map((item, index) => (
-            <MetricCard
-              key={index}
-              icon={item.icon}
-              metric={item.metric}
-              label={item.label}
-              suffix={item.suffix}
-            />
+            <div className="bounce-in" key={index}>
+              <MetricCard
+                icon={item.icon}
+                metric={item.metric}
+                label={item.label}
+                suffix={item.suffix}
+              />
+            </div>
           ))}
         </div>
       </div>
