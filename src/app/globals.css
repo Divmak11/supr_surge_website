@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  /* Your design tokens (colors, fonts, etc.) go here */
+  --color-primary-purple: #8B5CF6;
+  --color-accent-green: #22C55E;
+  --color-highlight-pink: #EC4899;
+  --color-neutral-dark: #1F2937;
+  --color-neutral-medium: #4B5563;
+  --color-neutral-light: #F9FAFB;
+  --color-neutral-gray: #D1D5DB;
+  --color-error-red: #EF4444;
+
+  --font-sans: "Open Sans", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+}
