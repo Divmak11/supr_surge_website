@@ -1,25 +1,37 @@
-import { FC, ReactNode } from 'react';
-import { motion } from 'framer-motion';
+"use client";
+
+import { motion } from "framer-motion";
+import { type LucideIcon } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const LiveCounter = dynamic(() => import("./LiveCounter"), {
+  ssr: false,
+});
 
 interface MetricCardProps {
-  icon: ReactNode;
-  metric: ReactNode;
+  icon: LucideIcon;
+  metric: number;
   label: string;
+  suffix?: string;
 }
 
-const MetricCard: FC<MetricCardProps> = ({ icon, metric, label }) => {
+const MetricCard = ({ icon: Icon, metric, label, suffix }: MetricCardProps) => {
   return (
-    <motion.div 
-      className="relative p-8 bg-white rounded-2xl border-2 border-dashed border-neutral-gray shadow-lg text-center group transition-all duration-300 hover:border-primary-purple hover:border-solid"
-      whileHover={{ y: -10, scale: 1.05 }}
+    <motion.div
+      className="group rounded-2xl border-2 border-dashed border-neutral-gray p-6 text-center shadow-lg transition-all duration-300 hover:border-solid hover:border-accent-green hover:shadow-2xl"
+      whileHover={{
+        y: -10,
+        rotate: [0, -2, 2, -2, 0],
+        transition: { duration: 0.4, ease: "easeInOut" },
+      }}
     >
-      <div className="flex justify-center items-center text-primary-purple mb-4">
-        {icon}
+      <div className="flex justify-center">
+        <Icon className="h-12 w-12 text-primary-purple transition-colors duration-300 group-hover:text-accent-green" />
       </div>
-      <div className="text-5xl font-bold font-montserrat text-neutral-dark">
-        {metric}
+      <div className="mt-4 font-montserrat text-5xl font-bold text-neutral-dark">
+        <LiveCounter from={0} to={metric} suffix={suffix} />
       </div>
-      <p className="text-neutral-medium font-sans mt-2">{label}</p>
+      <p className="mt-2 font-sans text-lg text-neutral-medium">{label}</p>
     </motion.div>
   );
 };

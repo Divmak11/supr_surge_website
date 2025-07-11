@@ -131,13 +131,13 @@ This section details the requirements and implementation tasks for each part of 
 
 -   **Micro-Tasks & Implementation Steps**:
     1.  **Task: Design the Metric Card**
-        -   *Step*: Create a component for the metric card, applying the sticker-like styling (rounded corners, dashed border, shadow).
+        -   [x] *Step*: Create a component for the metric card, applying the sticker-like styling (rounded corners, dashed border, shadow).
     2.  **Task: Implement Layout**
-        -   *Step*: Use a responsive grid to arrange the cards correctly across different screen sizes.
+        -   [x] *Step*: Use a responsive grid to arrange the cards correctly across different screen sizes.
     3.  **Task: Implement Animations**
-        -   *Step*: Use an intersection observer to trigger the live counter for each metric.
-        -   *Step*: Implement the CSS keyframe animation for the card shake on hover.
-        -   *Step*: Animate the dashed border morphing into a solid line on hover, potentially by animating properties of an SVG border.
+        -   [x] *Step*: Use an intersection observer to trigger the live counter for each metric.
+        -   [x] *Step*: Implement the CSS keyframe animation for the card shake on hover.
+        -   [x] *Step*: Animate the dashed border morphing into a solid line on hover, potentially by animating properties of an SVG border.
 
 ---
 
