@@ -9,17 +9,7 @@ import Button from "../ui/Button";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 
-const InteractiveGraphic = dynamic(
-  () => import("../ui/InteractiveGraphic"),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-64 sm:h-80 md:h-96 bg-primary-purple/20 rounded-2xl flex items-center justify-center">
-        <p className="text-sm sm:text-base">Loading Animation...</p>
-      </div>
-    ),
-  }
-);
+
 
 const greetings = [
   "Hello!", "¡Hola!", "Ciao!", "नमस्ते!", "Meme Time!", "👋", "Salut!", "Hallo!", "こんにちは!"

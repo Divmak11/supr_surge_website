@@ -2,13 +2,7 @@
 
 import { useEffect } from 'react';
 
-interface PerformanceMetrics {
-  fcp: number;
-  lcp: number;
-  fid: number;
-  cls: number;
-  ttfb: number;
-}
+
 
 const PerformanceMonitor = () => {
   useEffect(() => {
@@ -46,8 +40,12 @@ const PerformanceMonitor = () => {
         const fidObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
           entries.forEach((entry) => {
-            console.log('FID:', entry.processingStart - entry.startTime);
-            sendMetric('FID', entry.processingStart - entry.startTime);
+            const firstInputEntry = entry as PerformanceEntry & { processingStart?: number };
+            if (firstInputEntry.processingStart) {
+              const fid = firstInputEntry.processingStart - firstInputEntry.startTime;
+              console.log('FID:', fid);
+              sendMetric('FID', fid);
+            }
           });
         });
         fidObserver.observe({ entryTypes: ['first-input'] });
@@ -58,9 +56,10 @@ const PerformanceMonitor = () => {
         let clsValue = 0;
         const clsObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
-          entries.forEach((entry: any) => {
-            if (!entry.hadRecentInput) {
-              clsValue += entry.value;
+          entries.forEach((entry: PerformanceEntry) => {
+            const layoutShiftEntry = entry as { hadRecentInput?: boolean; value?: number };
+            if (!layoutShiftEntry.hadRecentInput && layoutShiftEntry.value) {
+              clsValue += layoutShiftEntry.value;
             }
           });
         });
@@ -103,8 +102,8 @@ const PerformanceMonitor = () => {
     console.log(`Performance Metric - ${metric}:`, value);
     
     // Example: Send to Google Analytics
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'web_vitals', {
+    if (typeof window !== 'undefined' && 'gtag' in window) {
+      (window as unknown as { gtag: Function }).gtag('event', 'web_vitals', {
         event_category: 'Web Vitals',
         event_label: metric,
         value: Math.round(value),

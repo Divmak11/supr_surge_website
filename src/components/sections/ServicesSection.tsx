@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import Card from "../ui/Card";
-import { Lightbulb, Presentation, TrendingUp, Brain, Rocket, BarChart3 } from "lucide-react";
+import { Brain, Rocket, BarChart3 } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 
@@ -247,7 +246,7 @@ const ServicesSection = () => {
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-primary-purple to-accent-green text-white px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3 md:py-4 rounded-full font-bold text-xs sm:text-sm md:text-base lg:text-lg hover:shadow-lg transition-all duration-300 min-h-[44px] touch-target"
           >
-            Let's Craft Your Strategy! 🎯
+            Let&apos;s Craft Your Strategy! 🎯
           </motion.button>
         </motion.div>
       </div>

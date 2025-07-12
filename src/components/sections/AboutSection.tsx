@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Users, Zap, Heart, Brain, Coffee, Gamepad2, Target, Sparkles } from "lucide-react";
+import { Users, Zap, Heart, Coffee, Target, Sparkles } from "lucide-react";
 
 interface TeamMember {
   id: string;
@@ -117,7 +117,7 @@ const AboutSection = () => {
             </motion.span>
           </h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-medium max-w-4xl mx-auto leading-relaxed">
-            We're not your typical marketing agency. We're cultural hackers, trend predictors, and meme scientists all rolled into one chaotic (but effective) team.
+            We&apos;re not your typical marketing agency. We&apos;re cultural hackers, trend predictors, and meme scientists all rolled into one chaotic (but effective) team.
           </p>
         </motion.div>
 
@@ -277,8 +277,8 @@ const AboutSection = () => {
             </h3>
             
             <p className="text-sm sm:text-base md:text-lg text-neutral-medium mb-6 sm:mb-8 max-w-2xl mx-auto">
-              We're always looking for creative minds who think in memes and speak fluent internet. 
-              If you've got the skills and the humor, let's talk!
+              We&apos;re always looking for creative minds who think in memes and speak fluent internet. 
+              If you&apos;ve got the skills and the humor, let&apos;s talk!
             </p>
             
             <motion.button

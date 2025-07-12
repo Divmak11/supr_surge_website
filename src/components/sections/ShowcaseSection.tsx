@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 import type { Swiper as SwiperClass } from "swiper/types";
@@ -258,7 +258,7 @@ const ShowcaseSection = () => {
             whileTap={{ scale: 0.97 }}
             className="bg-gradient-to-r from-accent-green to-highlight-pink text-white px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full font-bold text-xs sm:text-sm md:text-base lg:text-lg hover:shadow-lg transition-all duration-200 min-h-[44px] touch-target"
           >
-            Let's Make Magic! ✨
+            Let&apos;s Make Magic! ✨
           </motion.button>
         </motion.div>
       </div>

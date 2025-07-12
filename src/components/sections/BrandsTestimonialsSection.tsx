@@ -99,13 +99,13 @@ const BrandsTestimonialsSection = () => {
           className="text-center mb-12 sm:mb-16"
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-white mb-3 sm:mb-4">
-            Brands We've Made{" "}
+            Brands We&apos;ve Made{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
               Legendary
             </span>
           </h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto">
-            From startups to Fortune 500s, we've helped brands become part of internet culture 🌟
+            From startups to Fortune 500s, we&apos;ve helped brands become part of internet culture 🌟
           </p>
         </motion.div>
 

@@ -146,7 +146,7 @@ const Header = () => {
               transition={{ delay: 0.5 }}
             >
               <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
-              <span className="hidden xl:inline">Let's Create Magic</span>
+              <span className="hidden xl:inline">Let&apos;s Create Magic</span>
               <span className="xl:hidden">Get Started</span>
             </motion.button>
 
@@ -248,7 +248,7 @@ const Header = () => {
                     className="w-full bg-gradient-to-r from-primary-purple to-highlight-pink text-white px-4 sm:px-6 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg flex items-center justify-center space-x-2 min-h-[44px] touch-target"
                   >
                     <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span>Let's Create Magic</span>
+                    <span>Let&apos;s Create Magic</span>
                   </motion.button>
                 </div>
               </div>

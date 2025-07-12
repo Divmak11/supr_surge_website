@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { BarChart, Users, Zap, Award, Target, TrendingUp } from "lucide-react";
+import { Users, Zap, Award, TrendingUp } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const LiveCounter = dynamic(() => import("../ui/LiveCounter"), {
@@ -112,7 +112,7 @@ const MetricsSection = () => {
             </span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-neutral-medium max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-            Numbers that speak louder than memes. Here's the proof that our creative chaos actually works.
+            Numbers that speak louder than memes. Here&apos;s the proof that our creative chaos actually works.
           </p>
         </motion.div>
 
@@ -204,7 +204,7 @@ const MetricsSection = () => {
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-primary-purple to-accent-green text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:shadow-lg transition-all duration-300 touch-target"
           >
-            Let's Break Some Records! �
+            Let&apos;s Break Some Records! 🏆 �
           </motion.button>
         </motion.div>
       </div>

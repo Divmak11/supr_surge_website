@@ -118,7 +118,7 @@ const Footer = () => {
                 
                 <p className="text-xs sm:text-sm md:text-base text-neutral-gray leading-relaxed">
                   From memes to mainstream – we turn brands into internet legends. 
-                  Ready to break the internet? Let's chat! 🌟
+                  Ready to break the internet? Let&apos;s chat! 🌟
                 </p>
 
                 {/* Contact Info */}

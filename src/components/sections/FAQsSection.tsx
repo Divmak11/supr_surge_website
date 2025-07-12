@@ -200,7 +200,7 @@ const FAQsSection = () => {
             </h3>
             
             <p className="text-sm sm:text-base md:text-lg text-neutral-gray mb-4 sm:mb-6">
-              Let's hop on a call and discuss how we can make your brand the talk of the internet! 📞
+              Let&apos;s hop on a call and discuss how we can make your brand the talk of the internet! 📞
             </p>
             
             <motion.button

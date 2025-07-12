@@ -118,7 +118,7 @@ const ContactFormSection = () => {
           </motion.div>
           
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
-            You're In! 🎉
+            You&apos;re In! 🎉
           </h2>
           
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-medium mb-6 sm:mb-8">
@@ -187,12 +187,12 @@ const ContactFormSection = () => {
                   </motion.span>
                 </AnimatePresence>
                 <br />
-                <span className="text-neutral-dark">Let's Talk!</span>
+                <span className="text-neutral-dark">Let&apos;s Talk!</span>
               </h2>
               
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-medium leading-relaxed mb-6 sm:mb-8">
-                Drop us a line and let's turn your brand into the next internet sensation. 
-                From memes to mainstream – we've got the secret sauce! 🌶️
+                Drop us a line and let&apos;s turn your brand into the next internet sensation. 
+                From memes to mainstream – we&apos;ve got the secret sauce! 🌶️
               </p>
             </div>
 
@@ -235,7 +235,7 @@ const ContactFormSection = () => {
               <div>
                 <label className="flex items-center space-x-2 text-sm sm:text-base md:text-lg font-semibold text-neutral-dark mb-2 sm:mb-3">
                   <User className="w-4 h-4 sm:w-5 sm:h-5 text-primary-purple" />
-                  <span>What's your name?</span>
+                  <span>What&apos;s your name?</span>
                 </label>
                 <motion.input
                   type="text"
@@ -402,7 +402,7 @@ const ContactFormSection = () => {
                   ) : (
                     <>
                       <Send className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
-                      <span>Let's Make Magic! ✨</span>
+                      <span>Let&apos;s Make Magic! ✨</span>
                     </>
                   )}
                 </span>

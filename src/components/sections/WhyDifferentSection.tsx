@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Bot, Network, PersonStanding, ShieldCheck } from "lucide-react";
+
 import dynamic from "next/dynamic";
 import Image from "next/image";
 
@@ -92,7 +92,7 @@ const WhyDifferentSection = () => {
             {/* Section Header */}
             <div className="mb-8 sm:mb-12">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-4 sm:mb-6 text-white">
-                Why We're{" "}
+                Why We&apos;re{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
                   Different
                 </span>
