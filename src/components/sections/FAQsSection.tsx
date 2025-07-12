@@ -73,46 +73,46 @@ const FAQsSection = () => {
   };
 
   return (
-    <section className="relative py-24 bg-neutral-dark overflow-hidden">
+    <section className="relative py-16 sm:py-20 md:py-24 bg-neutral-dark overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-20 text-8xl animate-float-slow">❓</div>
-        <div className="absolute top-1/4 right-10 text-6xl animate-float-medium">💡</div>
-        <div className="absolute bottom-1/3 left-10 text-7xl animate-float-slow">🤔</div>
-        <div className="absolute bottom-20 right-1/4 text-5xl animate-float-medium">💭</div>
+        <div className="absolute top-20 left-20 text-3xl sm:text-4xl md:text-5xl lg:text-6xl animate-float-slow">❓</div>
+        <div className="absolute top-1/4 right-10 text-2xl sm:text-3xl md:text-4xl lg:text-5xl animate-float-medium">💡</div>
+        <div className="absolute bottom-1/3 left-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl animate-float-slow">🤔</div>
+        <div className="absolute bottom-20 right-1/4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl animate-float-medium">💭</div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
           <motion.div
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity }}
-            className="inline-block mb-6"
+            className="inline-block mb-4 sm:mb-6"
           >
-            <HelpCircle className="w-16 h-16 text-accent-green" />
+            <HelpCircle className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-accent-green" />
           </motion.div>
           
-          <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-white mb-4 sm:mb-6">
             Got Questions?{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
-              We've Got Answers!
+              We&apos;ve Got Answers!
             </span>
           </h2>
           
-          <p className="text-xl text-neutral-gray max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto">
             Everything you wanted to know about turning your brand into internet gold 🏆
           </p>
         </motion.div>
 
         {/* FAQ Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
           {faqs.map((faq, index) => (
             <motion.div
               key={faq.id}
@@ -120,23 +120,23 @@ const FAQsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 overflow-hidden hover:bg-white/15 transition-all duration-300"
+              className="bg-white/10 backdrop-blur-lg rounded-xl sm:rounded-2xl border border-white/20 overflow-hidden hover:bg-white/15 transition-all duration-300"
             >
               <motion.button
                 onClick={() => toggleItem(faq.id)}
-                className="w-full p-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors duration-200"
+                className="w-full p-3 sm:p-4 md:p-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors duration-200 min-h-[44px] touch-target"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
                   <motion.span
                     animate={openItems.includes(faq.id) ? { rotate: 360, scale: 1.2 } : { rotate: 0, scale: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="text-3xl"
+                    className="text-lg sm:text-xl md:text-2xl lg:text-3xl"
                   >
                     {faq.emoji}
                   </motion.span>
-                  <h3 className="text-lg font-bold text-white leading-tight">
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-white leading-tight">
                     {faq.question}
                   </h3>
                 </div>
@@ -144,9 +144,9 @@ const FAQsSection = () => {
                 <motion.div
                   animate={{ rotate: openItems.includes(faq.id) ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
-                  className="flex-shrink-0 ml-4"
+                  className="flex-shrink-0 ml-2 sm:ml-3 md:ml-4"
                 >
-                  <ChevronDown className="w-6 h-6 text-accent-green" />
+                  <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-accent-green" />
                 </motion.div>
               </motion.button>
 
@@ -159,14 +159,14 @@ const FAQsSection = () => {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6">
+                    <div className="px-3 sm:px-4 md:px-6 pb-3 sm:pb-4 md:pb-6">
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="bg-white/10 rounded-xl p-4 border-l-4 border-accent-green"
+                        className="bg-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 border-l-4 border-accent-green"
                       >
-                        <p className="text-neutral-gray leading-relaxed">
+                        <p className="text-xs sm:text-sm md:text-base text-neutral-gray leading-relaxed">
                           {faq.answer}
                         </p>
                       </motion.div>
@@ -184,32 +184,32 @@ const FAQsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-12 sm:mt-16"
         >
-          <div className="bg-gradient-to-r from-primary-purple/20 to-accent-green/20 rounded-3xl p-8 border border-white/20 backdrop-blur-lg">
+          <div className="bg-gradient-to-r from-primary-purple/20 to-accent-green/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/20 backdrop-blur-lg">
             <motion.div
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="inline-block mb-4"
+              className="inline-block mb-3 sm:mb-4"
             >
-              <Lightbulb className="w-12 h-12 text-highlight-pink" />
+              <Lightbulb className="w-10 h-10 sm:w-12 sm:h-12 text-highlight-pink" />
             </motion.div>
             
-            <h3 className="text-3xl font-extrabold text-white mb-4">
+            <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-white mb-3 sm:mb-4">
               Still Have Questions?
             </h3>
             
-            <p className="text-lg text-neutral-gray mb-6">
-              Let's hop on a call and discuss how we can make your brand the talk of the internet! 📞
+            <p className="text-sm sm:text-base md:text-lg text-neutral-gray mb-4 sm:mb-6">
+              Let&apos;s hop on a call and discuss how we can make your brand the talk of the internet! 📞
             </p>
             
             <motion.button
               whileHover={{ scale: 1.05, rotate: 1 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-accent-green to-highlight-pink text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all duration-300"
+              className="bg-gradient-to-r from-accent-green to-highlight-pink text-white px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full font-bold text-xs sm:text-sm md:text-base lg:text-lg hover:shadow-lg transition-all duration-300 min-h-[44px] touch-target"
             >
               <span className="flex items-center space-x-2">
-                <Zap className="w-5 h-5" />
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span>Book a Free Strategy Call</span>
               </span>
             </motion.button>
