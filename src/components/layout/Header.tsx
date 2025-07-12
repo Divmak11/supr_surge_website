@@ -79,11 +79,11 @@ const Header = () => {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 cursor-pointer touch-target"
+              className="flex items-center space-x-2 cursor-pointer min-h-[44px] min-w-[44px] touch-target"
               onClick={() => handleNavClick("#")}
             >
               <Logo />
-              <span className="font-extrabold text-lg md:text-2xl text-primary-purple">
+              <span className="font-extrabold text-xs sm:text-sm md:text-lg lg:text-2xl text-primary-purple">
                 Supr Surge
               </span>
               <motion.div
@@ -91,7 +91,7 @@ const Header = () => {
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
                 className="hidden sm:block"
               >
-                <Zap className="w-5 h-5 md:w-6 md:h-6 text-accent-green" />
+                <Zap className="w-3 h-3 md:w-5 md:h-5 lg:w-6 lg:h-6 text-accent-green" />
               </motion.div>
             </motion.div>
 
@@ -101,7 +101,7 @@ const Header = () => {
                 <motion.button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className="relative text-neutral-dark hover:text-primary-purple font-semibold transition-colors duration-200 touch-target"
+                  className="relative text-neutral-dark hover:text-primary-purple font-semibold transition-colors duration-200 min-h-[44px] min-w-[44px] touch-target"
                   onMouseEnter={() => setHoveredItem(item.name)}
                   onMouseLeave={() => setHoveredItem(null)}
                   whileHover={{ y: -2 }}
@@ -135,17 +135,17 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* CTA Button */}
+            {/* CTA Button - Show on mobile but smaller */}
             <motion.button
               whileHover={{ scale: 1.05, rotate: 1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleNavClick("#contact")}
-              className="hidden md:flex items-center space-x-2 bg-gradient-to-r from-primary-purple to-highlight-pink text-white px-4 py-2 md:px-6 md:py-3 rounded-full font-bold hover:shadow-lg transition-all duration-200 touch-target text-sm lg:text-base"
+              className="flex items-center space-x-2 bg-gradient-to-r from-primary-purple to-highlight-pink text-white px-2 py-2 md:px-4 md:py-2 lg:px-6 lg:py-3 rounded-full font-bold hover:shadow-lg transition-all duration-200 min-h-[44px] touch-target text-xs sm:text-sm lg:text-base"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
               <span className="hidden xl:inline">Let's Create Magic</span>
               <span className="xl:hidden">Get Started</span>
             </motion.button>
@@ -154,7 +154,7 @@ const Header = () => {
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg bg-primary-purple/10 hover:bg-primary-purple/20 transition-colors touch-target mobile-menu-button"
+              className="lg:hidden p-2 sm:p-3 rounded-lg bg-primary-purple/10 hover:bg-primary-purple/20 transition-colors min-h-[44px] min-w-[44px] touch-target mobile-menu-button"
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -165,7 +165,7 @@ const Header = () => {
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <X className="w-6 h-6 text-primary-purple" />
+                    <X className="w-5 h-5 text-primary-purple" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -175,7 +175,7 @@ const Header = () => {
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Menu className="w-6 h-6 text-primary-purple" />
+                    <Menu className="w-5 h-5 text-primary-purple" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -203,25 +203,25 @@ const Header = () => {
             >
               <div className="flex flex-col h-full">
                 {/* Mobile Menu Header */}
-                <div className="flex items-center justify-between p-6 border-b border-primary-purple/10">
+                <div className="flex items-center justify-between p-4 sm:p-6 border-b border-primary-purple/10">
                   <div className="flex items-center space-x-2">
                     <Logo />
-                    <span className="font-extrabold text-xl text-primary-purple">
+                    <span className="font-extrabold text-lg sm:text-xl text-primary-purple">
                       Supr Surge
                     </span>
                   </div>
                   <motion.button
                     whileTap={{ scale: 0.9 }}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 rounded-lg bg-primary-purple/10 hover:bg-primary-purple/20 transition-colors touch-target"
+                    className="p-2 rounded-lg bg-primary-purple/10 hover:bg-primary-purple/20 transition-colors min-h-[44px] min-w-[44px] touch-target"
                   >
-                    <X className="w-5 h-5 text-primary-purple" />
+                    <X className="w-4 h-4 sm:w-5 sm:h-5 text-primary-purple" />
                   </motion.button>
                 </div>
 
                 {/* Mobile Navigation Items */}
-                <div className="flex-1 p-6">
-                  <nav className="space-y-2">
+                <div className="flex-1 p-4 sm:p-6">
+                  <nav className="space-y-2 sm:space-y-3">
                     {navigationItems.map((item, index) => (
                       <motion.button
                         key={item.name}
@@ -229,9 +229,9 @@ const Header = () => {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="flex items-center space-x-4 text-neutral-dark hover:text-primary-purple font-semibold text-lg transition-colors duration-200 w-full text-left p-4 rounded-xl hover:bg-primary-purple/5 touch-target"
+                        className="flex items-center space-x-3 sm:space-x-4 text-neutral-dark hover:text-primary-purple font-semibold text-base sm:text-lg transition-colors duration-200 w-full text-left p-3 sm:p-4 rounded-xl hover:bg-primary-purple/5 min-h-[44px] touch-target"
                       >
-                        <span className="text-2xl">{item.emoji}</span>
+                        <span className="text-xl sm:text-2xl">{item.emoji}</span>
                         <span>{item.name}</span>
                       </motion.button>
                     ))}
@@ -239,15 +239,15 @@ const Header = () => {
                 </div>
 
                 {/* Mobile CTA */}
-                <div className="p-6 border-t border-primary-purple/10">
+                <div className="p-4 sm:p-6 border-t border-primary-purple/10">
                   <motion.button
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
                     onClick={() => handleNavClick("#contact")}
-                    className="w-full bg-gradient-to-r from-primary-purple to-highlight-pink text-white px-6 py-4 rounded-full font-bold text-lg flex items-center justify-center space-x-2 touch-target"
+                    className="w-full bg-gradient-to-r from-primary-purple to-highlight-pink text-white px-4 sm:px-6 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg flex items-center justify-center space-x-2 min-h-[44px] touch-target"
                   >
-                    <Sparkles className="w-5 h-5" />
+                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
                     <span>Let's Create Magic</span>
                   </motion.button>
                 </div>

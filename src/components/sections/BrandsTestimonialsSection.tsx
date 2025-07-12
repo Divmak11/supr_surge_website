@@ -80,44 +80,44 @@ const BrandsTestimonialsSection = () => {
   };
 
   return (
-    <section className="relative py-24 bg-neutral-dark overflow-hidden">
+    <section className="relative py-16 sm:py-20 md:py-24 bg-neutral-dark overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 text-6xl animate-float-slow">⭐</div>
-        <div className="absolute top-1/3 right-20 text-4xl animate-float-medium">💬</div>
-        <div className="absolute bottom-20 left-1/4 text-5xl animate-float-slow">🔥</div>
-        <div className="absolute bottom-10 right-10 text-6xl animate-float-medium">💯</div>
+        <div className="absolute top-10 left-10 text-4xl sm:text-5xl md:text-6xl animate-float-slow">⭐</div>
+        <div className="absolute top-1/3 right-20 text-3xl sm:text-4xl animate-float-medium">💬</div>
+        <div className="absolute bottom-20 left-1/4 text-4xl sm:text-5xl animate-float-slow">🔥</div>
+        <div className="absolute bottom-10 right-10 text-4xl sm:text-5xl md:text-6xl animate-float-medium">💯</div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white mb-3 sm:mb-4">
             Brands We've Made{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
               Legendary
             </span>
           </h2>
-          <p className="text-xl text-neutral-gray max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto">
             From startups to Fortune 500s, we've helped brands become part of internet culture 🌟
           </p>
         </motion.div>
 
         {/* Brand Gallery */}
-        <div className="mb-20">
+        <div className="mb-12 sm:mb-16 md:mb-20">
           {/* Filter Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-4 mb-12"
+            className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8 md:mb-12"
           >
             {categories.map((category) => (
               <motion.button
@@ -125,14 +125,14 @@ const BrandsTestimonialsSection = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveFilter(category)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+                className={`px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm md:text-base min-h-[44px] touch-target ${
                   activeFilter === category
                     ? "bg-primary-purple text-white shadow-lg"
                     : "bg-white/10 text-neutral-gray hover:bg-white/20 hover:text-white"
                 }`}
               >
                 <span className="flex items-center space-x-2">
-                  {category === "All" && <Filter className="w-4 h-4" />}
+                  {category === "All" && <Filter className="w-3 h-3 sm:w-4 sm:h-4" />}
                   <span>{category}</span>
                 </span>
               </motion.button>
@@ -142,7 +142,7 @@ const BrandsTestimonialsSection = () => {
           {/* Brand Grid */}
           <motion.div
             layout
-            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4 md:gap-6"
           >
             <AnimatePresence>
               {filteredBrands.map((brand, index) => (
@@ -158,12 +158,12 @@ const BrandsTestimonialsSection = () => {
                     rotate: [0, -5, 5, 0],
                     transition: { duration: 0.3 }
                   }}
-                  className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 flex flex-col items-center justify-center aspect-square hover:bg-white/20 transition-all duration-300 cursor-pointer group"
+                  className="bg-white/10 backdrop-blur-lg rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 flex flex-col items-center justify-center aspect-square hover:bg-white/20 transition-all duration-300 cursor-pointer group min-h-[44px] touch-target"
                 >
-                  <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
                     {brand.logo}
                   </div>
-                  <span className="text-white font-semibold text-sm text-center">
+                  <span className="text-white font-semibold text-xs sm:text-sm text-center">
                     {brand.name}
                   </span>
                 </motion.div>
@@ -179,12 +179,12 @@ const BrandsTestimonialsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-white mb-3 sm:mb-4">
               What Our Clients Say
             </h3>
-            <p className="text-lg text-neutral-gray">
+            <p className="text-sm sm:text-base md:text-lg text-neutral-gray">
               Real stories from brands that went viral with us 📈
             </p>
           </motion.div>
@@ -201,10 +201,10 @@ const BrandsTestimonialsSection = () => {
                 className="relative"
               >
                 {/* Speech Bubble Card */}
-                <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl relative">
+                <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-12 shadow-2xl relative">
                   {/* Speech bubble tail */}
-                  <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
-                    <div className="w-0 h-0 border-l-[24px] border-r-[24px] border-t-[24px] border-l-transparent border-r-transparent border-t-white"></div>
+                  <div className="absolute -bottom-3 sm:-bottom-4 md:-bottom-6 left-1/2 transform -translate-x-1/2">
+                    <div className="w-0 h-0 border-l-[12px] sm:border-l-[16px] md:border-l-[24px] border-r-[12px] sm:border-r-[16px] md:border-r-[24px] border-t-[12px] sm:border-t-[16px] md:border-t-[24px] border-l-transparent border-r-transparent border-t-white"></div>
                   </div>
 
                   <div className="text-center">
@@ -212,18 +212,18 @@ const BrandsTestimonialsSection = () => {
                     <motion.div
                       animate={{ rotate: [0, 5, -5, 0] }}
                       transition={{ duration: 4, repeat: Infinity }}
-                      className="inline-block mb-6"
+                      className="inline-block mb-3 sm:mb-4 md:mb-6"
                     >
-                      <Quote className="w-12 h-12 text-primary-purple" />
+                      <Quote className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-primary-purple" />
                     </motion.div>
 
                     {/* Testimonial Content */}
-                    <p className="text-xl md:text-2xl text-neutral-dark font-medium mb-8 leading-relaxed">
+                    <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-neutral-dark font-medium mb-4 sm:mb-6 md:mb-8 leading-relaxed">
                       {testimonials[currentTestimonial].content}
                     </p>
 
                     {/* Rating */}
-                    <div className="flex justify-center mb-6">
+                    <div className="flex justify-center mb-3 sm:mb-4 md:mb-6">
                       {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
                         <motion.div
                           key={i}
@@ -231,21 +231,21 @@ const BrandsTestimonialsSection = () => {
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: i * 0.1 }}
                         >
-                          <Star className="w-6 h-6 text-accent-green fill-current" />
+                          <Star className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-accent-green fill-current" />
                         </motion.div>
                       ))}
                     </div>
 
                     {/* Author */}
-                    <div className="flex items-center justify-center space-x-4">
-                      <div className="text-4xl">
+                    <div className="flex items-center justify-center space-x-2 sm:space-x-3 md:space-x-4">
+                      <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                         {testimonials[currentTestimonial].avatar}
                       </div>
                       <div className="text-left">
-                        <h4 className="font-bold text-lg text-neutral-dark">
+                        <h4 className="font-bold text-xs sm:text-sm md:text-base lg:text-lg text-neutral-dark">
                           {testimonials[currentTestimonial].name}
                         </h4>
-                        <p className="text-neutral-medium">
+                        <p className="text-xs sm:text-sm text-neutral-medium">
                           {testimonials[currentTestimonial].role} at {testimonials[currentTestimonial].company}
                         </p>
                       </div>
@@ -256,25 +256,25 @@ const BrandsTestimonialsSection = () => {
             </AnimatePresence>
 
             {/* Navigation Buttons */}
-            <div className="flex justify-center mt-12 space-x-4">
+            <div className="flex justify-center mt-6 sm:mt-8 md:mt-12 space-x-2 sm:space-x-3 md:space-x-4">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={prevTestimonial}
-                className="bg-primary-purple/20 hover:bg-primary-purple text-white p-3 rounded-full transition-all duration-300"
+                className="bg-primary-purple/20 hover:bg-primary-purple text-white p-2 sm:p-3 rounded-full transition-all duration-300 min-h-[44px] min-w-[44px] touch-target"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
               </motion.button>
 
               {/* Pagination dots */}
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1 sm:space-x-2">
                 {testimonials.map((_, index) => (
                   <motion.button
                     key={index}
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.8 }}
                     onClick={() => setCurrentTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 min-h-[44px] min-w-[44px] touch-target ${
                       index === currentTestimonial
                         ? "bg-primary-purple scale-125"
                         : "bg-neutral-gray hover:bg-white"
@@ -287,9 +287,9 @@ const BrandsTestimonialsSection = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={nextTestimonial}
-                className="bg-primary-purple/20 hover:bg-primary-purple text-white p-3 rounded-full transition-all duration-300"
+                className="bg-primary-purple/20 hover:bg-primary-purple text-white p-2 sm:p-3 rounded-full transition-all duration-300 min-h-[44px] min-w-[44px] touch-target"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
               </motion.button>
             </div>
           </div>

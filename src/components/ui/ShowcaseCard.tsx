@@ -27,7 +27,7 @@ const ShowcaseCard = ({
 }: ShowcaseCardProps) => {
   return (
     <div
-      className="h-[450px] w-full [perspective:1000px] cursor-pointer"
+      className="h-[280px] sm:h-[350px] md:h-[400px] lg:h-[450px] w-full [perspective:1000px] cursor-pointer min-h-[44px] touch-target"
       onClick={onCardClick}
     >
       <motion.div
@@ -45,41 +45,41 @@ const ShowcaseCard = ({
             className="h-full w-full rounded-xl object-cover"
           />
           <div className="absolute inset-0 bg-black/50 rounded-xl" />
-          <div className="absolute bottom-0 left-0 p-6">
-            <h3 className="text-2xl font-bold text-white font-montserrat">
+          <div className="absolute bottom-0 left-0 p-3 sm:p-4 md:p-6">
+            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white font-montserrat">
               {title}
             </h3>
-            <span className="mt-2 inline-block rounded-full bg-highlight-pink px-3 py-1 text-sm font-semibold text-white">
+            <span className="mt-2 inline-block rounded-full bg-highlight-pink px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold text-white">
               {metric}
             </span>
           </div>
         </div>
 
         {/* Back Face */}
-        <div className="absolute inset-0 h-full w-full rounded-xl bg-gradient-to-br from-neutral-dark to-slate-800 p-6 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+        <div className="absolute inset-0 h-full w-full rounded-xl bg-gradient-to-br from-neutral-dark to-slate-800 p-3 sm:p-4 md:p-6 [transform:rotateY(180deg)] [backface-visibility:hidden]">
           <div className="flex h-full flex-col justify-between text-left">
             <div>
-              <h3 className="text-2xl font-bold text-white font-montserrat">
+              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white font-montserrat">
                 {title}
               </h3>
-              <p className="mt-2 text-base text-neutral-gray font-sans">
+              <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-gray font-sans">
                 {description}
               </p>
             </div>
-            <div className="w-full border-t border-neutral-medium/30 pt-4">
+            <div className="w-full border-t border-neutral-medium/30 pt-2 sm:pt-3 md:pt-4">
               <div className="flex justify-between">
-                <p className="font-sans text-sm font-semibold text-neutral-gray">
+                <p className="font-sans text-xs sm:text-sm font-semibold text-neutral-gray">
                   Platform
                 </p>
-                <p className="font-sans text-sm font-bold text-white">
+                <p className="font-sans text-xs sm:text-sm font-bold text-white">
                   {platform}
                 </p>
               </div>
               <div className="mt-2 flex justify-between">
-                <p className="font-sans text-sm font-semibold text-neutral-gray">
+                <p className="font-sans text-xs sm:text-sm font-semibold text-neutral-gray">
                   Key Result
                 </p>
-                <p className="font-sans text-sm font-bold text-accent-green">
+                <p className="font-sans text-xs sm:text-sm font-bold text-accent-green">
                   {keyResult}
                 </p>
               </div>

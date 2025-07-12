@@ -16,8 +16,8 @@ import ShowcaseCard from "../ui/ShowcaseCard";
 import Image from "next/image";
 
 const floatingStickers = [
-  { src: "/file.svg", alt: "File Sticker", style: "top-8 left-8 w-10 animate-float-slow" },
-  { src: "/globe.svg", alt: "Globe Sticker", style: "bottom-8 right-8 w-12 animate-float-medium" },
+  { src: "/file.svg", alt: "File Sticker", style: "top-8 left-8 w-6 sm:w-8 md:w-10 animate-float-slow" },
+  { src: "/globe.svg", alt: "Globe Sticker", style: "bottom-8 right-8 w-8 sm:w-10 md:w-12 animate-float-medium" },
 ];
 
 const headlineEmojis = ["🎬", "🔥", "😂", "🚀", "🎉", "👑"];
@@ -129,7 +129,7 @@ const ShowcaseSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="portfolio" className="relative bg-neutral-dark py-24 overflow-hidden">
+    <section ref={sectionRef} id="portfolio" className="relative bg-neutral-dark py-16 sm:py-20 md:py-24 overflow-hidden">
       {/* Floating SVG Stickers - Optimized loading */}
       {floatingStickers.map((sticker, i) => (
         <Image
@@ -143,15 +143,15 @@ const ShowcaseSection = () => {
         />
       ))}
       
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Section Header - Optimized animations */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white mb-4 sm:mb-6">
             Our Top Works{" "}
             <motion.span
               key={headlineIndex}
@@ -163,12 +163,12 @@ const ShowcaseSection = () => {
               {headlineEmojis[headlineIndex]}
             </motion.span>
           </h2>
-          <p className="text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">
             Where creativity meets data, and pixels meet purpose. Check out some campaigns that broke the internet.
           </p>
         </motion.div>
 
-        {/* Showcase Carousel - Optimized Swiper config */}
+        {/* Showcase Carousel - Mobile-optimized Swiper config */}
         <div className="relative">
           <Swiper
             onSwiper={setSwiper}
@@ -176,12 +176,18 @@ const ShowcaseSection = () => {
             grabCursor={true}
             centeredSlides={true}
             loop={true}
-            slidesPerView={"auto"}
+            slidesPerView={1.1}
+            spaceBetween={15}
+            breakpoints={{
+              640: { slidesPerView: 1.3, spaceBetween: 20 },
+              768: { slidesPerView: 2.2, spaceBetween: 30 },
+              1024: { slidesPerView: 2.8, spaceBetween: 40 }
+            }}
             coverflowEffect={{
               rotate: 0,
               stretch: 0,
-              depth: 80, // Reduced from 100
-              modifier: 2, // Reduced from 2.5
+              depth: 40,
+              modifier: 1.2,
             }}
             pagination={{ el: ".swiper-pagination", clickable: true }}
             navigation={{
@@ -189,12 +195,12 @@ const ShowcaseSection = () => {
               prevEl: ".swiper-button-prev",
             }}
             modules={[EffectCoverflow, Pagination, Navigation]}
-            className="h-[500px] w-full"
-            speed={600} // Reduced from default for better performance
-            autoplay={false} // Disabled autoplay to reduce CPU usage
+            className="h-[280px] sm:h-[350px] md:h-[450px] lg:h-[500px] w-full"
+            speed={500}
+            autoplay={false}
           >
             {projects.map((project, index) => (
-              <SwiperSlide key={project.id} className="!w-[400px]">
+              <SwiperSlide key={project.id} className="!w-[260px] sm:!w-[300px] md:!w-[350px] lg:!w-[400px]">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
@@ -215,14 +221,14 @@ const ShowcaseSection = () => {
             ))}
           </Swiper>
 
-          {/* Navigation Controls - Simplified animations */}
-          <div className="relative mx-auto mt-8 flex w-64 items-center justify-center gap-8">
+          {/* Navigation Controls - Mobile-optimized */}
+          <div className="relative mx-auto mt-4 sm:mt-6 md:mt-8 flex w-40 sm:w-48 md:w-64 items-center justify-center gap-3 sm:gap-4 md:gap-8">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="swiper-button-prev !static !h-14 !w-14 rounded-full bg-primary-purple/50 !text-white transition-colors hover:bg-primary-purple flex items-center justify-center cursor-pointer"
+              className="swiper-button-prev !static !h-10 !w-10 sm:!h-12 sm:!w-12 md:!h-14 md:!w-14 rounded-full bg-primary-purple/50 !text-white transition-colors hover:bg-primary-purple flex items-center justify-center cursor-pointer min-h-[44px] min-w-[44px] touch-target"
             >
-              <ChevronLeft className="h-8 w-8" />
+              <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8" />
             </motion.div>
             
             <div className="swiper-pagination !static !w-auto"></div>
@@ -230,27 +236,27 @@ const ShowcaseSection = () => {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="swiper-button-next !static !h-14 !w-14 rounded-full bg-primary-purple/50 !text-white transition-colors hover:bg-primary-purple flex items-center justify-center cursor-pointer"
+              className="swiper-button-next !static !h-10 !w-10 sm:!h-12 sm:!w-12 md:!h-14 md:!w-14 rounded-full bg-primary-purple/50 !text-white transition-colors hover:bg-primary-purple flex items-center justify-center cursor-pointer min-h-[44px] min-w-[44px] touch-target"
             >
-              <ChevronRight className="h-8 w-8" />
+              <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8" />
             </motion.div>
           </div>
         </div>
 
-        {/* Bottom CTA - Optimized animation */}
+        {/* Bottom CTA - Mobile-optimized */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-16"
+          className="text-center mt-12 sm:mt-16"
         >
-          <p className="text-lg text-neutral-gray mb-6">
+          <p className="text-sm sm:text-base md:text-lg text-neutral-gray mb-4 sm:mb-6">
             Ready to create your own viral moment?
           </p>
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="bg-gradient-to-r from-accent-green to-highlight-pink text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all duration-200"
+            className="bg-gradient-to-r from-accent-green to-highlight-pink text-white px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full font-bold text-xs sm:text-sm md:text-base lg:text-lg hover:shadow-lg transition-all duration-200 min-h-[44px] touch-target"
           >
             Let's Make Magic! ✨
           </motion.button>
