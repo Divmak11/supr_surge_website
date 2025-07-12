@@ -108,7 +108,7 @@ const MetricsSection = () => {
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
             Numbers That{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-accent-green">
-              Don't Lie
+              Don&apos;t Lie
             </span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-neutral-medium max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">

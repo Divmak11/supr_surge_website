@@ -103,7 +103,7 @@ const PerformanceMonitor = () => {
     
     // Example: Send to Google Analytics
     if (typeof window !== 'undefined' && 'gtag' in window) {
-      (window as unknown as { gtag: Function }).gtag('event', 'web_vitals', {
+      (window as unknown as { gtag: (...args: unknown[]) => void }).gtag('event', 'web_vitals', {
         event_category: 'Web Vitals',
         event_label: metric,
         value: Math.round(value),

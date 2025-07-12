@@ -6,7 +6,6 @@ import {
   useInView,
 } from "framer-motion";
 import Button from "../ui/Button";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 
 

@@ -102,7 +102,7 @@ const FAQsSection = () => {
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-white mb-4 sm:mb-6">
             Got Questions?{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
-              We've Got Answers!
+              We&apos;ve Got Answers!
             </span>
           </h2>
           
