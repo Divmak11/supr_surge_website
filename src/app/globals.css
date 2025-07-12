@@ -20,6 +20,220 @@
   box-sizing: border-box;
 }
 
+/* Mobile-first responsive typography */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Mobile-first responsive containers */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Mobile-first responsive spacing */
+.section-padding {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+/* Mobile-first responsive typography */
+.responsive-heading {
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+@media (min-width: 640px) {
+  .responsive-heading {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-heading {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-heading {
+    font-size: 3.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsive-heading {
+    font-size: 4.5rem;
+  }
+}
+
+.responsive-text {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .responsive-text {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-text {
+    font-size: 1.25rem;
+  }
+}
+
+/* Mobile-first responsive grid */
+.responsive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-grid {
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+/* Mobile-first responsive flexbox */
+.responsive-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .responsive-flex {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+/* Mobile-first touch targets */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile-first responsive buttons */
+.btn-responsive {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .btn-responsive {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    border-radius: 0.75rem;
+  }
+}
+
+/* Mobile-first responsive cards */
+.card-responsive {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+  .card-responsive {
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+}
+
 /* Optimize animations with transform3d and will-change */
 .animate-float-slow,
 .animate-float-medium,
@@ -32,6 +246,24 @@
 .swiper-button-next::after,
 .swiper-button-prev::after {
   content: none !important;
+}
+
+/* Mobile-first responsive swiper navigation */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 40px !important;
+  height: 40px !important;
+  background: rgba(139, 92, 246, 0.9) !important;
+  border-radius: 50% !important;
+  color: white !important;
+}
+
+@media (min-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 50px !important;
+    height: 50px !important;
+  }
 }
 
 /* Optimized gradient animation with reduced complexity */
@@ -143,16 +375,24 @@
   transform: translateZ(0);
 }
 
-/* Optimized scroll indicator */
+/* Mobile-first responsive scroll indicator */
 .scroll-indicator {
   position: absolute;
   left: 50%;
-  bottom: 32px;
+  bottom: 1rem;
   transform: translate3d(-50%, 0, 0);
   width: 32px;
   height: 32px;
   z-index: 10;
   will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .scroll-indicator {
+    bottom: 2rem;
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .scroll-indicator svg {
@@ -196,6 +436,20 @@
 img {
   max-width: 100%;
   height: auto;
+  display: block;
+}
+
+/* Mobile-first responsive images */
+.responsive-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .responsive-image {
+    max-width: 100%;
+  }
 }
 
 /* Optimize transitions */
@@ -203,6 +457,127 @@ img {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
+}
+
+/* Mobile-first responsive navigation */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.mobile-nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .mobile-nav-content {
+    padding: 1.5rem 2rem;
+  }
+}
+
+/* Mobile-first responsive menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.mobile-menu-item {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 1rem 0;
+  text-align: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-item {
+    font-size: 1.25rem;
+    padding: 0.75rem 0;
+  }
+}
+
+/* Mobile-first responsive forms */
+.form-responsive {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .form-responsive {
+    gap: 1.5rem;
+  }
+}
+
+.input-responsive {
+  padding: 0.75rem 1rem;
+  border: 2px solid #D1D5DB;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .input-responsive {
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 1.125rem;
+  }
+}
+
+/* Mobile-first responsive modals */
+.modal-responsive {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.modal-content-responsive {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .modal-content-responsive {
+    padding: 2rem;
+    border-radius: 1.5rem;
+    max-width: 80vw;
+  }
 }
 
 /* Reduce motion for users who prefer it */
@@ -226,5 +601,103 @@ img {
   
   .animated-gradient {
     animation-duration: 16s; /* Slower on mobile */
+  }
+  
+  /* Reduce complexity on mobile */
+  .mobile-simplified {
+    transform: none !important;
+    animation: none !important;
+  }
+  
+  /* Improve touch targets on mobile */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Optimize text for mobile reading */
+  p, span, div {
+    line-height: 1.6;
+  }
+  
+  /* Reduce padding on mobile */
+  .mobile-padding {
+    padding: 1rem;
+  }
+  
+  /* Stack elements vertically on mobile */
+  .mobile-stack {
+    flex-direction: column;
+  }
+  
+  /* Center align on mobile */
+  .mobile-center {
+    text-align: center;
+  }
+}
+
+/* Mobile-first responsive utilities */
+@media (max-width: 640px) {
+  .xs\:hidden {
+    display: none;
+  }
+  
+  .xs\:block {
+    display: block;
+  }
+  
+  .xs\:flex {
+    display: flex;
+  }
+  
+  .xs\:grid {
+    display: grid;
+  }
+  
+  .xs\:text-center {
+    text-align: center;
+  }
+  
+  .xs\:text-left {
+    text-align: left;
+  }
+  
+  .xs\:text-right {
+    text-align: right;
+  }
+  
+  .xs\:w-full {
+    width: 100%;
+  }
+  
+  .xs\:h-full {
+    height: 100%;
+  }
+  
+  .xs\:p-0 {
+    padding: 0;
+  }
+  
+  .xs\:m-0 {
+    margin: 0;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card-responsive {
+    border: 2px solid #000;
+  }
+  
+  .btn-responsive {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .dark-mode {
+    background-color: #1F2937;
+    color: #F9FAFB;
   }
 }

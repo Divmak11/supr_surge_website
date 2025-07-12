@@ -1,21 +1,37 @@
 import React from "react";
 
-type CardProps = {
+interface CardProps {
   children: React.ReactNode;
   className?: string;
-};
+  variant?: "default" | "elevated" | "outlined" | "glass";
+  padding?: "none" | "sm" | "md" | "lg" | "xl";
+}
 
-const Card = ({ children, className = "" }: CardProps) => {
+const Card: React.FC<CardProps> = ({
+  children,
+  className = "",
+  variant = "default",
+  padding = "md",
+}) => {
+  const baseClasses = "rounded-xl sm:rounded-2xl transition-all duration-200";
+  
+  const variantClasses = {
+    default: "bg-white shadow-md hover:shadow-lg",
+    elevated: "bg-white shadow-lg hover:shadow-xl",
+    outlined: "bg-white border-2 border-primary-purple/20 hover:border-primary-purple/40",
+    glass: "bg-white/80 backdrop-blur-lg border border-white/20 shadow-lg",
+  };
+  
+  const paddingClasses = {
+    none: "",
+    sm: "p-3 sm:p-4",
+    md: "p-4 sm:p-6",
+    lg: "p-6 sm:p-8",
+    xl: "p-8 sm:p-10",
+  };
+
   return (
-    <div
-      className={`
-        bg-neutral-light rounded-3xl p-8
-        border-t-2 border-accent-green
-        shadow-lg
-        hover:bg-primary-purple/10 transition-colors duration-300
-        ${className}
-      `}
-    >
+    <div className={`${baseClasses} ${variantClasses[variant]} ${paddingClasses[padding]} ${className}`}>
       {children}
     </div>
   );

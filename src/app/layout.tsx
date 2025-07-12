@@ -24,7 +24,10 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
+  minimumScale: 1,
+  userScalable: true,
   themeColor: '#8B5CF6',
+  viewportFit: 'cover',
 };
 
 export const metadata: Metadata = {
@@ -103,7 +106,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -118,8 +121,10 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#8B5CF6" />
         <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="theme-color" content="#8B5CF6" />
+        <meta name="color-scheme" content="light" />
       </head>
-      <body className={`${montserrat.variable} ${openSans.variable} font-sans`}>
+      <body className={`${montserrat.variable} ${openSans.variable} font-sans antialiased`}>
         <PerformanceMonitor />
         <Script
           id="structured-data"
@@ -150,7 +155,7 @@ export default function RootLayout({
           }}
         />
         <Header />
-        <main className="pt-20">
+        <main className="pt-16 sm:pt-20">
           {children}
         </main>
         <Footer />
