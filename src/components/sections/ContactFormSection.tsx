@@ -117,15 +117,15 @@ const ContactFormSection = () => {
             <CheckCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-accent-green mx-auto" />
           </motion.div>
           
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
             You're In! 🎉
           </h2>
           
-          <p className="text-lg sm:text-xl md:text-2xl text-neutral-medium mb-6 sm:mb-8">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-medium mb-6 sm:mb-8">
             Our meme masters will get back to you within 24 hours. Time to make magic happen! ✨
           </p>
           
-          <div className="flex justify-center space-x-4 text-2xl sm:text-3xl md:text-4xl">
+          <div className="flex justify-center space-x-4 text-lg sm:text-xl md:text-2xl lg:text-3xl">
             <motion.span animate={{ rotate: [0, 20, -20, 0] }} transition={{ duration: 2, repeat: Infinity }}>🚀</motion.span>
             <motion.span animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }}>💫</motion.span>
             <motion.span animate={{ rotate: [0, -20, 20, 0] }} transition={{ duration: 2.5, repeat: Infinity }}>🎯</motion.span>
@@ -142,21 +142,21 @@ const ContactFormSection = () => {
         <motion.div
           animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
           transition={{ duration: 6, repeat: Infinity }}
-          className="absolute top-20 left-10 text-4xl sm:text-5xl md:text-6xl opacity-20"
+          className="absolute top-20 left-10 text-2xl sm:text-3xl md:text-4xl lg:text-5xl opacity-20"
         >
           💬
         </motion.div>
         <motion.div
           animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
-          className="absolute top-1/3 right-10 text-3xl sm:text-4xl md:text-5xl opacity-20"
+          className="absolute top-1/3 right-10 text-xl sm:text-2xl md:text-3xl lg:text-4xl opacity-20"
         >
           🎨
         </motion.div>
         <motion.div
           animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
           transition={{ duration: 5, repeat: Infinity }}
-          className="absolute bottom-20 left-1/4 text-3xl sm:text-4xl opacity-20"
+          className="absolute bottom-20 left-1/4 text-xl sm:text-2xl md:text-3xl opacity-20"
         >
           📈
         </motion.div>
@@ -173,7 +173,7 @@ const ContactFormSection = () => {
             className="space-y-6 sm:space-y-8"
           >
             <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={dynamicPrompts[promptIndex]}
@@ -206,7 +206,7 @@ const ContactFormSection = () => {
                 <motion.div
                   animate={{ rotate: [0, 10, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity }}
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
+                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
                 >
                   🎯
                 </motion.div>

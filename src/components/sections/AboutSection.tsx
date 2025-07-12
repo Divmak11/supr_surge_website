@@ -72,25 +72,25 @@ const AboutSection = () => {
       {/* Floating Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-20 left-10 text-4xl sm:text-5xl md:text-6xl opacity-10"
-        >
-          👥
-        </motion.div>
-        <motion.div
-          animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }}
+          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
           transition={{ duration: 6, repeat: Infinity }}
-          className="absolute top-1/3 right-20 text-3xl sm:text-4xl md:text-5xl opacity-10"
+          className="absolute top-20 left-10 text-2xl sm:text-3xl md:text-4xl lg:text-5xl opacity-10"
         >
-          🎨
+          �
         </motion.div>
         <motion.div
-          animate={{ y: [0, -10, 0], scale: [1, 1.1, 1] }}
-          transition={{ duration: 7, repeat: Infinity }}
-          className="absolute bottom-20 left-1/4 text-3xl sm:text-4xl opacity-10"
+          animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }}
+          transition={{ duration: 4, repeat: Infinity }}
+          className="absolute top-1/3 right-20 text-xl sm:text-2xl md:text-3xl lg:text-4xl opacity-10"
         >
-          🚀
+          💡
+        </motion.div>
+        <motion.div
+          animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
+          transition={{ duration: 5, repeat: Infinity }}
+          className="absolute bottom-20 left-1/4 text-xl sm:text-2xl md:text-3xl opacity-10"
+        >
+          ⭐
         </motion.div>
       </div>
 
@@ -103,10 +103,10 @@ const AboutSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12 sm:mb-16 md:mb-20"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
             Meet the{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-accent-green">
-              Meme Team
+              Meme Masters
             </span>
             <motion.span
               animate={{ rotate: [0, 20, -20, 0] }}
@@ -197,7 +197,7 @@ const AboutSection = () => {
                       scale: hoveredMember === member.id ? [1, 1.1, 1] : 1,
                     }}
                     transition={{ duration: 0.5 }}
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-3 sm:mb-4 inline-block bg-gradient-to-br from-primary-purple/10 to-accent-green/10 rounded-full w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center"
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-3 sm:mb-4 inline-block bg-gradient-to-br from-primary-purple/10 to-accent-green/10 rounded-full w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center"
                   >
                     {member.avatar}
                   </motion.div>
@@ -267,7 +267,7 @@ const AboutSection = () => {
             <motion.div
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="text-3xl sm:text-4xl mb-4 sm:mb-6"
+              className="text-2xl sm:text-3xl mb-4 sm:mb-6"
             >
               🤝
             </motion.div>

@@ -74,25 +74,25 @@ const MetricsSection = () => {
       {/* Floating Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
+          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
           transition={{ duration: 6, repeat: Infinity }}
-          className="absolute top-8 sm:top-20 left-4 sm:left-10 text-4xl sm:text-6xl opacity-20"
+          className="absolute top-8 sm:top-20 left-4 sm:left-10 text-2xl sm:text-3xl md:text-4xl lg:text-5xl opacity-20"
         >
           📊
         </motion.div>
         <motion.div
-          animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
+          animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
-          className="absolute top-1/3 right-4 sm:right-20 text-3xl sm:text-5xl opacity-20"
-        >
-          📈
-        </motion.div>
-        <motion.div
-          animate={{ y: [0, -15, 0], scale: [1, 1.1, 1] }}
-          transition={{ duration: 5, repeat: Infinity }}
-          className="absolute bottom-8 sm:bottom-20 left-1/4 text-3xl sm:text-4xl opacity-20"
+          className="absolute top-1/3 right-4 sm:right-20 text-xl sm:text-2xl md:text-3xl lg:text-4xl opacity-20"
         >
           🎯
+        </motion.div>
+        <motion.div
+          animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
+          transition={{ duration: 5, repeat: Infinity }}
+          className="absolute bottom-8 sm:bottom-20 left-1/4 text-xl sm:text-2xl md:text-3xl opacity-20"
+        >
+          ⚡
         </motion.div>
       </div>
 
@@ -105,15 +105,11 @@ const MetricsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
-            Our Track Record{" "}
-            <motion.span
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="inline-block text-primary-purple"
-            >
-              📊
-            </motion.span>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
+            Numbers That{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-accent-green">
+              Don't Lie
+            </span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-neutral-medium max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
             Numbers that speak louder than memes. Here's the proof that our creative chaos actually works.
@@ -171,7 +167,7 @@ const MetricsSection = () => {
                     whileInView={{ scale: 1 }}
                     transition={{ delay: index * 0.2, type: "spring", bounce: 0.6 }}
                     viewport={{ once: true }}
-                    className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-neutral-dark"
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-neutral-dark"
                   >
                     <LiveCounter from={0} to={item.metric} suffix={item.suffix} />
                   </motion.div>

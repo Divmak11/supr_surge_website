@@ -83,10 +83,10 @@ const BrandsTestimonialsSection = () => {
     <section className="relative py-16 sm:py-20 md:py-24 bg-neutral-dark overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 text-4xl sm:text-5xl md:text-6xl animate-float-slow">⭐</div>
-        <div className="absolute top-1/3 right-20 text-3xl sm:text-4xl animate-float-medium">💬</div>
-        <div className="absolute bottom-20 left-1/4 text-4xl sm:text-5xl animate-float-slow">🔥</div>
-        <div className="absolute bottom-10 right-10 text-4xl sm:text-5xl md:text-6xl animate-float-medium">💯</div>
+        <div className="absolute top-10 left-10 text-2xl sm:text-3xl md:text-4xl lg:text-5xl animate-float-slow">⭐</div>
+        <div className="absolute top-1/3 right-20 text-xl sm:text-2xl md:text-3xl lg:text-4xl animate-float-medium">💬</div>
+        <div className="absolute bottom-20 left-1/4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl animate-float-slow">🔥</div>
+        <div className="absolute bottom-10 right-10 text-2xl sm:text-3xl md:text-4xl lg:text-5xl animate-float-medium">💯</div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
@@ -98,7 +98,7 @@ const BrandsTestimonialsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white mb-3 sm:mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-white mb-3 sm:mb-4">
             Brands We've Made{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
               Legendary
@@ -160,7 +160,7 @@ const BrandsTestimonialsSection = () => {
                   }}
                   className="bg-white/10 backdrop-blur-lg rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 flex flex-col items-center justify-center aspect-square hover:bg-white/20 transition-all duration-300 cursor-pointer group min-h-[44px] touch-target"
                 >
-                  <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
                     {brand.logo}
                   </div>
                   <span className="text-white font-semibold text-xs sm:text-sm text-center">
@@ -181,7 +181,7 @@ const BrandsTestimonialsSection = () => {
             viewport={{ once: true }}
             className="text-center mb-8 sm:mb-12"
           >
-            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-white mb-3 sm:mb-4">
+            <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-extrabold text-white mb-3 sm:mb-4">
               What Our Clients Say
             </h3>
             <p className="text-sm sm:text-base md:text-lg text-neutral-gray">
@@ -218,7 +218,7 @@ const BrandsTestimonialsSection = () => {
                     </motion.div>
 
                     {/* Testimonial Content */}
-                    <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-neutral-dark font-medium mb-4 sm:mb-6 md:mb-8 leading-relaxed">
+                    <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-neutral-dark font-medium mb-4 sm:mb-6 md:mb-8 leading-relaxed">
                       {testimonials[currentTestimonial].content}
                     </p>
 
@@ -238,7 +238,7 @@ const BrandsTestimonialsSection = () => {
 
                     {/* Author */}
                     <div className="flex items-center justify-center space-x-2 sm:space-x-3 md:space-x-4">
-                      <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                      <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
                         {testimonials[currentTestimonial].avatar}
                       </div>
                       <div className="text-left">

@@ -76,10 +76,10 @@ const FAQsSection = () => {
     <section className="relative py-16 sm:py-20 md:py-24 bg-neutral-dark overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-20 text-5xl sm:text-6xl md:text-8xl animate-float-slow">❓</div>
-        <div className="absolute top-1/4 right-10 text-4xl sm:text-5xl md:text-6xl animate-float-medium">💡</div>
-        <div className="absolute bottom-1/3 left-10 text-5xl sm:text-6xl md:text-7xl animate-float-slow">🤔</div>
-        <div className="absolute bottom-20 right-1/4 text-3xl sm:text-4xl md:text-5xl animate-float-medium">💭</div>
+        <div className="absolute top-20 left-20 text-3xl sm:text-4xl md:text-5xl lg:text-6xl animate-float-slow">❓</div>
+        <div className="absolute top-1/4 right-10 text-2xl sm:text-3xl md:text-4xl lg:text-5xl animate-float-medium">💡</div>
+        <div className="absolute bottom-1/3 left-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl animate-float-slow">🤔</div>
+        <div className="absolute bottom-20 right-1/4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl animate-float-medium">💭</div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -99,7 +99,7 @@ const FAQsSection = () => {
             <HelpCircle className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-accent-green" />
           </motion.div>
           
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-white mb-4 sm:mb-6">
             Got Questions?{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
               We've Got Answers!
@@ -132,7 +132,7 @@ const FAQsSection = () => {
                   <motion.span
                     animate={openItems.includes(faq.id) ? { rotate: 360, scale: 1.2 } : { rotate: 0, scale: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="text-xl sm:text-2xl md:text-3xl"
+                    className="text-lg sm:text-xl md:text-2xl lg:text-3xl"
                   >
                     {faq.emoji}
                   </motion.span>
@@ -195,7 +195,7 @@ const FAQsSection = () => {
               <Lightbulb className="w-10 h-10 sm:w-12 sm:h-12 text-highlight-pink" />
             </motion.div>
             
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mb-3 sm:mb-4">
+            <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-white mb-3 sm:mb-4">
               Still Have Questions?
             </h3>
             
