@@ -21,46 +21,22 @@ const serviceCards = [
     icon: Brain,
     emoji: "💡",
     color: "bg-[#F9FAFB] border-[#8B5CF6]",
-    title: "Ideate & Strategize",
-    description: "We decode your brand's voice and audience DNA—combining memetic trends with data-backed insights to craft a blueprint that's both playful and precise.",
-    features: [
-      "Cultural Intelligence Research",
-      "Audience Persona Mapping",
-      "Competitive Meme Analysis",
-      "Strategic Content Planning"
-    ]
+    title: "Trend Intelligence & Strategy",
+    description: "Deep‑dive cultural research meets AI‑powered forecast to pinpoint the next big thing.",
   },
   {
     icon: Rocket,
     emoji: "🚀",
     color: "bg-[#F0F5FF] border-[#22C55E]",
-    title: "Create & Amplify",
-    description: "From scroll-stopping memes to influencer collabs, we roll out content on the ideal channels—powered by AI-driven curation and real-time campaign boosts.",
-    badge: "AI-Powered",
-    features: [
-      "Viral Content Creation",
-      "Multi-Platform Distribution",
-      "Influencer Partnerships",
-      "Real-Time Optimization"
-    ]
+    title: "Viral‑First Content Creation",
+    description: "Memes, micro‑videos, AR filters—crafted for maximum shareability & branded impact.",
   },
   {
     icon: BarChart3,
     emoji: "📈",
     color: "bg-[#FFF7F0] border-[#EC4899]",
-    title: "Analyze & Optimize",
-    description: "We track every click, view and share—using custom dashboards and ML-powered insights to double down on winners and pivot from duds.",
-    counter: {
-      from: 0,
-      to: 3.4,
-      suffix: "x engagement",
-    },
-    features: [
-      "Performance Analytics",
-      "A/B Testing",
-      "Sentiment Analysis",
-      "ROI Optimization"
-    ]
+    title: "Seeding, Amplification & Optimization",
+    description: "Hand‑picked creator networks + real‑time bidding pivot for ultimate ROI.",
   },
 ];
 
@@ -120,16 +96,7 @@ const ServicesSection = () => {
           className="text-center mb-12 sm:mb-16 md:mb-20"
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
-            What We Do{" "}
-            <motion.span
-              key={headlineIndex}
-              initial={{ scale: 0.8, rotate: -10 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.5, type: "spring", bounce: 0.6 }}
-              className="inline-block text-primary-purple"
-            >
-              {headlineEmojis[headlineIndex]}
-            </motion.span>
+            Our Three‑Phase Methodology
           </h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-medium max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
             Our three-phase workflow turns brands into internet legends through strategic meme mastery and data-driven creativity.
@@ -155,14 +122,7 @@ const ServicesSection = () => {
               }}
               className={`relative rounded-2xl sm:rounded-3xl border-4 ${service.color} shadow-xl p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col text-center group cursor-pointer min-h-[44px] touch-target`}
             >
-              {/* Badge */}
-              {service.badge && (
-                <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-accent-green text-white text-xs sm:text-sm font-bold px-2 sm:px-3 md:px-4 py-1 sm:py-2 rounded-full shadow-lg">
-                    {service.badge}
-                  </span>
-                </div>
-              )}
+
 
               {/* Icon */}
               <div className="flex justify-center mb-3 sm:mb-4 md:mb-6">
@@ -194,35 +154,7 @@ const ServicesSection = () => {
                 {service.description}
               </p>
 
-              {/* Features List */}
-              <div className="space-y-1 sm:space-y-2 mb-3 sm:mb-4 md:mb-6">
-                {service.features.map((feature, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-center text-xs sm:text-sm md:text-base text-neutral-dark"
-                  >
-                    <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 bg-primary-purple rounded-full mr-2 sm:mr-3 flex-shrink-0"></span>
-                    <span className="text-left">{feature}</span>
-                  </motion.div>
-                ))}
-              </div>
 
-              {/* Counter */}
-              {service.counter && (
-                <div className="mt-auto">
-                  <div className="bg-white/50 rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4 border-2 border-highlight-pink/20">
-                    <div className="text-sm sm:text-base md:text-lg lg:text-2xl font-extrabold text-highlight-pink">
-                      <LiveCounter from={service.counter.from} to={service.counter.to} />
-                      <span className="ml-1">{service.counter.suffix}</span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-neutral-medium mt-1">Average uplift</p>
-                  </div>
-                </div>
-              )}
 
               {/* Hover Effect Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-primary-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl sm:rounded-3xl pointer-events-none"></div>
@@ -244,6 +176,12 @@ const ServicesSection = () => {
           <motion.button
             whileHover={{ scale: 1.05, rotate: 1 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              const element = document.querySelector("#contact");
+              if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
             className="bg-gradient-to-r from-primary-purple to-accent-green text-white px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3 md:py-4 rounded-full font-bold text-xs sm:text-sm md:text-base lg:text-lg hover:shadow-lg transition-all duration-300 min-h-[44px] touch-target"
           >
             Let&apos;s Craft Your Strategy! 🎯

@@ -12,31 +12,33 @@ const LiveCounter = dynamic(() => import("../ui/LiveCounter"), {
 const metrics = [
   {
     icon: TrendingUp,
-    metric: 150,
-    label: "Campaigns Launched",
-    description: "Viral campaigns across all platforms",
+    metric: 200,
+    label: "Viral Campaigns",
+    description: "20M+ Impressions per Campaign Avg.",
     emoji: "🚀"
   },
   {
     icon: Users,
-    metric: 99,
-    label: "Happy Clients",
-    description: "Brands we've made legendary",
+    metric: 150,
+    label: "M+ Monthly Reach",
+    suffix: "",
+    description: "Massive audience reach",
     emoji: "😍"
   },
   {
     icon: Zap,
-    metric: 3.4,
-    label: "Avg. Engagement Uplift",
-    suffix: "x",
-    description: "Higher than industry average",
+    metric: 300,
+    label: "Avg. ROI",
+    suffix: "%",
+    description: "Exceptional return on investment",
     emoji: "⚡"
   },
   {
     icon: Award,
-    metric: 12,
-    label: "Industry Awards",
-    description: "Recognition for viral creativity",
+    metric: 100,
+    label: "Brands Served",
+    suffix: "+",
+    description: "Trusted by leading brands",
     emoji: "🏆"
   },
 ];

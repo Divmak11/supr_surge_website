@@ -53,7 +53,13 @@ const Header = () => {
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    if (href !== "#") {
+    if (href === "#") {
+      // Home link - scroll to hero section
+      const element = document.querySelector("#hero");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else if (href !== "#") {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
@@ -84,7 +90,7 @@ const Header = () => {
             >
               <Logo />
               <span className="font-extrabold text-xs sm:text-sm md:text-lg lg:text-2xl text-primary-purple">
-                Supr Surge
+                Bread n Buttr
               </span>
               <motion.div
                 animate={{ rotate: [0, 10, -10, 0] }}
@@ -150,11 +156,11 @@ const Header = () => {
               <span className="xl:hidden">Get Started</span>
             </motion.button>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Hidden on desktop */}
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 sm:p-3 rounded-lg bg-primary-purple/10 hover:bg-primary-purple/20 transition-colors min-h-[44px] min-w-[44px] touch-target mobile-menu-button"
+              className="md:hidden p-2 sm:p-3 rounded-lg bg-primary-purple/10 hover:bg-primary-purple/20 transition-colors min-h-[44px] min-w-[44px] touch-target mobile-menu-button"
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -207,7 +213,7 @@ const Header = () => {
                   <div className="flex items-center space-x-2">
                     <Logo />
                     <span className="font-extrabold text-lg sm:text-xl text-primary-purple">
-                      Supr Surge
+                      Bread n Buttr
                     </span>
                   </div>
                   <motion.button
