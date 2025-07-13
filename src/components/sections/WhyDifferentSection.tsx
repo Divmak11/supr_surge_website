@@ -26,34 +26,33 @@ const features = [
     icon: "/globe.svg",
     emoji: "🌍",
     color: "bg-[#F9FAFB] border-[#8B5CF6]",
-    title: "Omni-Channel Amplification",
+    title: "Culture‑First Creativity",
     description:
-      "Masters across every major feed—from meme pages on Instagram to trend-driving TikTok hubs.",
+      "Our in‑house meme‑lords live on Reddit, TikTok & Discord—so your brand speaks internet fluently.",
   },
   {
     icon: "/window.svg",
     emoji: "🤖",
     color: "bg-[#F0F5FF] border-[#22C55E]",
-    title: "AI-Driven Strategy",
+    title: "Proprietary AI Insights",
     description:
-      "Proprietary AI analyzes trend velocity and audience sentiment, so your campaigns land at the perfect moment.",
-    badge: "Proprietary Tech",
+      "Custom ML models that flag trending formats before they blow up.",
   },
   {
     icon: "/file.svg",
     emoji: "⚡",
     color: "bg-[#FFF7F0] border-[#EC4899]",
-    title: "Real-Time Optimization",
+    title: "Performance‑Backed Virality",
     description:
-      "Live dashboards update every 5 seconds—letting us pivot on the fly for maximum ROI.",
+      "Every campaign tied to real KPIs: CTR, engagement uplift, cost‑per‑share.",
   },
   {
     icon: "/next.svg",
     emoji: "🧑‍🎤",
     color: "bg-[#F9FAFB] border-[#8B5CF6]",
-    title: "Creative Collective",
+    title: "Holistic 360° Support",
     description:
-      "A hand-picked team of meme-lords, data nerds and creative strategists—all under one roof.",
+      "From crisis‑proof community management to full social‑media ops.",
   },
 ];
 
@@ -156,11 +155,6 @@ const WhyDifferentSection = () => {
                       <h3 className="text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-accent-green transition-colors duration-300">
                         {feature.title}
                       </h3>
-                      {feature.badge && (
-                        <span className="bg-highlight-pink text-white text-xs font-semibold px-2 sm:px-3 py-1 rounded-full animate-pulse">
-                          {feature.badge}
-                        </span>
-                      )}
                     </div>
                     <p className="text-xs sm:text-sm md:text-base text-neutral-gray leading-relaxed group-hover:text-white transition-colors duration-300">
                       {feature.description}
