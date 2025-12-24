@@ -9,12 +9,12 @@ const ServicesSection = dynamic(() => import("@/components/sections/ServicesSect
 });
 
 const WhyDifferentSection = dynamic(() => import("@/components/sections/WhyDifferentSection"), {
-  loading: () => <div className="h-96 bg-white animate-pulse" />,
+  loading: () => <div className="h-96 bg-neutral-dark animate-pulse" />,
   ssr: true,
 });
 
 const MetricsSection = dynamic(() => import("@/components/sections/MetricsSection"), {
-  loading: () => <div className="h-96 bg-neutral-dark animate-pulse" />,
+  loading: () => <div className="h-96 bg-gray-50 animate-pulse" />,
   ssr: true,
 });
 
@@ -28,8 +28,8 @@ const BrandsTestimonialsSection = dynamic(() => import("@/components/sections/Br
   ssr: true,
 });
 
-const AboutSection = dynamic(() => import("@/components/sections/AboutSection"), {
-  loading: () => <div className="h-96 bg-gray-50 animate-pulse" />,
+const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection"), {
+  loading: () => <div className="h-96 bg-neutral-dark animate-pulse" />,
   ssr: true,
 });
 
@@ -39,7 +39,7 @@ const ContactFormSection = dynamic(() => import("@/components/sections/ContactFo
 });
 
 const FAQsSection = dynamic(() => import("@/components/sections/FAQsSection"), {
-  loading: () => <div className="h-96 bg-white animate-pulse" />,
+  loading: () => <div className="h-96 bg-neutral-dark animate-pulse" />,
   ssr: true,
 });
 
@@ -50,10 +50,10 @@ export default function Home() {
       <Suspense fallback={<div className="h-96 bg-gray-50 animate-pulse" />}>
         <ServicesSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 bg-white animate-pulse" />}>
+      <Suspense fallback={<div className="h-96 bg-neutral-dark animate-pulse" />}>
         <WhyDifferentSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 bg-neutral-dark animate-pulse" />}>
+      <Suspense fallback={<div className="h-96 bg-gray-50 animate-pulse" />}>
         <MetricsSection />
       </Suspense>
       <Suspense fallback={<div className="h-96 bg-neutral-dark animate-pulse" />}>
@@ -62,15 +62,15 @@ export default function Home() {
       <Suspense fallback={<div className="h-96 bg-white animate-pulse" />}>
         <BrandsTestimonialsSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 bg-gray-50 animate-pulse" />}>
-        <AboutSection />
+      <Suspense fallback={<div className="h-96 bg-neutral-dark animate-pulse" />}>
+        <TestimonialsSection />
       </Suspense>
       <Suspense fallback={<div className="h-96 bg-neutral-dark animate-pulse" />}>
         <ContactFormSection />
       </Suspense>
-      <Suspense fallback={<div className="h-96 bg-white animate-pulse" />}>
+      <Suspense fallback={<div className="h-96 bg-neutral-dark animate-pulse" />}>
         <FAQsSection />
       </Suspense>
     </>
   );
-} 
+}
