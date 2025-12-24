@@ -22,30 +22,63 @@ const BrandsTestimonialsSection = () => {
         </motion.div>
 
         {/* Brands Grid */}
-        <div className="flex flex-wrap justify-center gap-6 md:gap-8 cursor-pointer">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 justify-items-center">
           {[
-            { name: "Samsung", src: "/brand_samsung.svg" },
-            { name: "Amazon", src: "/brand_amazon.svg" },
-            { name: "Flipkart", src: "/brand_flipkart.svg" },
-            { name: "Lenskart", src: "/brand_lenskart.svg" },
-            { name: "Dettol", src: "/brand_dettol.svg" },
+            { name: "Samsung", src: "/brand_samsung.png", color: "#1428A0" },
+            { name: "Flipkart", src: "/brand_flipkart.png", color: "#2874F0" },
+            { name: "Dettol", src: "/brand_dettol.png", color: "#007F3E" },
+            { name: "Lenskart", src: "/brand_lenskart.png", color: "#000045" },
+            { name: "NDTV", src: "/brand_ndtv.png", color: "#E31837" },
+            { name: "KITKAT", src: "/brand_kitkat.png", color: "#D32027" },
+            { name: "POCO", src: "/brand_poco.png", color: "#000000" },
+            { name: "Rapido", src: "/brand_rapido.png", color: "#F8D021" },
+            { name: "ALT BALAJI", src: "/brand_altbalaji.png", color: "#000000", serif: true },
+            { name: "PRIMEPLAY", src: "/brand_primeplay.png", color: "#E50914" },
+            { name: "TECHNO", src: "/brand_tecno.png", color: "#0064FE" },
+            { name: "NOWORY", src: "/brand_nowory.png", color: "#000000" },
+            { name: "AMAZON", src: "/brand_amazon.png", color: "#FF9900" },
+            { name: "NYKAA", src: "/brand_nykaa.png", color: "#E80071" },
+            { name: "DOT & KEY", src: "/brand_dotandkey.png", color: "#333333" },
           ].map((brand, index) => (
             <motion.div
               key={brand.name}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               whileHover={{ y: -5, scale: 1.05 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
+              transition={{ duration: 0.3, delay: (index % 5) * 0.1 }}
               viewport={{ once: true }}
-              className="relative w-32 h-32 md:w-40 md:h-40 bg-white rounded-xl shadow-lg hover:shadow-2xl flex items-center justify-center p-6 transition-all duration-300"
+              className="relative w-full aspect-square max-w-[140px] bg-white rounded-2xl shadow-lg hover:shadow-2xl flex items-center justify-center p-4 transition-all duration-300 border border-white/10 group overflow-hidden"
             >
-              <Image
-                src={brand.src}
-                alt={`${brand.name} logo`}
-                width={120}
-                height={60}
-                className="object-contain w-full h-full p-2"
-              />
+              <div className="relative w-full h-full flex items-center justify-center">
+                <Image
+                  src={brand.src}
+                  alt={`${brand.name} logo`}
+                  width={100}
+                  height={50}
+                  className="object-contain w-full h-full p-2 grayscale group-hover:grayscale-0 transition-all duration-500 relative z-10"
+                  onError={(e: any) => {
+                    const img = e.target;
+                    img.style.display = 'none';
+                    const fallback = img.nextSibling;
+                    if (fallback) fallback.style.display = 'flex';
+                  }}
+                />
+                <div
+                  className="absolute inset-0 hidden items-center justify-center p-2 text-center"
+                  style={{ display: 'none' }}
+                >
+                  <span
+                    className={`font-black tracking-tight leading-none ${brand.serif ? "font-serif italic" : "font-sans"
+                      }`}
+                    style={{
+                      color: brand.color,
+                      fontSize: brand.name.length > 8 ? "0.8rem" : "1rem",
+                    }}
+                  >
+                    {brand.name}
+                  </span>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>

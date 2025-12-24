@@ -173,6 +173,7 @@ const AnimatedROI = React.memo(() => (
 AnimatedROI.displayName = "AnimatedROI";
 
 // Enhanced Animated Punchline Component
+// Enhanced Animated Punchline Component
 const AnimatedPunchline = React.memo(() => {
     return (
         <motion.span
@@ -187,7 +188,6 @@ const AnimatedPunchline = React.memo(() => {
                 style={{
                     backgroundImage: "linear-gradient(135deg, #FF4D8C 0%, #FF6B9D 40%, #8B5CF6 100%)",
                     backgroundSize: "200% 100%",
-                    WebkitTextStroke: "1px rgba(255,255,255,0.1)",
                 }}
             >
                 well timed punchline
@@ -198,7 +198,12 @@ const AnimatedPunchline = React.memo(() => {
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12"
                 initial={{ x: "-150%" }}
                 animate={{ x: ["-150%", "150%"] }}
-                transition={{ delay: 2.5, duration: 1.5, repeat: Infinity, repeatDelay: 5 }}
+                transition={{
+                    delay: 2.5,
+                    duration: 1.5,
+                    repeat: Infinity,
+                    repeatDelay: 5
+                }}
             />
 
             {/* Glowing Underline */}
