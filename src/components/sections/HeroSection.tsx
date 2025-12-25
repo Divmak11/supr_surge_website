@@ -162,7 +162,7 @@ const AnimatedROI = React.memo(() => (
         transition={{ delay: 1.2, duration: 0.6, type: "spring" }}
     >
         ROI
-        <motion.div
+        <motion.span
             className="absolute -inset-2 bg-yellow-500/20 blur-xl rounded-full -z-10"
             animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 2, repeat: Infinity }}
@@ -194,7 +194,7 @@ const AnimatedPunchline = React.memo(() => {
             </span>
 
             {/* Sweep effect */}
-            <motion.div
+            <motion.span
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12"
                 initial={{ x: "-150%" }}
                 animate={{ x: ["-150%", "150%"] }}
@@ -273,7 +273,7 @@ const HeroSection = () => {
                 </h1>
 
                 {/* Subtitle with revealing effect */}
-                <motion.p
+                <motion.div
                     className="text-xl sm:text-2xl md:text-3xl text-white/80 mb-12 font-medium tracking-wide flex flex-wrap justify-center items-center gap-2"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -281,7 +281,7 @@ const HeroSection = () => {
                 >
                     <span className="opacity-60">because nothing sells faster than a</span>
                     <AnimatedPunchline />
-                </motion.p>
+                </motion.div>
 
                 {/* Refined CTA Button */}
                 <motion.button

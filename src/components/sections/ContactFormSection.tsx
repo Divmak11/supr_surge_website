@@ -233,7 +233,7 @@ const ContactFormSection = () => {
                     onFocus={() => setFocusedField("name")}
                     onBlur={() => setFocusedField(null)}
                     placeholder="Your name"
-                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none ${errors.name ? "border-error-red bg-error-red/5" :
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-neutral-dark placeholder:text-neutral-medium/70 ${errors.name ? "border-error-red bg-error-red/5" :
                       focusedField === "name" ? "border-primary-purple bg-primary-purple/5" : "border-neutral-gray bg-neutral-light"
                       }`}
                   />
@@ -253,7 +253,7 @@ const ContactFormSection = () => {
                     onFocus={() => setFocusedField("email")}
                     onBlur={() => setFocusedField(null)}
                     placeholder="your@email.com"
-                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none ${errors.email ? "border-error-red bg-error-red/5" :
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-neutral-dark placeholder:text-neutral-medium/70 ${errors.email ? "border-error-red bg-error-red/5" :
                       focusedField === "email" ? "border-primary-purple bg-primary-purple/5" : "border-neutral-gray bg-neutral-light"
                       }`}
                   />
@@ -273,7 +273,7 @@ const ContactFormSection = () => {
                     onFocus={() => setFocusedField("mobile")}
                     onBlur={() => setFocusedField(null)}
                     placeholder="+91 98765 43210"
-                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none ${errors.mobile ? "border-error-red bg-error-red/5" :
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-neutral-dark placeholder:text-neutral-medium/70 ${errors.mobile ? "border-error-red bg-error-red/5" :
                       focusedField === "mobile" ? "border-primary-purple bg-primary-purple/5" : "border-neutral-gray bg-neutral-light"
                       }`}
                   />
@@ -293,7 +293,7 @@ const ContactFormSection = () => {
                     onFocus={() => setFocusedField("website")}
                     onBlur={() => setFocusedField(null)}
                     placeholder="https://brand.com"
-                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none ${focusedField === "website" ? "border-primary-purple bg-primary-purple/5" : "border-neutral-gray bg-neutral-light"
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-neutral-dark placeholder:text-neutral-medium/70 ${focusedField === "website" ? "border-primary-purple bg-primary-purple/5" : "border-neutral-gray bg-neutral-light"
                       }`}
                   />
                 </div>
