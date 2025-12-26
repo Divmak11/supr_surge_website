@@ -44,6 +44,7 @@ export default {
         'neutral-light': '#F9FAFB',
         'neutral-gray': '#D1D5DB',
         'error-red': '#EF4444',
+        'beige-light': '#FDFBF7',
       },
       animation: {
         'float-slow': 'float-slow 8s ease-in-out infinite',

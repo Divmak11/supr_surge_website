@@ -1,252 +1,158 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Brain, Rocket, BarChart3 } from "lucide-react";
-import dynamic from "next/dynamic";
-import Image from "next/image";
 
-const LiveCounter = dynamic(() => import("../ui/LiveCounter"), {
-  ssr: false,
-});
-
-const floatingStickers = [
-  { src: "/window.svg", alt: "Window Sticker", style: "top-4 sm:top-8 left-4 sm:left-8 w-5 sm:w-6 md:w-8 lg:w-10 animate-float-slow" },
-  { src: "/file.svg", alt: "File Sticker", style: "bottom-4 sm:bottom-8 right-4 sm:right-8 w-6 sm:w-8 md:w-10 lg:w-12 animate-float-medium" },
+const services = [
+  { title: "Meme Marketing", emoji: "😂", color: "#FF6B6B", desc: "Viral content that spreads like wildfire" },
+  { title: "Influencer Marketing", emoji: "🌟", color: "#4ECDC4", desc: "Connect with voices that matter" },
+  { title: "Rating & Reviews", emoji: "⭐", color: "#45B7D1", desc: "Build trust through social proof" },
+  { title: "PR Activity", emoji: "📰", color: "#96CEB4", desc: "Get featured in top publications" },
+  { title: "Quora/Reddit Marketing", emoji: "💬", color: "#F1C40F", desc: "Community-driven brand presence" },
+  { title: "Snapchat Marketing", emoji: "👻", color: "#FFEB3B", desc: "Reach Gen-Z where they live" },
+  { title: "Youtube Marketing", emoji: "▶️", color: "#FF5252", desc: "Video content that converts" },
+  { title: "Performance Marketing", emoji: "📈", color: "#9B59B6", desc: "Data-driven growth strategies" },
+  { title: "Social Media Management", emoji: "📱", color: "#3498DB", desc: "Your brand, always on point" },
 ];
 
-const headlineEmojis = ["💡", "🚀", "📈", "🎨", "🔥", "😂"];
+const ServiceCard = ({ service, index }: { service: typeof services[0], index: number }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{ y: -8, scale: 1.02 }}
+      className="group cursor-pointer h-full"
+    >
+      <div
+        className="relative h-full bg-white rounded-2xl p-6 border-2 border-neutral-100 overflow-hidden transition-all duration-300 group-hover:border-transparent group-hover:shadow-2xl"
+        style={{
+          boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+        }}
+      >
+        {/* Color Accent Top Bar */}
+        <div
+          className="absolute top-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{ backgroundColor: service.color }}
+        />
 
-const serviceCards = [
-  {
-    icon: Brain,
-    emoji: "💡",
-    color: "bg-[#F9FAFB] border-[#8B5CF6]",
-    title: "Ideate & Strategize",
-    description: "We decode your brand's voice and audience DNA—combining memetic trends with data-backed insights to craft a blueprint that's both playful and precise.",
-    features: [
-      "Cultural Intelligence Research",
-      "Audience Persona Mapping",
-      "Competitive Meme Analysis",
-      "Strategic Content Planning"
-    ]
-  },
-  {
-    icon: Rocket,
-    emoji: "🚀",
-    color: "bg-[#F0F5FF] border-[#22C55E]",
-    title: "Create & Amplify",
-    description: "From scroll-stopping memes to influencer collabs, we roll out content on the ideal channels—powered by AI-driven curation and real-time campaign boosts.",
-    badge: "AI-Powered",
-    features: [
-      "Viral Content Creation",
-      "Multi-Platform Distribution",
-      "Influencer Partnerships",
-      "Real-Time Optimization"
-    ]
-  },
-  {
-    icon: BarChart3,
-    emoji: "📈",
-    color: "bg-[#FFF7F0] border-[#EC4899]",
-    title: "Analyze & Optimize",
-    description: "We track every click, view and share—using custom dashboards and ML-powered insights to double down on winners and pivot from duds.",
-    counter: {
-      from: 0,
-      to: 3.4,
-      suffix: "x engagement",
-    },
-    features: [
-      "Performance Analytics",
-      "A/B Testing",
-      "Sentiment Analysis",
-      "ROI Optimization"
-    ]
-  },
-];
+        {/* Hover Glow Effect */}
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl"
+          style={{ backgroundColor: service.color }}
+        />
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
+        {/* Emoji Icon */}
+        <div
+          className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl mb-4 transition-transform duration-300 group-hover:scale-110"
+          style={{
+            backgroundColor: `${service.color}15`,
+          }}
+        >
+          {service.emoji}
+        </div>
 
-const itemVariants = {
-  hidden: { y: 40, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      type: "spring" as const,
-      bounce: 0.4,
-    },
-  },
+        {/* Title */}
+        <h3 className="text-lg font-black text-neutral-800 mb-2 leading-tight">
+          {service.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-sm text-neutral-500 leading-relaxed">
+          {service.desc}
+        </p>
+
+        {/* Arrow Icon */}
+        <motion.div
+          className="absolute bottom-5 right-5 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+          style={{ backgroundColor: service.color }}
+          whileHover={{ scale: 1.1 }}
+        >
+          <span className="text-white text-sm">→</span>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
 };
 
 const ServicesSection = () => {
-  const [headlineIndex, setHeadlineIndex] = React.useState(0);
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setHeadlineIndex((i) => (i + 1) % headlineEmojis.length);
-    }, 1800);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section id="services" className="relative py-16 sm:py-20 md:py-28 bg-white overflow-hidden">
-      {/* Floating SVG Stickers */}
-      {floatingStickers.map((sticker, i) => (
-        <Image
-          key={i}
-          src={sticker.src}
-          alt={sticker.alt}
-          width={48}
-          height={48}
-          className={`pointer-events-none select-none opacity-60 absolute z-0 ${sticker.style}`}
-        />
-      ))}
-      
-      <div className="container mx-auto">
+    <section
+      id="services"
+      className="relative py-20 md:py-28 overflow-hidden"
+      style={{
+        background: "linear-gradient(180deg, #FAFAFA 0%, #FFFFFF 50%, #FAFAFA 100%)",
+      }}
+    >
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+      }} />
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12 sm:mb-16 md:mb-20"
+          className="text-center mb-14 md:mb-20"
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-neutral-dark mb-4 sm:mb-6">
-            What We Do{" "}
-            <motion.span
-              key={headlineIndex}
-              initial={{ scale: 0.8, rotate: -10 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.5, type: "spring", bounce: 0.6 }}
-              className="inline-block text-primary-purple"
-            >
-              {headlineEmojis[headlineIndex]}
-            </motion.span>
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-medium max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-            Our three-phase workflow turns brands into internet legends through strategic meme mastery and data-driven creativity.
-          </p>
-        </motion.div>
-
-        {/* Service Cards Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10"
-        >
-          {serviceCards.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ 
-                scale: 1.02,
-                rotate: index === 0 ? -1 : index === 1 ? 0 : 1,
-                transition: { duration: 0.3 }
-              }}
-              className={`relative rounded-2xl sm:rounded-3xl border-4 ${service.color} shadow-xl p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col text-center group cursor-pointer min-h-[44px] touch-target`}
-            >
-              {/* Badge */}
-              {service.badge && (
-                <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-accent-green text-white text-xs sm:text-sm font-bold px-2 sm:px-3 md:px-4 py-1 sm:py-2 rounded-full shadow-lg">
-                    {service.badge}
-                  </span>
-                </div>
-              )}
-
-              {/* Icon */}
-              <div className="flex justify-center mb-3 sm:mb-4 md:mb-6">
-                <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-white rounded-xl sm:rounded-2xl shadow-lg flex items-center justify-center group-hover:shadow-xl transition-shadow duration-300">
-                  <service.icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-primary-purple" />
-                  <motion.span
-                    animate={{ 
-                      rotate: [0, 10, -10, 0],
-                      scale: [1, 1.1, 1] 
-                    }}
-                    transition={{ 
-                      duration: 2, 
-                      repeat: Infinity,
-                      delay: index * 0.5 
-                    }}
-                    className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 text-sm sm:text-base md:text-lg lg:text-2xl"
-                  >
-                    {service.emoji}
-                  </motion.span>
-                </div>
-              </div>
-
-              {/* Content */}
-              <h3 className="text-base sm:text-lg md:text-xl font-extrabold mb-2 sm:mb-3 md:mb-4 text-neutral-dark">
-                {service.title}
-              </h3>
-              
-              <p className="text-sm sm:text-base md:text-lg text-neutral-medium mb-3 sm:mb-4 md:mb-6 leading-relaxed">
-                {service.description}
-              </p>
-
-              {/* Features List */}
-              <div className="space-y-1 sm:space-y-2 mb-3 sm:mb-4 md:mb-6">
-                {service.features.map((feature, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-center text-xs sm:text-sm md:text-base text-neutral-dark"
-                  >
-                    <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 bg-primary-purple rounded-full mr-2 sm:mr-3 flex-shrink-0"></span>
-                    <span className="text-left">{feature}</span>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Counter */}
-              {service.counter && (
-                <div className="mt-auto">
-                  <div className="bg-white/50 rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4 border-2 border-highlight-pink/20">
-                    <div className="text-sm sm:text-base md:text-lg lg:text-2xl font-extrabold text-highlight-pink">
-                      <LiveCounter from={service.counter.from} to={service.counter.to} />
-                      <span className="ml-1">{service.counter.suffix}</span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-neutral-medium mt-1">Average uplift</p>
-                  </div>
-                </div>
-              )}
-
-              {/* Hover Effect Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl sm:rounded-3xl pointer-events-none"></div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mt-12 sm:mt-16"
-        >
-          <p className="text-sm sm:text-base md:text-lg text-neutral-medium mb-4 sm:mb-6 px-4 sm:px-0">
-            Ready to see your brand become the talk of the internet?
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05, rotate: 1 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-primary-purple to-accent-green text-white px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3 md:py-4 rounded-full font-bold text-xs sm:text-sm md:text-base lg:text-lg hover:shadow-lg transition-all duration-300 min-h-[44px] touch-target"
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            viewport={{ once: true }}
+            className="inline-block mb-6"
           >
-            Let&apos;s Craft Your Strategy! 🎯
+            <span className="px-6 py-2 rounded-full bg-black text-white font-bold text-sm uppercase tracking-wider">
+              Our Services
+            </span>
+          </motion.div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-neutral-800 mb-6">
+            What We{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400">
+              Bring to the Table
+            </span>
+          </h2>
+
+          <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto">
+            A full arsenal of digital marketing services to make your brand unforgettable
+          </p>
+        </motion.div>
+
+        {/* Services Grid - Full Width */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 max-w-6xl mx-auto">
+          {services.map((service, index) => (
+            <ServiceCard key={service.title} service={service} index={index} />
+          ))}
+        </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mt-14 md:mt-20"
+        >
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              const element = document.querySelector("#contact");
+              if (element) element.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="px-10 py-5 rounded-full font-bold text-lg md:text-xl text-white"
+            style={{
+              background: "linear-gradient(135deg, #000000 0%, #333333 100%)",
+              boxShadow: "4px 4px 0px 0px #8B5CF6",
+            }}
+          >
+            <span className="flex items-center gap-3">
+              Let&apos;s Build Your Strategy 🎯
+            </span>
           </motion.button>
         </motion.div>
       </div>
@@ -254,4 +160,4 @@ const ServicesSection = () => {
   );
 };
 
-export default ServicesSection; 
+export default ServicesSection;

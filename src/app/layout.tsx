@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Script from "next/script";
 import PerformanceMonitor from "@/components/ui/PerformanceMonitor";
+import ClientWrapper from "@/components/layout/ClientWrapper";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -32,11 +31,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://suprsurge.com'),
-  title: {
-    default: "Supr Surge - From Meme to Mainstream | Digital Marketing Agency",
-    template: "%s | Supr Surge"
-  },
-  description: "Digital and meme marketing agency that turns brands into internet legends. From memes to mainstream — your brand, our playground. Specializing in viral campaigns, social media marketing, and creative digital strategies.",
+  title: "Brand & Butter | Digital Marketing Agency",
+  description: "Brand & Butter - We turn LOLs into ROI.",
   keywords: [
     "digital marketing agency",
     "meme marketing",
@@ -124,7 +120,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#8B5CF6" />
         <meta name="color-scheme" content="light" />
       </head>
-      <body className={`${montserrat.variable} ${openSans.variable} font-sans antialiased`}>
+      <body className={`${montserrat.variable} ${openSans.variable} font-sans antialiased text-white bg-black`}>
         <PerformanceMonitor />
         <Script
           id="structured-data"
@@ -154,12 +150,10 @@ export default function RootLayout({
             })
           }}
         />
-        <Header />
-        <main className="pt-16 sm:pt-20">
+        <ClientWrapper>
           {children}
-        </main>
-        <Footer />
+        </ClientWrapper>
       </body>
     </html>
   );
-} 
+}

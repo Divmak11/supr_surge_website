@@ -1,200 +1,326 @@
 "use client";
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useInView,
-} from "framer-motion";
-import Button from "../ui/Button";
-import Image from "next/image";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
+// Optimized Particle Field Canvas Component
+const ParticleField = React.memo(() => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const animationRef = useRef<number>(0);
+    const lastTimeRef = useRef<number>(0);
 
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
 
-const greetings = [
-  "Hello!", "¡Hola!", "Ciao!", "नमस्ते!", "Meme Time!", "👋", "Salut!", "Hallo!", "こんにちは!"
-];
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
 
-const dynamicWords = [
-  { word: "Meme", emoji: "😂" },
-  { word: "Trend", emoji: "🔥" },
-  { word: "Viral Moment", emoji: "🚀" },
-  { word: "Inside Joke", emoji: "🤫" },
-  { word: "Culture Drop", emoji: "🎉" },
-  { word: "Story", emoji: "📖" },
-  { word: "LOL", emoji: "🤣" },
-  { word: "👀", emoji: "" },
-];
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
 
-const floatingStickers = [
-  { src: "/globe.svg", alt: "Globe Sticker", style: "top-4 left-4 w-6 sm:w-8 md:w-10 lg:w-12 animate-float-slow" },
-  { src: "/window.svg", alt: "Window Sticker", style: "top-1/2 left-2 sm:left-4 w-5 sm:w-6 md:w-8 lg:w-10 animate-float-medium" },
-  { src: "/file.svg", alt: "File Sticker", style: "bottom-4 right-4 w-6 sm:w-8 md:w-10 lg:w-12 animate-float-slow" },
-  { src: "/next.svg", alt: "Next Sticker", style: "bottom-1/3 right-2 sm:right-8 w-8 sm:w-10 md:w-12 lg:w-16 animate-float-medium" },
-];
+        const particleCount = 40;
+        const particles: Array<{
+            x: number;
+            y: number;
+            vx: number;
+            vy: number;
+            size: number;
+            color: string;
+        }> = [];
 
-const HeroSection = () => {
-  const [showGreeting, setShowGreeting] = useState(true);
-  const [greetIndex, setGreetIndex] = useState(0);
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+        const colors = ["#8B5CF6", "#EC4899", "#22C55E", "#F59E0B", "#3B82F6"];
 
-  // Optimized greeting animation with reduced complexity
-  useEffect(() => {
-    if (!showGreeting) return;
-    
-    const interval = setInterval(() => {
-      setGreetIndex((prev) => {
-        if (prev < greetings.length - 1) {
-          return prev + 1;
-        } else {
-          clearInterval(interval);
-          setTimeout(() => setShowGreeting(false), 600);
-          return prev;
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 3 + 1,
+                color: colors[Math.floor(Math.random() * colors.length)],
+            });
         }
-      });
-    }, 180);
 
-    return () => clearInterval(interval);
-  }, [showGreeting]);
+        const animate = (currentTime: number) => {
+            if (currentTime - lastTimeRef.current < 33) {
+                animationRef.current = requestAnimationFrame(animate);
+                return;
+            }
+            lastTimeRef.current = currentTime;
 
-  // Optimized dynamic headline with reduced re-renders
-  useEffect(() => {
-    if (!showGreeting) {
-      const interval = setInterval(() => {
-        setWordIndex((prev) => (prev + 1) % dynamicWords.length);
-      }, 2200);
-      return () => clearInterval(interval);
-    }
-  }, [showGreeting]);
+            ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Optimized hover handlers
-  const handleIllustrationHover = useCallback(() => setIsHovered(true), []);
-  const handleIllustrationLeave = useCallback(() => setIsHovered(false), []);
+            particles.forEach((particle, i) => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
 
-  return (
-    <section ref={sectionRef} className="relative min-h-screen bg-white flex items-center justify-center p-4 sm:p-6 md:p-8 overflow-hidden">
-      {/* Floating SVG Stickers - Optimized with priority loading */}
-      {floatingStickers.map((sticker, i) => (
-        <Image
-          key={i}
-          src={sticker.src}
-          alt={sticker.alt}
-          width={64}
-          height={64}
-          priority={i < 2} // Only prioritize first 2 images
-          className={`pointer-events-none select-none opacity-70 absolute z-0 ${sticker.style}`}
+                if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fillStyle = particle.color;
+                ctx.fill();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[j].x - particle.x;
+                    const dy = particles[j].y - particle.y;
+                    const distSq = dx * dx + dy * dy;
+
+                    if (distSq < 20000) {
+                        const dist = Math.sqrt(distSq);
+                        ctx.beginPath();
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${0.3 - dist / 500})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            });
+
+            animationRef.current = requestAnimationFrame(animate);
+        };
+
+        animationRef.current = requestAnimationFrame(animate);
+
+        return () => {
+            cancelAnimationFrame(animationRef.current);
+            window.removeEventListener("resize", resizeCanvas);
+        };
+    }, []);
+
+    return (
+        <canvas
+            ref={canvasRef}
+            className="absolute inset-0 w-full h-full"
+            style={{ background: "radial-gradient(ellipse at center, #1a1a2e 0%, #0f0f14 50%, #000000 100%)" }}
         />
-      ))}
-      
-      {/* Opening Greeting Overlay - Simplified animation */}
-      <AnimatePresence>
-        {showGreeting && (
-          <motion.div
-            className="fixed inset-0 z-30 flex items-center justify-center bg-white"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.5 } }}
-          >
-            <motion.span
-              key={greetIndex}
-              initial={{ opacity: 0, scale: 0.7 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.2 }}
-              transition={{ duration: 0.18 }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-primary-purple drop-shadow-lg flex items-center gap-2 sm:gap-4"
-            >
-              {greetings[greetIndex]}
-            </motion.span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      
-      {/* Main Content - Optimized with intersection observer */}
-      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-6xl w-full z-10">
-        <div className="flex flex-col justify-center text-center md:text-left">
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: showGreeting ? 0 : 1, y: showGreeting ? 40 : 0 } : { opacity: 0, y: 40 }}
-            transition={{ duration: 0.8, delay: 0.2, type: 'spring', bounce: 0.4 }}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-extrabold text-neutral-dark mb-4 leading-tight"
-          >
-            From{' '}
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={dynamicWords[wordIndex].word}
-                initial={{ opacity: 0, y: -20, scale: 0.8 }}
-                animate={{ opacity: 1, y: 0, scale: 1.1 }}
-                exit={{ opacity: 0, y: 20, scale: 0.8 }}
-                transition={{ duration: 0.5, type: 'spring', bounce: 0.5 }}
-                className="inline-block text-primary-purple px-2 rounded-lg bg-primary-purple/10 shadow font-extrabold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl align-middle"
-              >
-                {dynamicWords[wordIndex].word} {dynamicWords[wordIndex].emoji}
-              </motion.span>
-            </AnimatePresence>{' '}
-            to Mainstream —<br className="hidden sm:block" />Your Brand, Our Playground
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: showGreeting ? 0 : 1, y: showGreeting ? 40 : 0 } : { opacity: 0, y: 40 }}
-            transition={{ duration: 0.8, delay: 0.5, type: 'spring', bounce: 0.3 }}
-            className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl text-neutral-medium font-semibold flex items-center gap-2 justify-center md:justify-start"
-          >
-            Crafty digital campaigns that stop scrolls and spark conversations. <span className="text-sm sm:text-base md:text-lg lg:text-xl">🎯</span>
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: showGreeting ? 0 : 1, scale: showGreeting ? 0.8 : 1 } : { opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.7, delay: 0.7 }}
-            className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start"
-          >
-            <Button className="text-xs sm:text-sm md:text-base lg:text-lg px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3 md:py-4 lg:py-5 font-extrabold bg-primary-purple text-white rounded-full shadow-lg hover:bg-accent-green hover:text-primary-purple transition-all duration-200 min-h-[44px] touch-target w-full sm:w-auto">
-              Make Memes, Make Impact 🚀
-            </Button>
-            <a
-              href="#"
-              className="text-primary-purple/80 hover:text-primary-purple font-bold text-xs sm:text-sm md:text-base lg:text-lg transition-colors relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-px after:bg-primary-purple after:transition-all after:duration-200 hover:after:w-full min-h-[44px] flex items-center touch-target"
-            >
-              See Our Viral Lab →
-            </a>
-          </motion.div>
-        </div>
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: showGreeting ? 0 : 1, y: showGreeting ? 40 : 0 } : { opacity: 0, y: 40 }}
-          transition={{ duration: 0.8, delay: 0.5, type: 'spring', bounce: 0.3 }}
-          className="flex items-center justify-center order-first md:order-last"
-        >
-          <motion.div
-            whileHover={{ rotate: isHovered ? [0, 8, -8, 0] : 0, scale: 1.08 }}
-            transition={{ duration: 0.7, type: 'spring', bounce: 0.5 }}
-            onMouseEnter={handleIllustrationHover}
-            onMouseLeave={handleIllustrationLeave}
-            className="bg-white rounded-2xl sm:rounded-3xl border-4 border-primary-purple shadow-2xl p-2 sm:p-4 w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 xl:w-80 xl:h-80 flex items-center justify-center"
-            style={{ boxShadow: '0 8px 32px 0 rgba(139,92,246,0.15)' }}
-          >
-            <Image 
-              src="/globe.svg" 
-              alt="Meme Sticker" 
-              width={220} 
-              height={220} 
-              priority
-              className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48" 
-            />
-          </motion.div>
-        </motion.div>
-      </div>
-      
-      {/* Playful Scroll Down Indicator - Simplified */}
-      <div className="scroll-indicator z-20">
-        <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="sm:w-8 sm:h-8 md:w-10 md:h-10">
-          <circle cx="20" cy="20" r="18" stroke="#8B5CF6" strokeWidth="3" fill="none" />
-          <path d="M20 13V27" stroke="#22C55E" strokeWidth="3" strokeLinecap="round" />
-          <path d="M15 22L20 27L25 22" stroke="#EC4899" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      </div>
-    </section>
-  );
+    );
+});
+
+ParticleField.displayName = "ParticleField";
+
+// Dramatically Animated Text Component
+const DramaticText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
+    const characters = text.split("");
+    return (
+        <span className="inline-block whitespace-nowrap">
+            {characters.map((char, i) => (
+                <motion.span
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.5, filter: "blur(4px)", y: 10 }}
+                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)", y: 0 }}
+                    transition={{
+                        delay: delay + i * 0.04,
+                        duration: 0.6,
+                        ease: "easeOut"
+                    }}
+                    className="inline-block"
+                >
+                    {char === " " ? "\u00A0" : char}
+                </motion.span>
+            ))}
+        </span>
+    );
 };
 
-export default HeroSection; 
+// Animated LOL Badge Component
+const AnimatedLOLBadge = React.memo(() => (
+    <motion.span
+        className="inline-flex items-center gap-1 px-4 py-2 rounded-xl text-white font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl border-2 border-dashed border-white/30 align-middle"
+        style={{
+            background: "linear-gradient(135deg, #EC4899 0%, #F472B6 100%)",
+            boxShadow: "0 0 30px rgba(236, 72, 153, 0.5)",
+        }}
+        initial={{ scale: 0, rotate: -15, y: 20 }}
+        animate={{ scale: 1, rotate: 0, y: 0 }}
+        transition={{ delay: 0.6, type: "spring", bounce: 0.5 }}
+    >
+        LOL
+        <span className="text-2xl sm:text-3xl animate-bounce">😂</span>
+    </motion.span>
+));
+
+AnimatedLOLBadge.displayName = "AnimatedLOLBadge";
+
+// Animated ROI Text Component
+const AnimatedROI = React.memo(() => (
+    <motion.span
+        className="font-black text-transparent bg-clip-text animate-shimmer relative align-middle"
+        style={{
+            backgroundImage: "linear-gradient(90deg, #F59E0B, #FBBF24, #F59E0B, #FBBF24)",
+            backgroundSize: "200% 100%",
+        }}
+        initial={{ opacity: 0, scale: 1.5, x: 20 }}
+        animate={{ opacity: 1, scale: 1, x: 0 }}
+        transition={{ delay: 1.2, duration: 0.6, type: "spring" }}
+    >
+        ROI
+        <motion.span
+            className="absolute -inset-2 bg-yellow-500/20 blur-xl rounded-full -z-10"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity }}
+        />
+    </motion.span>
+));
+
+AnimatedROI.displayName = "AnimatedROI";
+
+// Enhanced Animated Punchline Component
+// Enhanced Animated Punchline Component
+const AnimatedPunchline = React.memo(() => {
+    return (
+        <motion.span
+            className="relative inline-block align-baseline"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.8, duration: 0.8, ease: "backOut" }}
+        >
+            {/* Main text with dramatic gradient */}
+            <span
+                className="relative font-bold bg-clip-text text-transparent italic"
+                style={{
+                    backgroundImage: "linear-gradient(135deg, #FF4D8C 0%, #FF6B9D 40%, #8B5CF6 100%)",
+                    backgroundSize: "200% 100%",
+                }}
+            >
+                well timed punchline
+            </span>
+
+            {/* Sweep effect */}
+            <motion.span
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12"
+                initial={{ x: "-150%" }}
+                animate={{ x: ["-150%", "150%"] }}
+                transition={{
+                    delay: 2.5,
+                    duration: 1.5,
+                    repeat: Infinity,
+                    repeatDelay: 5
+                }}
+            />
+
+            {/* Glowing Underline */}
+            <motion.span
+                className="absolute -bottom-1 left-0 h-[3px] rounded-full shadow-[0_0_15px_rgba(255,77,140,0.8)]"
+                style={{
+                    background: "linear-gradient(90deg, transparent, #FF4D8C, #8B5CF6, transparent)",
+                }}
+                initial={{ width: "0%", opacity: 0 }}
+                animate={{ width: "100%", opacity: 1 }}
+                transition={{ delay: 2.2, duration: 1, ease: "easeOut" }}
+            />
+        </motion.span>
+    );
+});
+
+AnimatedPunchline.displayName = "AnimatedPunchline";
+
+const HeroSection = () => {
+    const [mounted, setMounted] = useState(false);
+    const containerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end start"]
+    });
+
+    const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+    const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const scrollToContact = useCallback(() => {
+        const element = document.querySelector("#contact");
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    }, []);
+
+    return (
+        <section
+            ref={containerRef}
+            id="hero"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        >
+            {/* Animated Background */}
+            {mounted && <ParticleField />}
+
+            {/* Overlays */}
+            <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+
+            {/* Dramatic Content Container */}
+            <motion.div
+                style={{ y, opacity, scale }}
+                className="relative z-10 text-center px-4 max-w-6xl mx-auto"
+            >
+                {/* Main Headline with Stagger Animation */}
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white mb-8 leading-tight tracking-tight">
+                    <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
+                        <DramaticText text="We turn" delay={0.2} />
+                        <AnimatedLOLBadge />
+                        <DramaticText text="to" delay={0.8} />
+                        <AnimatedROI />
+                    </div>
+                </h1>
+
+                {/* Subtitle with revealing effect */}
+                <motion.div
+                    className="text-xl sm:text-2xl md:text-3xl text-white/80 mb-12 font-medium tracking-wide flex flex-wrap justify-center items-center gap-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.5, duration: 1 }}
+                >
+                    <span className="opacity-60">because nothing sells faster than a</span>
+                    <AnimatedPunchline />
+                </motion.div>
+
+                {/* Refined CTA Button */}
+                <motion.button
+                    onClick={scrollToContact}
+                    className="group relative px-10 py-5 rounded-full font-black text-xl text-white overflow-hidden transition-all duration-300"
+                    initial={{ opacity: 0, scale: 0.8, y: 30 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ delay: 2.5, type: "spring", bounce: 0.4 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    {/* Pulsing Glow Background */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 group-hover:bg-gradient-to-l transition-all duration-500" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/20 blur-xl" />
+
+                    <span className="relative z-10 flex items-center gap-3">
+                        Let&apos;s Create Magic
+                        <motion.span
+                            animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1.2, 1] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                            ✨
+                        </motion.span>
+                    </span>
+                </motion.button>
+            </motion.div>
+
+            {/* Scroll Indicator */}
+            <motion.div
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 3, duration: 1, repeat: Infinity, repeatType: "reverse" }}
+            >
+                <div className="w-1 h-12 rounded-full bg-gradient-to-b from-purple-500 to-transparent" />
+                <span className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Scroll to explore</span>
+            </motion.div>
+        </section>
+    );
+};
+
+export default HeroSection;

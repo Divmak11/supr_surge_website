@@ -2,229 +2,197 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import dynamic from "next/dynamic";
-import Image from "next/image";
+// Simple, engaging features
+const features = [
+    {
+        emoji: "🔥",
+        title: "We Speak Internet",
+        description: "We live on TikTok, Reddit & Discord. Your brand will too.",
+    },
+    {
+        emoji: "📈",
+        title: "Data + Creativity",
+        description: "We know what's trending BEFORE it trends. Magic? Nope, just smart AI.",
+    },
+    {
+        emoji: "💰",
+        title: "Real Results",
+        description: "Every meme is backed by real KPIs. No fluff, just growth.",
+    },
+];
 
-const FeatureMap = dynamic(() => import("@/components/ui/FeatureMap"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex items-center justify-center h-64 sm:h-80 md:h-96 rounded-2xl bg-primary-purple/10">
-      <p className="text-sm sm:text-base">Loading Map...</p>
-    </div>
-  ),
+// Animated viral chart component
+const ViralChart = React.memo(() => {
+    return (
+        <div className="relative w-full h-80 bg-white/5 rounded-2xl p-6 border border-white/10">
+            {/* Chart Background Grid */}
+            <div className="absolute inset-6 flex flex-col justify-between">
+                {[...Array(5)].map((_, i) => (
+                    <div key={i} className="w-full h-px bg-white/10" />
+                ))}
+            </div>
+
+            {/* Animated Line Chart */}
+            <svg className="absolute inset-6 w-[calc(100%-48px)] h-[calc(100%-48px)]" viewBox="0 0 300 200" preserveAspectRatio="none">
+                {/* Chart Path */}
+                <motion.path
+                    d="M0 180 Q 30 170 60 160 Q 90 150 120 130 Q 150 110 180 70 Q 210 40 240 25 Q 270 15 300 5"
+                    fill="none"
+                    stroke="url(#chartGradient)"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    transition={{ duration: 2, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                />
+
+                {/* Gradient Definition */}
+                <defs>
+                    <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#22C55E" />
+                        <stop offset="50%" stopColor="#8B5CF6" />
+                        <stop offset="100%" stopColor="#EC4899" />
+                    </linearGradient>
+                </defs>
+
+                {/* Animated Pointer/Dot */}
+                <motion.circle
+                    cx="300"
+                    cy="5"
+                    r="8"
+                    fill="#EC4899"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ delay: 2, duration: 0.5, type: "spring" }}
+                    viewport={{ once: true }}
+                />
+            </svg>
+
+            {/* "Viral Trends" Dialog Box */}
+            <motion.div
+                className="absolute top-4 right-4 bg-accent-green text-white px-4 py-2 rounded-xl shadow-lg font-bold text-sm"
+                initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: 2.2, duration: 0.5, type: "spring" }}
+                viewport={{ once: true }}
+            >
+                <span className="flex items-center gap-2">
+                    🚀 Viral Trends!
+                </span>
+                {/* Arrow pointer */}
+                <div className="absolute -bottom-2 right-6 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-accent-green" />
+            </motion.div>
+
+            {/* Y-Axis Labels */}
+            <div className="absolute left-2 top-6 bottom-6 flex flex-col justify-between text-xs text-white/40">
+                <span>🔥</span>
+                <span>📈</span>
+                <span>📊</span>
+            </div>
+
+            {/* X-Axis Label */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-white/40">
+                Your Content Journey →
+            </div>
+        </div>
+    );
 });
 
-const floatingStickers = [
-  { src: "/globe.svg", alt: "Globe Sticker", style: "top-8 right-8 w-8 sm:w-10 md:w-12 animate-float-slow" },
-  { src: "/window.svg", alt: "Window Sticker", style: "bottom-8 left-8 w-6 sm:w-8 md:w-10 animate-float-medium" },
-];
-
-const headlineEmojis = ["🤓", "🤖", "🎯", "🔥", "💡", "😂"];
-
-const features = [
-  {
-    icon: "/globe.svg",
-    emoji: "🌍",
-    color: "bg-[#F9FAFB] border-[#8B5CF6]",
-    title: "Omni-Channel Amplification",
-    description:
-      "Masters across every major feed—from meme pages on Instagram to trend-driving TikTok hubs.",
-  },
-  {
-    icon: "/window.svg",
-    emoji: "🤖",
-    color: "bg-[#F0F5FF] border-[#22C55E]",
-    title: "AI-Driven Strategy",
-    description:
-      "Proprietary AI analyzes trend velocity and audience sentiment, so your campaigns land at the perfect moment.",
-    badge: "Proprietary Tech",
-  },
-  {
-    icon: "/file.svg",
-    emoji: "⚡",
-    color: "bg-[#FFF7F0] border-[#EC4899]",
-    title: "Real-Time Optimization",
-    description:
-      "Live dashboards update every 5 seconds—letting us pivot on the fly for maximum ROI.",
-  },
-  {
-    icon: "/next.svg",
-    emoji: "🧑‍🎤",
-    color: "bg-[#F9FAFB] border-[#8B5CF6]",
-    title: "Creative Collective",
-    description:
-      "A hand-picked team of meme-lords, data nerds and creative strategists—all under one roof.",
-  },
-];
+ViralChart.displayName = "ViralChart";
 
 const WhyDifferentSection = () => {
-  const [headlineIndex, setHeadlineIndex] = React.useState(0);
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setHeadlineIndex((i) => (i + 1) % headlineEmojis.length);
-    }, 1800);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <section id="why-different" className="relative bg-neutral-dark text-neutral-light py-16 sm:py-20 md:py-28 overflow-hidden">
-      {/* Floating SVG Stickers */}
-      {floatingStickers.map((sticker, i) => (
-        <Image
-          key={i}
-          src={sticker.src}
-          alt={sticker.alt}
-          width={48}
-          height={48}
-          className={`pointer-events-none select-none opacity-60 absolute z-0 ${sticker.style}`}
-        />
-      ))}
-      
-      <div className="container mx-auto px-4 sm:px-6 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-          {/* Left Column: Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            {/* Section Header */}
-            <div className="mb-8 sm:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-4 sm:mb-6 text-white">
-                Why We&apos;re{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
-                  Different
-                </span>
-                <motion.span
-                  key={headlineIndex}
-                  initial={{ scale: 0.8, rotate: -10 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ duration: 0.5, type: "spring", bounce: 0.6 }}
-                  className="inline-block ml-2 sm:ml-4 text-accent-green"
-                >
-                  {headlineEmojis[headlineIndex]}
-                </motion.span>
-              </h2>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-gray leading-relaxed">
-                While others chase trends, we create them. Our unique blend of viral creativity and AI-driven insights gives you the best of both worlds.
-              </p>
-            </div>
-
-            {/* Features */}
-            <div className="space-y-4 sm:space-y-6">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ 
-                    scale: 1.02,
-                    x: 10,
-                    transition: { duration: 0.3 }
-                  }}
-                  className={`flex items-start gap-2 sm:gap-3 md:gap-4 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 p-3 sm:p-4 md:p-6 shadow-lg hover:bg-white/15 transition-all duration-300 group cursor-pointer min-h-[44px] touch-target`}
-                >
-                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 flex items-center justify-center relative">
-                    <Image 
-                      src={feature.icon} 
-                      alt={feature.title} 
-                      width={48} 
-                      height={48} 
-                      className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 drop-shadow-lg group-hover:scale-110 transition-transform duration-300" 
-                    />
-                    <motion.span
-                      animate={{ 
-                        rotate: [0, 10, -10, 0],
-                        scale: [1, 1.1, 1] 
-                      }}
-                      transition={{ 
-                        duration: 2, 
-                        repeat: Infinity,
-                        delay: index * 0.3 
-                      }}
-                      className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 text-sm sm:text-base md:text-xl"
+    return (
+        <section id="why-different" className="relative bg-neutral-dark text-neutral-light py-16 sm:py-20 md:py-24 overflow-hidden">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    {/* Left Column: Text Content */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6 }}
+                        viewport={{ once: true }}
                     >
-                      {feature.emoji}
-                    </motion.span>
-                  </div>
-                  
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 sm:gap-3 mb-2">
-                      <h3 className="text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-accent-green transition-colors duration-300">
-                        {feature.title}
-                      </h3>
-                      {feature.badge && (
-                        <span className="bg-highlight-pink text-white text-xs font-semibold px-2 sm:px-3 py-1 rounded-full animate-pulse">
-                          {feature.badge}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-xs sm:text-sm md:text-base text-neutral-gray leading-relaxed group-hover:text-white transition-colors duration-300">
-                      {feature.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                        {/* Section Header */}
+                        <div className="mb-8">
+                            <motion.span
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.1 }}
+                                viewport={{ once: true }}
+                                className="inline-block px-4 py-1 rounded-full bg-accent-green/20 text-accent-green font-bold text-sm mb-4"
+                            >
+                                Why Us?
+                            </motion.span>
 
-          {/* Right Column: Interactive Graphic */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="flex items-center justify-center h-full min-h-[300px] sm:min-h-[400px]"
-          >
-            <div className="relative w-full max-w-lg">
-              {/* Background Glow */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-purple/20 to-accent-green/20 rounded-2xl sm:rounded-3xl blur-xl"></div>
-              
-              {/* Main Graphic Container */}
-              <div className="relative bg-white/5 backdrop-blur-lg rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/20">
-                <FeatureMap />
-              </div>
-              
-              {/* Floating Elements */}
-              <motion.div
-                animate={{ 
-                  y: [0, -10, 0],
-                  rotate: [0, 5, 0] 
-                }}
-                transition={{ 
-                  duration: 3, 
-                  repeat: Infinity,
-                  ease: "easeInOut" 
-                }}
-                className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 w-10 h-10 sm:w-12 sm:h-12 bg-accent-green rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg"
-              >
-                AI
-              </motion.div>
-              
-              <motion.div
-                animate={{ 
-                  y: [0, 10, 0],
-                  rotate: [0, -5, 0] 
-                }}
-                transition={{ 
-                  duration: 4, 
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1 
-                }}
-                className="absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-4 w-10 h-10 sm:w-12 sm:h-12 bg-highlight-pink rounded-full flex items-center justify-center text-white text-lg sm:text-xl shadow-lg"
-              >
-                🔥
-              </motion.div>
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 text-white">
+                                Why We&apos;re{" "}
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
+                                    Different
+                                </span>{" "}
+                                🎯
+                            </h2>
+
+                            <p className="text-lg text-neutral-gray">
+                                Others follow trends. We create them. Simple as that.
+                            </p>
+                        </div>
+
+                        {/* Features */}
+                        <div className="space-y-4">
+                            {features.map((feature, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                                    viewport={{ once: true }}
+                                    whileHover={{ x: 8 }}
+                                    className="flex items-start gap-4 rounded-xl bg-white/5 border border-white/10 p-4 cursor-pointer hover:bg-white/10 transition-colors"
+                                >
+                                    <span className="text-3xl">{feature.emoji}</span>
+                                    <div>
+                                        <h3 className="text-lg font-bold text-white mb-1">
+                                            {feature.title}
+                                        </h3>
+                                        <p className="text-sm text-neutral-gray">
+                                            {feature.description}
+                                        </p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* Right Column: Viral Chart Illustration */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        viewport={{ once: true }}
+                        className="flex items-center justify-center"
+                    >
+                        <div className="relative w-full max-w-md">
+                            {/* Glow Effect */}
+                            <div className="absolute -inset-4 bg-gradient-to-r from-accent-green/20 to-highlight-pink/20 rounded-3xl blur-2xl" />
+
+                            {/* Chart */}
+                            <ViralChart />
+
+                            {/* Floating Badge */}
+                            <motion.div
+                                animate={{ y: [0, -8, 0] }}
+                                transition={{ duration: 3, repeat: Infinity }}
+                                className="absolute -bottom-4 -left-4 bg-highlight-pink text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg"
+                            >
+                                📊 Your Content
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                </div>
             </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
+        </section>
+    );
 };
 
-export default WhyDifferentSection; 
+export default WhyDifferentSection;

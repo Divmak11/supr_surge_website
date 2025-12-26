@@ -1,118 +1,111 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
-import type { Swiper as SwiperClass } from "swiper/types";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, Play, TrendingUp, Zap } from "lucide-react";
 import ShowcaseCard from "../ui/ShowcaseCard";
-import Image from "next/image";
 
-const floatingStickers = [
-  { src: "/file.svg", alt: "File Sticker", style: "top-8 left-8 w-6 sm:w-8 md:w-10 animate-float-slow" },
-  { src: "/globe.svg", alt: "Globe Sticker", style: "bottom-8 right-8 w-8 sm:w-10 md:w-12 animate-float-medium" },
-];
-
-const headlineEmojis = ["🎬", "🔥", "😂", "🚀", "🎉", "👑"];
+const headlineEmojis = ["🔥", "🚀", "💥", "⚡", "🎯", "✨"];
 
 const projects = [
   {
     id: 1,
-    title: "Viral Meme Campaign",
-    metric: "+20M Impressions",
-    description: "Launched a multi-platform meme campaign that became a trending topic on Twitter.",
-    imageUrl: "https://picsum.photos/seed/project1/800/900",
-    platform: "Twitter, Instagram",
-    keyResult: "20M+ Impressions",
+    title: "Tu Ru Ruu Campaign",
+    tagline: "Harrdy Sandhu",
+    description: "We drove Harrdy Sandhu's 'Tu Ru Ruu' to viral status with strategic planning and innovative digital tactics, turning it into a cultural phenomenon!",
+    imageUrl: "/campaign_tururuu.png",
+    accentColor: "#FF4D8C",
+    metrics: [
+      { value: "100M+", label: "YouTube Views", color: "#FF4D8C" },
+      { value: "7 Days", label: "To Viral", color: "#22C55E" },
+      { value: "5M+", label: "Engagement", color: "#FFD700" },
+      { value: "#1", label: "Trending", color: "#00D4FF" },
+    ],
+    highlights: [
+      "Influencer Collabs on Instagram & Snapchat",
+      "Memes, BTS clips & viral moments",
+      "Became the anthem of December 2024",
+      "Turned fans into marketers",
+    ],
   },
   {
     id: 2,
-    title: "Influencer Collab",
-    metric: "300% ROI",
-    description: "Partnered with top-tier influencers to generate authentic, high-converting content.",
-    imageUrl: "https://picsum.photos/seed/project2/800/900",
-    platform: "YouTube",
-    keyResult: "300% ROI on Ad Spend",
+    title: "Raghav Juyal PR",
+    tagline: "IIFA Award Winner",
+    description: "Strategic PR campaign that secured massive visibility for Raghav Juyal, culminating in an IIFA Award win with unprecedented social media engagement.",
+    imageUrl: "/campaign_raghav_pr.png",
+    accentColor: "#FFD700",
+    metrics: [
+      { value: "40M+", label: "Impressions", color: "#FF4D8C" },
+      { value: "800K", label: "Likes", color: "#22C55E" },
+      { value: "16M", label: "Reach", color: "#FFD700" },
+      { value: "IIFA", label: "Award", color: "#8B5CF6" },
+    ],
+    highlights: [
+      "IIFA Award winning campaign",
+      "Multi-platform PR strategy",
+      "16M+ organic reach achieved",
+      "800K+ engagement across platforms",
+    ],
   },
   {
     id: 3,
-    title: "AR Filter for Instagram",
-    metric: "1M+ Uses",
-    description: "Developed a branded AR filter that was used over a million times in the first week.",
-    imageUrl: "https://picsum.photos/seed/project3/800/900",
-    platform: "Instagram",
-    keyResult: "1.2M Uses & Shares",
-  },
-  {
-    id: 4,
-    title: "TikTok Challenge",
-    metric: "500K Submissions",
-    description: "Created a viral TikTok challenge that drove massive user-generated content.",
-    imageUrl: "https://picsum.photos/seed/project4/800/900",
-    platform: "TikTok",
-    keyResult: "500K+ Video Submissions",
-  },
-  {
-    id: 5,
-    title: "Data-Driven Content",
-    metric: "+50% Engagement",
-    description: "Used analytics to craft a content strategy that doubled user engagement.",
-    imageUrl: "https://picsum.photos/seed/project5/800/900",
-    platform: "Blog, Socials",
-    keyResult: "53% Increase in Engagement",
+    title: "Moonwalkr",
+    tagline: "Cricket Gear Brand",
+    description: "Executed a comprehensive visibility campaign across 200 cricket pages, establishing Moonwalkr as a premium cricket gear brand with massive reach.",
+    imageUrl: "/campaign_moonwalkr.png",
+    accentColor: "#22C55E",
+    metrics: [
+      { value: "1M+", label: "Impressions", color: "#22C55E" },
+      { value: "500K", label: "Reach", color: "#FFD700" },
+      { value: "10K+", label: "Likes", color: "#FF4D8C" },
+      { value: "200", label: "Pages", color: "#00D4FF" },
+    ],
+    highlights: [
+      "200 cricket pages for visibility",
+      "Targeted sports audience reach",
+      "Brand awareness boost",
+      "Engaged cricket community",
+    ],
   },
 ];
 
 const ShowcaseSection = () => {
-  const [swiper, setSwiper] = useState<SwiperClass | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [flippedCardId, setFlippedCardId] = useState<number | null>(null);
   const [headlineIndex, setHeadlineIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  
-  // Optimized headline animation with reduced frequency
+
+  // Headline emoji animation
   useEffect(() => {
     const interval = setInterval(() => {
       setHeadlineIndex((i) => (i + 1) % headlineEmojis.length);
-    }, 3000); // Increased from 1800ms to reduce CPU usage
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
-  // Optimized card click handler
-  const handleCardClick = useCallback((clickedIndex: number, clickedId: number) => {
-    if (!swiper) return;
-
-    if (swiper.realIndex === clickedIndex) {
-      setFlippedCardId((current) => (current === clickedId ? null : clickedId));
-    } else {
+  // Simple unflip-then-navigate wrapper
+  const navigateWithUnflip = (newIndex: number) => {
+    if (flippedCardId !== null) {
       setFlippedCardId(null);
-      const flipAfterSlide = () => {
-        setFlippedCardId(clickedId);
-        swiper.off("slideChangeTransitionEnd", flipAfterSlide);
-      };
-      swiper.on("slideChangeTransitionEnd", flipAfterSlide);
-      swiper.slideToLoop(clickedIndex);
+      setTimeout(() => setCurrentIndex(newIndex), 400);
+    } else {
+      setCurrentIndex(newIndex);
     }
-  }, [swiper]);
+  };
 
-  // Optimized swiper event handling
-  useEffect(() => {
-    if (swiper) {
-      const handleSliderMove = () => setFlippedCardId(null);
-      swiper.on('sliderMove', handleSliderMove);
-      return () => {
-        swiper.off('sliderMove', handleSliderMove);
-      };
+  const handleNext = () => navigateWithUnflip((currentIndex + 1) % projects.length);
+  const handlePrev = () => navigateWithUnflip((currentIndex - 1 + projects.length) % projects.length);
+
+  const handleCardInteraction = (index: number) => {
+    if (index === currentIndex) {
+      setFlippedCardId(flippedCardId === projects[index].id ? null : projects[index].id);
+    } else {
+      navigateWithUnflip(index);
     }
-  }, [swiper]);
+  };
 
-  // Intersection observer for performance
+  // Intersection observer for entrance animations
   const sectionRef = useCallback((node: HTMLElement | null) => {
     if (node) {
       const observer = new IntersectionObserver(
@@ -129,141 +122,165 @@ const ShowcaseSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="portfolio" className="relative bg-neutral-dark py-16 sm:py-20 md:py-24 overflow-hidden">
-      {/* Floating SVG Stickers - Optimized loading */}
-      {floatingStickers.map((sticker, i) => (
-        <Image
-          key={i}
-          src={sticker.src}
-          alt={sticker.alt}
-          width={48}
-          height={48}
-          priority={i === 0} // Only prioritize first sticker
-          className={`pointer-events-none select-none opacity-60 absolute z-0 ${sticker.style}`}
+    <section
+      ref={sectionRef}
+      id="portfolio"
+      className="relative bg-gradient-to-b from-[#0f0f14] via-[#1a1a2e] to-[#0f0f14] py-16 sm:py-20 md:py-28 overflow-hidden"
+    >
+      {/* Background Orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute w-96 h-96 rounded-full blur-3xl opacity-20 bg-purple-600/30"
+          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+          transition={{ duration: 15, repeat: Infinity }}
+          style={{ top: '10%', left: '-10%' }}
         />
-      ))}
-      
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        {/* Section Header - Optimized animations */}
+        <motion.div
+          className="absolute w-80 h-80 rounded-full blur-3xl opacity-15 bg-pink-600/30"
+          animate={{ x: [0, -40, 0], y: [0, -20, 0] }}
+          transition={{ duration: 18, repeat: Infinity }}
+          style={{ bottom: '20%', right: '-5%' }}
+        />
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 relative z-10">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          className="text-center mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white mb-4 sm:mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+            <Play className="w-4 h-4 text-highlight-pink" fill="currentColor" />
+            <span className="text-sm text-neutral-gray">Success Stories</span>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black text-white mb-6">
             Our Top Works{" "}
-            <motion.span
-              key={headlineIndex}
-              initial={{ scale: 0.8, rotate: -10 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.4, type: "spring", bounce: 0.4 }}
-              className="inline-block text-accent-green"
-            >
-              {headlineEmojis[headlineIndex]}
-            </motion.span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={headlineIndex}
+                initial={{ scale: 0, rotate: -20 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: 20 }}
+                className="inline-block"
+              >
+                {headlineEmojis[headlineIndex]}
+              </motion.span>
+            </AnimatePresence>
           </h2>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">
-            Where creativity meets data, and pixels meet purpose. Check out some campaigns that broke the internet.
+          <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
+            Where creativity meets data. Check out campaigns that broke the internet.
           </p>
         </motion.div>
 
-        {/* Showcase Carousel - Mobile-optimized Swiper config */}
-        <div className="relative">
-          <Swiper
-            onSwiper={setSwiper}
-            effect={"coverflow"}
-            grabCursor={true}
-            centeredSlides={true}
-            loop={true}
-            slidesPerView={1.1}
-            spaceBetween={15}
-            breakpoints={{
-              640: { slidesPerView: 1.3, spaceBetween: 20 },
-              768: { slidesPerView: 2.2, spaceBetween: 30 },
-              1024: { slidesPerView: 2.8, spaceBetween: 40 }
-            }}
-            coverflowEffect={{
-              rotate: 0,
-              stretch: 0,
-              depth: 40,
-              modifier: 1.2,
-            }}
-            pagination={{ el: ".swiper-pagination", clickable: true }}
-            navigation={{
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            }}
-            modules={[EffectCoverflow, Pagination, Navigation]}
-            className="h-[280px] sm:h-[350px] md:h-[450px] lg:h-[500px] w-full"
-            speed={500}
-            autoplay={false}
-          >
-            {projects.map((project, index) => (
-              <SwiperSlide key={project.id} className="!w-[260px] sm:!w-[300px] md:!w-[350px] lg:!w-[400px]">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ 
-                    scale: 1.02,
-                    transition: { duration: 0.2 }
-                  }}
-                  className="relative group"
-                >
-                  <ShowcaseCard 
-                    {...project} 
-                    isFlipped={flippedCardId === project.id}
-                    onCardClick={() => handleCardClick(index, project.id)}
-                  />
-                </motion.div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+        {/* Improved Carousel Track */}
+        <div className="relative h-[600px] flex items-center justify-center">
+          {projects.map((project, index) => {
+            // Calculate relative position with wrap-around
+            let diff = index - currentIndex;
+            if (diff < -1) diff += projects.length;
+            if (diff > 1) diff -= projects.length;
 
-          {/* Navigation Controls - Mobile-optimized */}
-          <div className="relative mx-auto mt-4 sm:mt-6 md:mt-8 flex w-40 sm:w-48 md:w-64 items-center justify-center gap-3 sm:gap-4 md:gap-8">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="swiper-button-prev !static !h-10 !w-10 sm:!h-12 sm:!w-12 md:!h-14 md:!w-14 rounded-full bg-primary-purple/50 !text-white transition-colors hover:bg-primary-purple flex items-center justify-center cursor-pointer min-h-[44px] min-w-[44px] touch-target"
-            >
-              <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8" />
-            </motion.div>
-            
-            <div className="swiper-pagination !static !w-auto"></div>
-            
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="swiper-button-next !static !h-10 !w-10 sm:!h-12 sm:!w-12 md:!h-14 md:!w-14 rounded-full bg-primary-purple/50 !text-white transition-colors hover:bg-primary-purple flex items-center justify-center cursor-pointer min-h-[44px] min-w-[44px] touch-target"
-            >
-              <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8" />
-            </motion.div>
-          </div>
+            const isActive = diff === 0;
+            const isLeft = diff === -1;
+            const isRight = diff === 1;
+
+            // Define animation properties based on position
+            const xOffset = diff * 380; // Distance between cards
+            const opacity = isActive ? 1 : 0.4;
+            const scale = isActive ? 1 : 0.8;
+            const zIndex = isActive ? 20 : 10;
+            const blur = isActive ? "blur(0px)" : "blur(2px)";
+            const visibility = (isActive || isLeft || isRight) ? "visible" : "hidden";
+
+            return (
+              <motion.div
+                key={project.id}
+                initial={false}
+                animate={{
+                  x: xOffset,
+                  opacity,
+                  scale,
+                  zIndex,
+                  filter: blur,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 26,
+                }}
+                className="absolute w-[300px] sm:w-[350px] h-[500px]"
+                style={{
+                  visibility: visibility as any,
+                  cursor: isActive ? "default" : "pointer"
+                }}
+                onClick={() => handleCardInteraction(index)}
+              >
+                <div className="w-full h-full transform transition-transform duration-500">
+                  <ShowcaseCard
+                    {...project}
+                    isFlipped={isActive && flippedCardId === project.id}
+                    onCardClick={() => handleCardInteraction(index)}
+                  />
+                </div>
+
+                {/* Center Card Shadow/Glow */}
+                {isActive && (
+                  <motion.div
+                    layoutId="glow"
+                    className="absolute -inset-4 bg-purple-500/20 rounded-[2.5rem] blur-3xl -z-10"
+                  />
+                )}
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Bottom CTA - Mobile-optimized */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-12 sm:mt-16"
-        >
-          <p className="text-sm sm:text-base md:text-lg text-neutral-gray mb-4 sm:mb-6">
-            Ready to create your own viral moment?
-          </p>
+        {/* Controls */}
+        <div className="flex flex-col items-center gap-8 mt-4">
+          <div className="flex items-center gap-6">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={handlePrev}
+              className="p-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </motion.button>
+
+            <div className="flex gap-2">
+              {projects.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => navigateWithUnflip(idx)}
+                  className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? "w-8 bg-purple-500" : "w-2 bg-white/20"
+                    }`}
+                />
+              ))}
+            </div>
+
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={handleNext}
+              className="p-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </motion.button>
+          </div>
+
           <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="bg-gradient-to-r from-accent-green to-highlight-pink text-white px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full font-bold text-xs sm:text-sm md:text-base lg:text-lg hover:shadow-lg transition-all duration-200 min-h-[44px] touch-target"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+            className="px-10 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-lg shadow-xl shadow-purple-500/20"
           >
             Let&apos;s Make Magic! ✨
           </motion.button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 };
 
-export default ShowcaseSection; 
+export default ShowcaseSection;
