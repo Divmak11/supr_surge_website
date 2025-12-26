@@ -24,22 +24,18 @@ const BrandsTestimonialsSection = () => {
         {/* Brands Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 justify-items-center">
           {[
-            { name: "Samsung", src: "/brand_samsung.png", color: "#1428A0" },
-            { name: "Flipkart", src: "/brand_flipkart.png", color: "#2874F0" },
-            { name: "Dettol", src: "/brand_dettol.png", color: "#007F3E" },
-            { name: "Lenskart", src: "/brand_lenskart.png", color: "#000045" },
-            { name: "NDTV", src: "/brand_ndtv.png", color: "#E31837" },
-            { name: "KITKAT", src: "/brand_kitkat.png", color: "#D32027" },
-            { name: "POCO", src: "/brand_poco.png", color: "#000000" },
-            { name: "Rapido", src: "/brand_rapido.png", color: "#F8D021" },
-            { name: "ALT BALAJI", src: "/brand_altbalaji.png", color: "#000000", serif: true },
-            { name: "PRIMEPLAY", src: "/brand_primeplay.png", color: "#E50914" },
-            { name: "TECHNO", src: "/brand_tecno.png", color: "#0064FE" },
-            { name: "NOWORY", src: "/brand_nowory.png", color: "#000000" },
-            { name: "AMAZON", src: "/brand_amazon.png", color: "#FF9900" },
-            { name: "NYKAA", src: "/brand_nykaa.png", color: "#E80071" },
-            { name: "DOT & KEY", src: "/brand_dotandkey.png", color: "#333333" },
-          ].map((brand, index) => (
+            { name: "Samsung", src: "/brands/samsung_logo.svg", color: "#1428A0" },
+            { name: "Flipkart", src: "/brands/flipkart_logo.svg", color: "#2874F0" },
+            { name: "Dettol", src: "/brands/dettol_logo.png", color: "#007F3E" },
+            { name: "Lenskart", src: "/brands/lenskart_logo.svg", color: "#000045" },
+            { name: "POCO", src: "/brands/poco_logo.png", color: "#000000" },
+            { name: "Rapido", src: "/brands/rapido_logo.svg", color: "#F8D021" },
+            { name: "ALT BALAJI", src: "/brands/altbalaji_Logo.svg", color: "#000000", serif: true },
+            { name: "PRIMEPLAY", src: "/brands/primeplay.png", color: "#E50914" },
+            { name: "AMAZON", src: "/brands/amazon_logo.svg", color: "#FF9900" },
+            { name: "NYKAA", src: "/brands/nykaa_logo.svg", color: "#E80071" },
+            { name: "DOT & KEY", src: "/brands/dotnkey.png", color: "#333333" },
+          ].map((brand: { name: string; src: string; color: string; serif?: boolean }, index) => (
             <motion.div
               key={brand.name}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -47,15 +43,16 @@ const BrandsTestimonialsSection = () => {
               whileHover={{ y: -5, scale: 1.05 }}
               transition={{ duration: 0.3, delay: (index % 5) * 0.1 }}
               viewport={{ once: true }}
-              className="relative w-full aspect-square max-w-[140px] bg-white rounded-2xl shadow-lg hover:shadow-2xl flex items-center justify-center p-4 transition-all duration-300 border border-white/10 group overflow-hidden"
+              className={`relative w-full aspect-square max-w-[140px] rounded-2xl shadow-lg hover:shadow-2xl flex items-center justify-center p-6 transition-all duration-300 border border-black/5 group overflow-hidden ${brand.name === "PRIMEPLAY" ? "bg-zinc-900" : "bg-white"
+                }`}
             >
               <div className="relative w-full h-full flex items-center justify-center">
                 <Image
                   src={brand.src}
                   alt={`${brand.name} logo`}
-                  width={100}
-                  height={50}
-                  className="object-contain w-full h-full p-2 grayscale group-hover:grayscale-0 transition-all duration-500 relative z-10"
+                  width={200}
+                  height={100}
+                  className="object-contain w-full h-full transition-all duration-500 relative z-10"
                   onError={(e: any) => {
                     const img = e.target;
                     img.style.display = 'none';
