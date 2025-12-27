@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Play, TrendingUp, Zap } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import ShowcaseCard from "../ui/ShowcaseCard";
 
 const headlineEmojis = ["🔥", "🚀", "💥", "⚡", "🎯", "✨"];
@@ -211,7 +211,7 @@ const ShowcaseSection = () => {
                 }}
                 className="absolute w-[300px] sm:w-[350px] h-[500px]"
                 style={{
-                  visibility: visibility as any,
+                  visibility: visibility as React.CSSProperties["visibility"],
                   cursor: isActive ? "default" : "pointer"
                 }}
                 onClick={() => handleCardInteraction(index)}

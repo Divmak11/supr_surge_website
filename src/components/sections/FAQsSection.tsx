@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, HelpCircle, Zap, Lightbulb } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
 
 interface FAQ {
     id: string;

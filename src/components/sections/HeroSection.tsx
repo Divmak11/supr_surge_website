@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 // Optimized Particle Field Canvas Component
 const ParticleField = React.memo(() => {

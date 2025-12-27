@@ -182,16 +182,10 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial; ind
 const TestimonialsSection = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
 
-    // Check for mobile view
+    // Check for mobile view - logic removed since it was unused
     useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        // No-op
     }, []);
 
     // Mobile carousel navigation
@@ -341,8 +335,8 @@ const TestimonialsSection = () => {
                                     key={index}
                                     onClick={() => setActiveIndex(index)}
                                     className={`w-2 h-2 rounded-full transition-all duration-300 ${index === activeIndex
-                                            ? 'w-6 bg-highlight-pink'
-                                            : 'bg-white/30 hover:bg-white/50'
+                                        ? 'w-6 bg-highlight-pink'
+                                        : 'bg-white/30 hover:bg-white/50'
                                         }`}
                                     aria-label={`Go to testimonial ${index + 1}`}
                                 />

@@ -53,10 +53,10 @@ const BrandsTestimonialsSection = () => {
                   width={200}
                   height={100}
                   className="object-contain w-full h-full transition-all duration-500 relative z-10"
-                  onError={(e: any) => {
-                    const img = e.target;
+                  onError={(e) => {
+                    const img = e.target as HTMLImageElement;
                     img.style.display = 'none';
-                    const fallback = img.nextSibling;
+                    const fallback = img.nextSibling as HTMLDivElement;
                     if (fallback) fallback.style.display = 'flex';
                   }}
                 />
