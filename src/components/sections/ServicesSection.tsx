@@ -1,114 +1,265 @@
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 
 const services = [
-  { title: "Meme Marketing", emoji: "😂", color: "#FF6B6B", desc: "Viral content that spreads like wildfire" },
-  { title: "Influencer Marketing", emoji: "🌟", color: "#4ECDC4", desc: "Connect with voices that matter" },
-  { title: "Rating & Reviews", emoji: "⭐", color: "#45B7D1", desc: "Build trust through social proof" },
-  { title: "PR Activity", emoji: "📰", color: "#96CEB4", desc: "Get featured in top publications" },
-  { title: "Quora/Reddit Marketing", emoji: "💬", color: "#F1C40F", desc: "Community-driven brand presence" },
-  { title: "Snapchat Marketing", emoji: "👻", color: "#FFEB3B", desc: "Reach Gen-Z where they live" },
-  { title: "Youtube Marketing", emoji: "▶️", color: "#FF5252", desc: "Video content that converts" },
-  { title: "Performance Marketing", emoji: "📈", color: "#9B59B6", desc: "Data-driven growth strategies" },
-  { title: "Social Media Management", emoji: "📱", color: "#3498DB", desc: "Your brand, always on point" },
+  { title: "Meme Marketing", emoji: "😂", color: "#FF6B6B", desc: "Viral content that spreads like wildfire", accent: "from-red-100 to-rose-100" },
+  { title: "Influencer Marketing", emoji: "🌟", color: "#4ECDC4", desc: "Connect with voices that matter", accent: "from-teal-100 to-cyan-100" },
+  { title: "Rating & Reviews", emoji: "⭐", color: "#45B7D1", desc: "Build trust through social proof", accent: "from-sky-100 to-blue-100" },
+  { title: "PR Activity", emoji: "📰", color: "#96CEB4", desc: "Get featured in top publications", accent: "from-emerald-100 to-green-100" },
+  { title: "Quora/Reddit Marketing", emoji: "💬", color: "#F1C40F", desc: "Community-driven brand presence", accent: "from-yellow-100 to-orange-100" },
+  { title: "Snapchat Marketing", emoji: "👻", color: "#FFEB3B", desc: "Reach Gen-Z where they live", accent: "from-yellow-50 to-amber-100" },
+  { title: "Youtube Marketing", emoji: "▶️", color: "#FF5252", desc: "Video content that converts", accent: "from-red-100 to-orange-100" },
+  { title: "Performance Marketing", emoji: "📈", color: "#9B59B6", desc: "Data-driven growth strategies", accent: "from-purple-100 to-indigo-100" },
+  { title: "Social Media Management", emoji: "📱", color: "#3498DB", desc: "Your brand, always on point", accent: "from-blue-100 to-indigo-100" },
 ];
 
-const ServiceCard = ({ service, index }: { service: typeof services[0], index: number }) => {
+const ServiceCard = ({ service, index, mouseX, mouseY }: { service: typeof services[0], index: number, mouseX: any, mouseY: any }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="group cursor-pointer h-full"
+    <div
+      className="group relative rounded-3xl cursor-pointer"
     >
-      <div
-        className="relative h-full bg-white rounded-2xl p-6 border-2 border-neutral-100 overflow-hidden transition-all duration-300 group-hover:border-transparent group-hover:shadow-2xl"
+      {/* Spotlight Border Effect */}
+      <motion.div
+        className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{
-          boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+          background: useMotionTemplate`
+            radial-gradient(
+              650px circle at ${mouseX}px ${mouseY}px,
+              ${service.color}40,
+              transparent 80%
+            )
+          `,
         }}
-      >
-        {/* Color Accent Top Bar */}
+      />
+
+      {/* Main Card Content */}
+      <div className="relative h-full bg-white rounded-3xl p-8 border border-neutral-200/60 overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:border-transparent">
+
+        {/* Subtle Pastel Gradient Reveal on Hover */}
         <div
-          className="absolute top-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ backgroundColor: service.color }}
+          className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${service.accent}`}
         />
 
-        {/* Hover Glow Effect */}
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl"
-          style={{ backgroundColor: service.color }}
-        />
+        <div className="relative z-10">
+          {/* Header with Emoji */}
+          <div className="flex items-start justify-between mb-6">
+            <div
+              className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shadow-sm border border-neutral-100 bg-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+            >
+              {service.emoji}
+            </div>
 
-        {/* Emoji Icon */}
-        <div
-          className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl mb-4 transition-transform duration-300 group-hover:scale-110"
-          style={{
-            backgroundColor: `${service.color}15`,
-          }}
-        >
-          {service.emoji}
+            {/* Arrow Icon */}
+            <div
+              className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+              style={{ backgroundColor: `${service.color}20` }}
+            >
+              <span className="text-sm font-bold" style={{ color: service.color }}>↗</span>
+            </div>
+          </div>
+
+          {/* Text Content */}
+          <h3 className="text-xl font-bold text-neutral-800 mb-3 tracking-tight group-hover:text-black transition-colors">
+            {service.title}
+          </h3>
+
+          <p className="text-neutral-500 text-sm leading-relaxed font-medium transition-colors group-hover:text-neutral-700">
+            {service.desc}
+          </p>
         </div>
-
-        {/* Title */}
-        <h3 className="text-lg font-black text-neutral-800 mb-2 leading-tight">
-          {service.title}
-        </h3>
-
-        {/* Description */}
-        <p className="text-sm text-neutral-500 leading-relaxed">
-          {service.desc}
-        </p>
-
-        {/* Arrow Icon */}
-        <motion.div
-          className="absolute bottom-5 right-5 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
-          style={{ backgroundColor: service.color }}
-          whileHover={{ scale: 1.1 }}
-        >
-          <span className="text-white text-sm">→</span>
-        </motion.div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const ServicesSection = () => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
   return (
     <section
       id="services"
-      className="relative py-20 md:py-28 overflow-hidden"
-      style={{
-        background: "linear-gradient(180deg, #FAFAFA 0%, #FFFFFF 50%, #FAFAFA 100%)",
-      }}
+      className="relative py-24 md:py-32 overflow-hidden bg-neutral-50"
     >
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-      }} />
+      {/* Ambient Pastel Aurora Background + Floating Geometric Shapes */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Very subtle moving blobs */}
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-200/20 rounded-full blur-[100px] animate-float-slow" />
+        <div className="absolute bottom-[0%] right-[-10%] w-[40%] h-[40%] bg-purple-200/20 rounded-full blur-[120px] animate-float-medium" />
+        <div className="absolute top-[30%] left-[40%] w-[30%] h-[30%] bg-pink-200/15 rounded-full blur-[80px] animate-float" />
+
+        {/* Crisp Dot Pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `radial-gradient(#000 1px, transparent 1px)`,
+          backgroundSize: '24px 24px'
+        }} />
+
+        {/* Floating Geometric Shapes - Professional & Abstract */}
+        {/* Circles */}
+        <motion.div
+          animate={{
+            y: [0, -25, 0],
+            scale: [1, 1.15, 1]
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-20 left-[8%] w-16 h-16 rounded-full border-2 border-purple-300/30"
+        />
+
+        <motion.div
+          animate={{
+            y: [0, 20, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          className="absolute top-32 right-[12%] w-12 h-12 rounded-full bg-pink-200/20"
+        />
+
+        <motion.div
+          animate={{
+            y: [0, -15, 0],
+            x: [0, 10, 0],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute top-[15%] left-[75%] w-10 h-10 rounded-full border-2 border-blue-300/25"
+        />
+
+        {/* Squares */}
+        <motion.div
+          animate={{
+            y: [0, 30, 0],
+            rotate: [0, 45, 0],
+          }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+          className="absolute top-[35%] left-[5%] w-14 h-14 border-2 border-orange-300/30 rounded-sm"
+        />
+
+        <motion.div
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, -30, 0],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+          className="absolute top-[40%] right-[8%] w-16 h-16 bg-purple-200/15 rounded-lg"
+        />
+
+        <motion.div
+          animate={{
+            y: [0, 25, 0],
+            rotate: [0, 60, 0],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-[45%] left-[85%] w-12 h-12 border-2 border-teal-300/25"
+        />
+
+        {/* Triangles (using CSS clip-path) */}
+        <motion.div
+          animate={{
+            y: [0, -18, 0],
+            rotate: [0, 120, 0],
+          }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+          className="absolute bottom-[20%] left-[15%] w-14 h-14 bg-gradient-to-br from-pink-200/20 to-purple-200/20"
+          style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
+        />
+
+        <motion.div
+          animate={{
+            y: [0, 22, 0],
+            rotate: [0, -90, 0],
+          }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+          className="absolute bottom-[25%] right-[20%] w-16 h-16 border-2 border-blue-300/30"
+          style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
+        />
+
+        <motion.div
+          animate={{
+            y: [0, -28, 0],
+            rotate: [0, 180, 0],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          className="absolute bottom-[15%] left-[65%] w-12 h-12 bg-gradient-to-tr from-orange-200/15 to-pink-200/15"
+          style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
+        />
+
+        {/* Additional Geometric Shapes */}
+        <motion.div
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[25%] right-[25%] w-12 h-12 border-2 border-purple-300/20 rounded-lg"
+        />
+
+        <motion.div
+          animate={{
+            rotate: [0, -360],
+            y: [0, 15, 0]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[35%] left-[35%] w-8 h-8 border-2 border-pink-300/20 rounded-full"
+        />
+
+        <motion.div
+          animate={{
+            rotate: [0, 180, 0],
+            scale: [1, 1.15, 1]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[60%] left-[12%] w-10 h-10 bg-gradient-to-br from-blue-200/10 to-purple-200/10 rounded-lg backdrop-blur-sm"
+        />
+
+        {/* Small Accent Dots */}
+        <motion.div
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[18%] left-[45%] w-2 h-2 bg-purple-400/30 rounded-full"
+        />
+
+        <motion.div
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.15, 0.35, 0.15]
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute bottom-[40%] right-[30%] w-3 h-3 bg-pink-400/25 rounded-full"
+        />
+
+        <motion.div
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-[55%] right-[15%] w-2 h-2 bg-blue-400/30 rounded-full"
+        />
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
+        {/* Section Header - Clean & Sharp */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mb-14 md:mb-20"
+          className="text-center mb-16 md:mb-24"
         >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            viewport={{ once: true }}
-            className="inline-block mb-6"
-          >
-            <span className="px-6 py-2 rounded-full bg-black text-white font-bold text-sm uppercase tracking-wider">
+          <div className="inline-block mb-6">
+            <span className="px-5 py-2 rounded-full bg-black text-white font-bold text-sm uppercase tracking-wider">
               Our Services
             </span>
-          </motion.div>
+          </div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-neutral-800 mb-6">
             What We{" "}
@@ -122,38 +273,42 @@ const ServicesSection = () => {
           </p>
         </motion.div>
 
-        {/* Services Grid - Full Width */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 max-w-6xl mx-auto">
+        {/* Services Grid with Spotlight Interaction */}
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto group"
+          onMouseMove={handleMouseMove}
+        >
           {services.map((service, index) => (
-            <ServiceCard key={service.title} service={service} index={index} />
+            <ServiceCard
+              key={service.title}
+              service={service}
+              index={index}
+              mouseX={mouseX}
+              mouseY={mouseY}
+            />
           ))}
         </div>
 
-        {/* CTA */}
+        {/* CTA - Minimalist & Light */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mt-14 md:mt-20"
+          className="text-center mt-20"
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={() => {
               const element = document.querySelector("#contact");
               if (element) element.scrollIntoView({ behavior: "smooth" });
             }}
-            className="px-10 py-5 rounded-full font-bold text-lg md:text-xl text-white"
-            style={{
-              background: "linear-gradient(135deg, #000000 0%, #333333 100%)",
-              boxShadow: "4px 4px 0px 0px #8B5CF6",
-            }}
+            className="group px-8 py-4 rounded-full bg-white border border-neutral-200 text-neutral-900 font-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 mx-auto"
           >
-            <span className="flex items-center gap-3">
-              Let&apos;s Build Your Strategy 🎯
+            <span>Let&apos;s Build Your Strategy</span>
+            <span className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center group-hover:bg-purple-600 transition-colors">
+              →
             </span>
-          </motion.button>
+          </button>
         </motion.div>
       </div>
     </section>
