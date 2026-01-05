@@ -50,9 +50,9 @@ const ViralChart = React.memo(() => {
                 {/* Gradient Definition */}
                 <defs>
                     <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#22C55E" />
-                        <stop offset="50%" stopColor="#8B5CF6" />
-                        <stop offset="100%" stopColor="#EC4899" />
+                        <stop offset="0%" stopColor="#808080" />
+                        <stop offset="50%" stopColor="#FAFF00" />
+                        <stop offset="100%" stopColor="#FFFF00" />
                     </linearGradient>
                 </defs>
 
@@ -61,7 +61,7 @@ const ViralChart = React.memo(() => {
                     cx="300"
                     cy="5"
                     r="8"
-                    fill="#EC4899"
+                    fill="#FFFF00"
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     transition={{ delay: 2, duration: 0.5, type: "spring" }}
@@ -71,7 +71,7 @@ const ViralChart = React.memo(() => {
 
             {/* "Viral Trends" Dialog Box */}
             <motion.div
-                className="absolute top-4 right-4 bg-accent-green text-white px-4 py-2 rounded-xl shadow-lg font-bold text-sm"
+                className="absolute top-4 right-4 bg-[#FFFF00] text-black px-4 py-2 rounded-xl shadow-lg font-bold text-sm"
                 initial={{ opacity: 0, scale: 0.5, y: 20 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: 2.2, duration: 0.5, type: "spring" }}
@@ -81,7 +81,7 @@ const ViralChart = React.memo(() => {
                     🚀 Viral Trends!
                 </span>
                 {/* Arrow pointer */}
-                <div className="absolute -bottom-2 right-6 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-accent-green" />
+                <div className="absolute -bottom-2 right-6 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#FFFF00]" />
             </motion.div>
 
             {/* Y-Axis Labels */}
@@ -103,7 +103,7 @@ ViralChart.displayName = "ViralChart";
 
 const WhyDifferentSection = () => {
     return (
-        <section id="why-different" className="relative bg-neutral-dark text-neutral-light py-16 sm:py-20 md:py-24 overflow-hidden">
+        <section id="why-different" className="relative bg-black text-white py-16 sm:py-20 md:py-24 overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     {/* Left Column: Text Content */}
@@ -120,14 +120,14 @@ const WhyDifferentSection = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
                                 viewport={{ once: true }}
-                                className="inline-block px-4 py-1 rounded-full bg-accent-green/20 text-accent-green font-bold text-sm mb-4"
+                                className="inline-block px-4 py-1 rounded-full bg-[#FFFF00]/20 text-[#FFFF00] font-bold text-sm mb-4"
                             >
                                 Why Us?
                             </motion.span>
 
                             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 text-white">
                                 Why We&apos;re{" "}
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFFF00] to-[#FAFF00]">
                                     Different
                                 </span>{" "}
                                 🎯
@@ -150,7 +150,7 @@ const WhyDifferentSection = () => {
                                     whileHover={{ x: 8 }}
                                     className="flex items-start gap-4 rounded-xl bg-white/5 border border-white/10 p-4 cursor-pointer hover:bg-white/10 transition-colors"
                                 >
-                                    <span className="text-3xl">{feature.emoji}</span>
+                                    <span className="text-3xl filter grayscale group-hover:grayscale-0 transition-all">{feature.emoji}</span>
                                     <div>
                                         <h3 className="text-lg font-bold text-white mb-1">
                                             {feature.title}
@@ -174,7 +174,7 @@ const WhyDifferentSection = () => {
                     >
                         <div className="relative w-full max-w-md">
                             {/* Glow Effect */}
-                            <div className="absolute -inset-4 bg-gradient-to-r from-accent-green/20 to-highlight-pink/20 rounded-3xl blur-2xl" />
+                            <div className="absolute -inset-4 bg-gradient-to-r from-[#FFFF00]/20 to-[#FAFF00]/20 rounded-3xl blur-2xl" />
 
                             {/* Chart */}
                             <ViralChart />
@@ -183,7 +183,7 @@ const WhyDifferentSection = () => {
                             <motion.div
                                 animate={{ y: [0, -8, 0] }}
                                 transition={{ duration: 3, repeat: Infinity }}
-                                className="absolute -bottom-4 -left-4 bg-highlight-pink text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg"
+                                className="absolute -bottom-4 -left-4 bg-[#FFFF00] text-black px-4 py-2 rounded-full font-bold text-sm shadow-lg"
                             >
                                 📊 Your Content
                             </motion.div>

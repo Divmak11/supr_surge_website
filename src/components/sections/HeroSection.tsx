@@ -32,7 +32,7 @@ const ParticleField = React.memo(() => {
             color: string;
         }> = [];
 
-        const colors = ["#8B5CF6", "#EC4899", "#22C55E", "#F59E0B", "#3B82F6"];
+        const colors = ["#FFFF00", "#FAFF00", "#FFFFFF", "#A0A0A0"];
 
         for (let i = 0; i < particleCount; i++) {
             particles.push({
@@ -77,7 +77,7 @@ const ParticleField = React.memo(() => {
                         ctx.beginPath();
                         ctx.moveTo(particle.x, particle.y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(139, 92, 246, ${0.3 - dist / 500})`;
+                        ctx.strokeStyle = `rgba(255, 255, 0, ${0.3 - dist / 500})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
@@ -135,8 +135,9 @@ const AnimatedLOLBadge = React.memo(() => (
     <motion.span
         className="inline-flex items-center gap-1 px-4 py-2 rounded-xl text-white font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl border-2 border-dashed border-white/30 align-middle"
         style={{
-            background: "linear-gradient(135deg, #EC4899 0%, #F472B6 100%)",
-            boxShadow: "0 0 30px rgba(236, 72, 153, 0.5)",
+            background: "linear-gradient(135deg, #000000 0%, #333333 100%)",
+            boxShadow: "0 0 30px rgba(255, 255, 0, 0.3)",
+            color: "#FFFF00"
         }}
         initial={{ scale: 0, rotate: -15, y: 20 }}
         animate={{ scale: 1, rotate: 0, y: 0 }}
@@ -154,7 +155,7 @@ const AnimatedROI = React.memo(() => (
     <motion.span
         className="font-black text-transparent bg-clip-text animate-shimmer relative align-middle"
         style={{
-            backgroundImage: "linear-gradient(90deg, #F59E0B, #FBBF24, #F59E0B, #FBBF24)",
+            backgroundImage: "linear-gradient(90deg, #FFFF00, #FAFF00, #FFFF00, #FAFF00)",
             backgroundSize: "200% 100%",
         }}
         initial={{ opacity: 0, scale: 1.5, x: 20 }}
@@ -163,7 +164,7 @@ const AnimatedROI = React.memo(() => (
     >
         ROI
         <motion.span
-            className="absolute -inset-2 bg-yellow-500/20 blur-xl rounded-full -z-10"
+            className="absolute -inset-2 bg-[#FFFF00]/30 blur-xl rounded-full -z-10"
             animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 2, repeat: Infinity }}
         />
@@ -186,7 +187,7 @@ const AnimatedPunchline = React.memo(() => {
             <span
                 className="relative font-bold bg-clip-text text-transparent italic"
                 style={{
-                    backgroundImage: "linear-gradient(135deg, #FF4D8C 0%, #FF6B9D 40%, #8B5CF6 100%)",
+                    backgroundImage: "linear-gradient(135deg, #FFFF00 0%, #FAFF00 40%, #FFFFFF 100%)",
                     backgroundSize: "200% 100%",
                 }}
             >
@@ -208,9 +209,9 @@ const AnimatedPunchline = React.memo(() => {
 
             {/* Glowing Underline */}
             <motion.span
-                className="absolute -bottom-1 left-0 h-[3px] rounded-full shadow-[0_0_15px_rgba(255,77,140,0.8)]"
+                className="absolute -bottom-1 left-0 h-[3px] rounded-full shadow-[0_0_15px_rgba(255,255,0,0.8)]"
                 style={{
-                    background: "linear-gradient(90deg, transparent, #FF4D8C, #8B5CF6, transparent)",
+                    background: "linear-gradient(90deg, transparent, #FFFF00, #FFFFFF, transparent)",
                 }}
                 initial={{ width: "0%", opacity: 0 }}
                 animate={{ width: "100%", opacity: 1 }}
@@ -294,10 +295,10 @@ const HeroSection = () => {
                     whileTap={{ scale: 0.95 }}
                 >
                     {/* Pulsing Glow Background */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 group-hover:bg-gradient-to-l transition-all duration-500" />
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/20 blur-xl" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-neutral-900 via-[#FFFF00] to-neutral-900 group-hover:bg-gradient-to-l transition-all duration-500" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#FFFF00]/20 blur-xl" />
 
-                    <span className="relative z-10 flex items-center gap-3">
+                    <span className="relative z-10 flex items-center gap-3 text-white group-hover:text-[#FFFF00]">
                         Let&apos;s Create Magic
                         <motion.span
                             animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1.2, 1] }}
@@ -316,8 +317,8 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 3, duration: 1, repeat: Infinity, repeatType: "reverse" }}
             >
-                <div className="w-1 h-12 rounded-full bg-gradient-to-b from-purple-500 to-transparent" />
-                <span className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Scroll to explore</span>
+                <div className="w-1 h-12 rounded-full bg-gradient-to-b from-[#FFFF00] to-transparent" />
+                <span className="text-[10px] uppercase tracking-widest text-[#FFFF00]/40 font-bold">Scroll to explore</span>
             </motion.div>
         </section>
     );

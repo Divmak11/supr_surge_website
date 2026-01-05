@@ -134,7 +134,7 @@ const ContactFormSection = () => {
 
   if (isSubmitted) {
     return (
-      <section id="contact" className="relative py-16 sm:py-20 md:py-24 bg-white overflow-hidden">
+      <section id="contact" className="relative py-16 sm:py-20 md:py-24 bg-black overflow-hidden text-white">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -147,14 +147,14 @@ const ContactFormSection = () => {
             transition={{ delay: 0.3 }}
             className="mb-8"
           >
-            <CheckCircle className="w-24 h-24 text-accent-green mx-auto" />
+            <CheckCircle className="w-24 h-24 text-[#FFFF00] mx-auto" />
           </motion.div>
 
-          <h2 className="text-3xl md:text-5xl font-extrabold text-neutral-dark mb-6">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6">
             You&apos;re In! 🎉
           </h2>
 
-          <p className="text-xl md:text-2xl text-neutral-medium mb-8">
+          <p className="text-xl md:text-2xl text-neutral-400 mb-8">
             Team will reach out to you shortly. Time to make magic happen! ✨
           </p>
 
@@ -163,7 +163,7 @@ const ContactFormSection = () => {
               setIsSubmitted(false);
               setFormData({ name: "", email: "", website: "", mobile: "", marketingTypes: [] });
             }}
-            className="text-primary-purple font-bold hover:underline"
+            className="text-[#FFFF00] font-bold hover:underline"
           >
             Submit another query
           </button>
@@ -173,41 +173,41 @@ const ContactFormSection = () => {
   }
 
   return (
-    <section id="contact" className="relative py-16 sm:py-20 md:py-24 bg-white overflow-hidden">
+    <section id="contact" className="relative py-16 sm:py-20 md:py-24 bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
           {/* Left Side - Intro */}
           <div className="space-y-8 sticky top-24">
             <div>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-neutral-dark mb-6">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={dynamicPrompts[promptIndex]}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    className="block text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-highlight-pink"
+                    className="block text-transparent bg-clip-text bg-gradient-to-r from-[#FFFF00] to-[#FAFF00]"
                   >
                     {dynamicPrompts[promptIndex]}
                   </motion.span>
                 </AnimatePresence>
-                <span className="text-neutral-dark">Let&apos;s Talk!</span>
+                <span className="text-white">Let&apos;s Talk!</span>
               </h2>
 
-              <p className="text-xl text-neutral-medium leading-relaxed mb-8">
+              <p className="text-xl text-neutral-400 leading-relaxed mb-8">
                 Drop us a line and let&apos;s turn your brand into the next internet sensation.
                 From memes to mainstream – we&apos;ve got the secret sauce! 🌶️
               </p>
             </div>
 
             {/* Interactive Badge */}
-            <div className="hidden md:block bg-gradient-to-br from-primary-purple/10 to-accent-green/10 rounded-3xl p-8 border-2 border-dashed border-primary-purple/30 text-center">
+            <div className="hidden md:block bg-gradient-to-br from-[#FFFF00]/10 to-white/5 rounded-3xl p-8 border-2 border-dashed border-[#FFFF00]/30 text-center">
               <div className="text-4xl mb-4">🎯</div>
-              <p className="text-lg font-bold text-neutral-dark">Your message = Our mission</p>
+              <p className="text-lg font-bold text-white">Your message = Our mission</p>
               <div className="flex justify-center gap-3 mt-4">
-                <Heart className="w-6 h-6 text-highlight-pink" />
-                <Zap className="w-6 h-6 text-accent-green" />
-                <Sparkles className="w-6 h-6 text-primary-purple" />
+                <Heart className="w-6 h-6 text-[#FFFF00]/80" />
+                <Zap className="w-6 h-6 text-[#FFFF00]" />
+                <Sparkles className="w-6 h-6 text-white" />
               </div>
             </div>
           </div>
@@ -218,14 +218,14 @@ const ContactFormSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-white rounded-3xl shadow-2xl p-6 md:p-10 border border-neutral-gray/20"
+            className="bg-neutral-900 rounded-3xl shadow-2xl p-6 md:p-10 border border-white/5"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name */}
               <div>
-                <label className="block text-sm font-bold text-neutral-dark mb-2">Name</label>
+                <label className="block text-sm font-bold text-white mb-2">Name</label>
                 <div className="relative">
-                  <User className="absolute left-4 top-3.5 w-5 h-5 text-neutral-medium" />
+                  <User className="absolute left-4 top-3.5 w-5 h-5 text-neutral-400" />
                   <input
                     type="text"
                     value={formData.name}
@@ -233,8 +233,8 @@ const ContactFormSection = () => {
                     onFocus={() => setFocusedField("name")}
                     onBlur={() => setFocusedField(null)}
                     placeholder="Your name"
-                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-neutral-dark placeholder:text-neutral-medium/70 ${errors.name ? "border-error-red bg-error-red/5" :
-                      focusedField === "name" ? "border-primary-purple bg-primary-purple/5" : "border-neutral-gray bg-neutral-light"
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-white placeholder:text-neutral-500 ${errors.name ? "border-error-red bg-error-red/5" :
+                      focusedField === "name" ? "border-[#FFFF00] bg-[#FFFF00]/5" : "border-white/10 bg-neutral-800"
                       }`}
                   />
                 </div>
@@ -243,9 +243,9 @@ const ContactFormSection = () => {
 
               {/* Email */}
               <div>
-                <label className="block text-sm font-bold text-neutral-dark mb-2">Email</label>
+                <label className="block text-sm font-bold text-white mb-2">Email</label>
                 <div className="relative">
-                  <Mail className="absolute left-4 top-3.5 w-5 h-5 text-neutral-medium" />
+                  <Mail className="absolute left-4 top-3.5 w-5 h-5 text-neutral-400" />
                   <input
                     type="email"
                     value={formData.email}
@@ -253,8 +253,8 @@ const ContactFormSection = () => {
                     onFocus={() => setFocusedField("email")}
                     onBlur={() => setFocusedField(null)}
                     placeholder="your@email.com"
-                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-neutral-dark placeholder:text-neutral-medium/70 ${errors.email ? "border-error-red bg-error-red/5" :
-                      focusedField === "email" ? "border-primary-purple bg-primary-purple/5" : "border-neutral-gray bg-neutral-light"
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-white placeholder:text-neutral-500 ${errors.email ? "border-error-red bg-error-red/5" :
+                      focusedField === "email" ? "border-[#FFFF00] bg-[#FFFF00]/5" : "border-white/10 bg-neutral-800"
                       }`}
                   />
                 </div>
@@ -263,9 +263,9 @@ const ContactFormSection = () => {
 
               {/* Mobile */}
               <div>
-                <label className="block text-sm font-bold text-neutral-dark mb-2">Mobile Number</label>
+                <label className="block text-sm font-bold text-white mb-2">Mobile Number</label>
                 <div className="relative">
-                  <Phone className="absolute left-4 top-3.5 w-5 h-5 text-neutral-medium" />
+                  <Phone className="absolute left-4 top-3.5 w-5 h-5 text-neutral-400" />
                   <input
                     type="tel"
                     value={formData.mobile}
@@ -273,8 +273,8 @@ const ContactFormSection = () => {
                     onFocus={() => setFocusedField("mobile")}
                     onBlur={() => setFocusedField(null)}
                     placeholder="+91 98765 43210"
-                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-neutral-dark placeholder:text-neutral-medium/70 ${errors.mobile ? "border-error-red bg-error-red/5" :
-                      focusedField === "mobile" ? "border-primary-purple bg-primary-purple/5" : "border-neutral-gray bg-neutral-light"
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-white placeholder:text-neutral-500 ${errors.mobile ? "border-error-red bg-error-red/5" :
+                      focusedField === "mobile" ? "border-[#FFFF00] bg-[#FFFF00]/5" : "border-white/10 bg-neutral-800"
                       }`}
                   />
                 </div>
@@ -283,9 +283,9 @@ const ContactFormSection = () => {
 
               {/* Website */}
               <div>
-                <label className="block text-sm font-bold text-neutral-dark mb-2">Company Website</label>
+                <label className="block text-sm font-bold text-white mb-2">Company Website</label>
                 <div className="relative">
-                  <Globe className="absolute left-4 top-3.5 w-5 h-5 text-neutral-medium" />
+                  <Globe className="absolute left-4 top-3.5 w-5 h-5 text-neutral-400" />
                   <input
                     type="url"
                     value={formData.website}
@@ -293,7 +293,7 @@ const ContactFormSection = () => {
                     onFocus={() => setFocusedField("website")}
                     onBlur={() => setFocusedField(null)}
                     placeholder="https://brand.com"
-                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-neutral-dark placeholder:text-neutral-medium/70 ${focusedField === "website" ? "border-primary-purple bg-primary-purple/5" : "border-neutral-gray bg-neutral-light"
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 transition-all outline-none text-white placeholder:text-neutral-500 ${focusedField === "website" ? "border-[#FFFF00] bg-[#FFFF00]/5" : "border-white/10 bg-neutral-800"
                       }`}
                   />
                 </div>
@@ -301,22 +301,22 @@ const ContactFormSection = () => {
 
               {/* Marketing Type Checkboxes */}
               <div>
-                <label className="block text-sm font-bold text-neutral-dark mb-3">What are you looking for?</label>
+                <label className="block text-sm font-bold text-white mb-3">What are you looking for?</label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {marketingOptions.map((type) => (
                     <label key={type} className={`
                         flex items-center space-x-3 p-3 rounded-xl border-2 cursor-pointer transition-all
                         ${formData.marketingTypes.includes(type)
-                        ? "border-primary-purple bg-primary-purple/5"
-                        : "border-neutral-gray bg-neutral-light hover:border-primary-purple/30"}
+                        ? "border-[#FFFF00] bg-[#FFFF00]/10"
+                        : "border-white/10 bg-neutral-800 hover:border-[#FFFF00]/30"}
                     `}>
                       <input
                         type="checkbox"
                         checked={formData.marketingTypes.includes(type)}
                         onChange={() => toggleMarketingType(type)}
-                        className="w-5 h-5 text-primary-purple rounded focus:ring-primary-purple"
+                        className="w-5 h-5 text-[#FFFF00] rounded focus:ring-[#FFFF00] bg-neutral-700 border-white/20"
                       />
-                      <span className="text-sm font-medium text-neutral-dark">{type}</span>
+                      <span className="text-sm font-medium text-white">{type}</span>
                     </label>
                   ))}
                 </div>
@@ -328,7 +328,7 @@ const ContactFormSection = () => {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-primary-purple to-accent-green text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full bg-[#FFFF00] text-black py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-[#FFFF00]/20 hover:shadow-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? "Sending..." : "Let's Create Magic! ✨"}
               </motion.button>

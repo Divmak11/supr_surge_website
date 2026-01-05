@@ -1,15 +1,18 @@
 @import "tailwindcss";
 
-@theme {
+:root {
   /* Your design tokens (colors, fonts, etc.) go here */
-  --color-primary-purple: #8B5CF6;
-  --color-accent-green: #22C55E;
-  --color-highlight-pink: #EC4899;
-  --color-neutral-dark: #1F2937;
-  --color-neutral-medium: #4B5563;
+  /* New Black & Yellow Theme tokens */
+  --color-primary-yellow: #FFFF00;
+  --color-accent-yellow: #FAFF00;
+  --color-neutral-dark: #000000;
+  --color-neutral-medium: #1A1A1A;
   --color-neutral-light: #F9FAFB;
-  --color-neutral-gray: #D1D5DB;
+  --color-neutral-gray: #A0A0A0;
   --color-error-red: #EF4444;
+  --color-highlight-yellow: #FFFF00;
+  --color-accent-green: #22C55E;
+  /* Keeping for success states if needed, but primary is yellow */
 
   --font-sans: "Open Sans", sans-serif;
   --font-montserrat: "Montserrat", sans-serif;
@@ -386,11 +389,11 @@ body {
 
   0%,
   100% {
-    box-shadow: 0 0 8px 2px #EC4899;
+    box-shadow: 0 0 8px 2px #FFFF00;
   }
 
   50% {
-    box-shadow: 0 0 24px 8px #8B5CF6;
+    box-shadow: 0 0 24px 8px #FAFF00;
   }
 }
 

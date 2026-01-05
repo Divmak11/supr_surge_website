@@ -73,7 +73,7 @@ const FAQsSection = () => {
     };
 
     return (
-        <section className="relative py-16 sm:py-20 md:py-24 bg-neutral-dark overflow-hidden">
+        <section className="relative py-16 sm:py-20 md:py-24 bg-black overflow-hidden">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
                 {/* Section Header */}
                 <motion.div
@@ -83,11 +83,11 @@ const FAQsSection = () => {
                     viewport={{ once: true }}
                     className="text-center mb-12"
                 >
-                    <HelpCircle className="w-12 h-12 text-accent-green mx-auto mb-4" />
+                    <HelpCircle className="w-12 h-12 text-[#FFFF00] mx-auto mb-4" />
 
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
                         Got Questions?{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-green to-highlight-pink">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFFF00] to-[#FAFF00]">
                             We&apos;ve Got Answers!
                         </span>
                     </h2>
@@ -124,7 +124,7 @@ const FAQsSection = () => {
                                     transition={{ duration: 0.2 }}
                                     className="flex-shrink-0 ml-3"
                                 >
-                                    <ChevronDown className="w-5 h-5 text-accent-green" />
+                                    <ChevronDown className="w-5 h-5 text-[#FFFF00]" />
                                 </motion.div>
                             </button>
 
@@ -138,7 +138,7 @@ const FAQsSection = () => {
                                         className="overflow-hidden"
                                     >
                                         <div className="px-4 pb-4">
-                                            <div className="bg-white/5 rounded-lg p-3 border-l-4 border-accent-green">
+                                            <div className="bg-white/5 rounded-lg p-3 border-l-4 border-[#FFFF00]">
                                                 <p className="text-sm text-neutral-gray leading-relaxed">
                                                     {faq.answer}
                                                 </p>

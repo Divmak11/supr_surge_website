@@ -24,7 +24,7 @@ const testimonials: Testimonial[] = [
         content: "Brand & Butter transformed our digital presence completely. Their meme marketing strategy generated 5x more engagement than our traditional campaigns. Absolutely brilliant team!",
         rating: 5,
         avatar: "RS",
-        accentColor: "#FF4D8C",
+        accentColor: "#FFFF00",
     },
     {
         id: 2,
@@ -34,7 +34,7 @@ const testimonials: Testimonial[] = [
         content: "Working with them felt like having an in-house creative team. They understood our brand voice perfectly and delivered content that our audience truly resonated with.",
         rating: 5,
         avatar: "PP",
-        accentColor: "#8B5CF6",
+        accentColor: "#FAFF00",
     },
     {
         id: 3,
@@ -44,7 +44,7 @@ const testimonials: Testimonial[] = [
         content: "The ROI we achieved was incredible. Our influencer collaboration campaign reached 10M+ people in just 2 weeks. They know how to make content go viral!",
         rating: 5,
         avatar: "AM",
-        accentColor: "#22C55E",
+        accentColor: "#FFFF00",
     },
     {
         id: 4,
@@ -54,7 +54,7 @@ const testimonials: Testimonial[] = [
         content: "Their attention to detail and deep understanding of social trends is unmatched. Every campaign they delivered exceeded our expectations. Highly recommended!",
         rating: 5,
         avatar: "SR",
-        accentColor: "#FFD700",
+        accentColor: "#FFFF00",
     },
     {
         id: 5,
@@ -64,7 +64,7 @@ const testimonials: Testimonial[] = [
         content: "Best decision we made for our product launch. The meme-driven approach they suggested was perfect for our Gen-Z audience. 200K+ app downloads in the first month!",
         rating: 5,
         avatar: "VS",
-        accentColor: "#00D4FF",
+        accentColor: "#FFFF00",
     },
     {
         id: 6,
@@ -74,7 +74,7 @@ const testimonials: Testimonial[] = [
         content: "They don't just create content; they create conversations. Our social media engagement increased by 400% after partnering with Brand & Butter. Simply amazing!",
         rating: 5,
         avatar: "AK",
-        accentColor: "#FF6B9D",
+        accentColor: "#FAFF00",
     },
 ];
 
@@ -137,7 +137,7 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial; ind
                         >
                             <Star
                                 className="w-4 h-4 fill-current"
-                                style={{ color: '#FFD700' }}
+                                style={{ color: '#FFFF00' }}
                             />
                         </motion.div>
                     ))}
@@ -162,7 +162,7 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial; ind
                             {testimonial.name}
                         </h4>
                         <p className="text-xs sm:text-sm text-gray-400">
-                            {testimonial.role} • <span style={{ color: testimonial.accentColor }}>{testimonial.company}</span>
+                            {testimonial.role} • <span style={{ color: '#FFFF00' }}>{testimonial.company}</span>
                         </p>
                     </div>
                 </div>
@@ -217,7 +217,7 @@ const TestimonialsSection = () => {
         <section
             ref={sectionRef}
             id="testimonials"
-            className="relative bg-gradient-to-b from-[#0f0f14] via-[#12121a] to-[#0f0f14] py-16 sm:py-20 md:py-28 overflow-hidden"
+            className="relative bg-black py-16 sm:py-20 md:py-28 overflow-hidden"
         >
             {/* Background Elements */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -225,7 +225,7 @@ const TestimonialsSection = () => {
                 <motion.div
                     className="absolute w-64 h-64 sm:w-80 sm:h-80 rounded-full blur-3xl opacity-10"
                     style={{
-                        background: 'radial-gradient(circle, #8B5CF6 0%, transparent 70%)',
+                        background: 'radial-gradient(circle, #FFFF00 0%, transparent 70%)',
                         top: '5%',
                         right: '-10%',
                     }}
@@ -239,7 +239,7 @@ const TestimonialsSection = () => {
                 <motion.div
                     className="absolute w-48 h-48 sm:w-64 sm:h-64 rounded-full blur-3xl opacity-10"
                     style={{
-                        background: 'radial-gradient(circle, #FF4D8C 0%, transparent 70%)',
+                        background: 'radial-gradient(circle, #FAFF00 0%, transparent 70%)',
                         bottom: '10%',
                         left: '-5%',
                     }}
@@ -255,7 +255,7 @@ const TestimonialsSection = () => {
                 <div
                     className="absolute inset-0 opacity-[0.03]"
                     style={{
-                        backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                        backgroundImage: `linear-gradient(rgba(255, 255, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 0, 0.05) 1px, transparent 1px)`,
                         backgroundSize: '60px 60px',
                     }}
                 />
@@ -282,7 +282,7 @@ const TestimonialsSection = () => {
 
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
                         What Our{" "}
-                        <span className="bg-gradient-to-r from-highlight-pink via-primary-purple to-accent-green bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-[#FFFF00] via-[#FAFF00] to-white bg-clip-text text-transparent">
                             Partners
                         </span>{" "}
                         Say
@@ -335,7 +335,7 @@ const TestimonialsSection = () => {
                                     key={index}
                                     onClick={() => setActiveIndex(index)}
                                     className={`w-2 h-2 rounded-full transition-all duration-300 ${index === activeIndex
-                                        ? 'w-6 bg-highlight-pink'
+                                        ? 'w-6 bg-[#FFFF00]'
                                         : 'bg-white/30 hover:bg-white/50'
                                         }`}
                                     aria-label={`Go to testimonial ${index + 1}`}
@@ -364,17 +364,17 @@ const TestimonialsSection = () => {
                 >
                     <div className="inline-flex flex-wrap justify-center items-center gap-6 sm:gap-10 px-6 py-4 rounded-2xl bg-white/5 border border-white/10">
                         <div className="flex items-center gap-2">
-                            <span className="text-2xl sm:text-3xl font-black text-accent-green">50+</span>
+                            <span className="text-2xl sm:text-3xl font-black text-[#FFFF00]">50+</span>
                             <span className="text-xs sm:text-sm text-neutral-gray">Happy Clients</span>
                         </div>
                         <div className="w-px h-8 bg-white/20 hidden sm:block" />
                         <div className="flex items-center gap-2">
-                            <span className="text-2xl sm:text-3xl font-black text-highlight-pink">100+</span>
+                            <span className="text-2xl sm:text-3xl font-black text-white">100+</span>
                             <span className="text-xs sm:text-sm text-neutral-gray">Campaigns</span>
                         </div>
                         <div className="w-px h-8 bg-white/20 hidden sm:block" />
                         <div className="flex items-center gap-2">
-                            <span className="text-2xl sm:text-3xl font-black text-primary-purple">5★</span>
+                            <span className="text-2xl sm:text-3xl font-black text-[#FFFF00]">5★</span>
                             <span className="text-xs sm:text-sm text-neutral-gray">Average Rating</span>
                         </div>
                     </div>

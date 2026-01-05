@@ -70,7 +70,7 @@ const ShowcaseCard = ({
           />
 
           {/* Card Container */}
-          <div className="absolute inset-[2px] bg-gradient-to-br from-[#1a1a2e] via-[#16163a] to-[#0f0f20] rounded-2xl overflow-hidden">
+          <div className="absolute inset-[2px] bg-gradient-to-br from-[#000000] via-[#111111] to-[#000000] rounded-2xl overflow-hidden">
             {/* Decorative Elements */}
             <div
               className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 opacity-20"
@@ -92,7 +92,7 @@ const ShowcaseCard = ({
             />
             <motion.div
               className="absolute top-8 left-10 w-1.5 h-1.5 rounded-full opacity-40"
-              style={{ backgroundColor: '#22C55E' }}
+              style={{ backgroundColor: '#FFFFFF' }}
               animate={{ scale: [1, 1.4, 1], opacity: [0.4, 0.8, 0.4] }}
               transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
             />
@@ -188,7 +188,7 @@ const ShowcaseCard = ({
           <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(145deg, #1a1a2e 0%, #0f0f20 50%, ${accentColor}15 100%)`,
+              background: `linear-gradient(145deg, #000000 0%, #111111 50%, ${accentColor}15 100%)`,
             }}
           />
 
@@ -228,7 +228,7 @@ const ShowcaseCard = ({
                     key={idx}
                     className="flex items-start gap-2 bg-white/5 rounded-lg px-2.5 py-1.5"
                   >
-                    <span className="text-accent-green text-xs mt-0.5">✓</span>
+                    <span className="text-[#FFFF00] text-xs mt-0.5">✓</span>
                     <span className="text-xs text-neutral-gray leading-snug">{highlight}</span>
                   </div>
                 ))}

@@ -18,7 +18,7 @@ const projects = [
     metrics: [
       { value: "100M+", label: "YouTube Views", color: "#FF4D8C" },
       { value: "7 Days", label: "To Viral", color: "#22C55E" },
-      { value: "5M+", label: "Engagement", color: "#FFD700" },
+      { value: "5M+", label: "Engagement", color: "#FFFF00" },
       { value: "#1", label: "Trending", color: "#00D4FF" },
     ],
     highlights: [
@@ -34,11 +34,11 @@ const projects = [
     tagline: "IIFA Award Winner",
     description: "Strategic PR campaign that secured massive visibility for Raghav Juyal, culminating in an IIFA Award win with unprecedented social media engagement.",
     imageUrl: "/campaign_raghav_pr.png",
-    accentColor: "#FFD700",
+    accentColor: "#FFFF00",
     metrics: [
       { value: "40M+", label: "Impressions", color: "#FF4D8C" },
       { value: "800K", label: "Likes", color: "#22C55E" },
-      { value: "16M", label: "Reach", color: "#FFD700" },
+      { value: "16M", label: "Reach", color: "#FFFF00" },
       { value: "IIFA", label: "Award", color: "#8B5CF6" },
     ],
     highlights: [
@@ -57,7 +57,7 @@ const projects = [
     accentColor: "#22C55E",
     metrics: [
       { value: "1M+", label: "Impressions", color: "#22C55E" },
-      { value: "500K", label: "Reach", color: "#FFD700" },
+      { value: "500K", label: "Reach", color: "#FFFF00" },
       { value: "10K+", label: "Likes", color: "#FF4D8C" },
       { value: "200", label: "Pages", color: "#00D4FF" },
     ],
@@ -130,13 +130,13 @@ const ShowcaseSection = () => {
       {/* Background Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute w-96 h-96 rounded-full blur-3xl opacity-20 bg-purple-600/30"
+          className="absolute w-96 h-96 rounded-full blur-3xl opacity-20 bg-[#FFFF00]/30"
           animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
           transition={{ duration: 15, repeat: Infinity }}
           style={{ top: '10%', left: '-10%' }}
         />
         <motion.div
-          className="absolute w-80 h-80 rounded-full blur-3xl opacity-15 bg-pink-600/30"
+          className="absolute w-80 h-80 rounded-full blur-3xl opacity-15 bg-white/10"
           animate={{ x: [0, -40, 0], y: [0, -20, 0] }}
           transition={{ duration: 18, repeat: Infinity }}
           style={{ bottom: '20%', right: '-5%' }}
@@ -151,7 +151,7 @@ const ShowcaseSection = () => {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-            <Play className="w-4 h-4 text-highlight-pink" fill="currentColor" />
+            <Play className="w-4 h-4 text-[#FFFF00]" fill="currentColor" />
             <span className="text-sm text-neutral-gray">Success Stories</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-white mb-6">
@@ -228,7 +228,7 @@ const ShowcaseSection = () => {
                 {isActive && (
                   <motion.div
                     layoutId="glow"
-                    className="absolute -inset-4 bg-purple-500/20 rounded-[2.5rem] blur-3xl -z-10"
+                    className="absolute -inset-4 bg-[#FFFF00]/20 rounded-[2.5rem] blur-3xl -z-10"
                   />
                 )}
               </motion.div>
@@ -253,7 +253,7 @@ const ShowcaseSection = () => {
                 <button
                   key={idx}
                   onClick={() => navigateWithUnflip(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? "w-8 bg-purple-500" : "w-2 bg-white/20"
+                  className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? "w-8 bg-[#FFFF00]" : "w-2 bg-white/20"
                     }`}
                 />
               ))}
@@ -273,7 +273,7 @@ const ShowcaseSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-10 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-lg shadow-xl shadow-purple-500/20"
+            className="px-10 py-4 rounded-full bg-[#FFFF00] text-black font-bold text-lg shadow-xl shadow-[#FFFF00]/20"
           >
             Let&apos;s Make Magic! ✨
           </motion.button>

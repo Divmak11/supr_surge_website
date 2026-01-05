@@ -18,7 +18,7 @@ const Footer = () => {
               <span
                 className="text-2xl md:text-3xl font-black tracking-tight whitespace-nowrap"
                 style={{
-                  background: "linear-gradient(135deg, #F5A623 0%, #FFD93D 50%, #F5A623 100%)",
+                  background: "linear-gradient(135deg, #FFFF00 0%, #FAFF00 50%, #FFFF00 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   fontFamily: "'Montserrat', sans-serif",
@@ -39,7 +39,7 @@ const Footer = () => {
 
             {/* Address */}
             <div className="flex items-center gap-2 text-neutral-gray hover:text-white transition-colors">
-              <MapPin className="w-4 h-4 text-accent-green flex-shrink-0" />
+              <MapPin className="w-4 h-4 text-[#FFFF00] flex-shrink-0" />
               <span className="text-sm">La Galaxia Newtech, Greater Noida West, UP</span>
             </div>
 
@@ -48,7 +48,7 @@ const Footer = () => {
               href="mailto:connect@brandandbutter.in"
               className="flex items-center gap-2 text-neutral-gray hover:text-white transition-colors"
             >
-              <Mail className="w-4 h-4 text-primary-purple flex-shrink-0" />
+              <Mail className="w-4 h-4 text-[#FFFF00] flex-shrink-0" />
               <span className="text-sm">connect@brandandbutter.in</span>
             </a>
 
@@ -57,7 +57,7 @@ const Footer = () => {
               href="https://www.instagram.com/_brandandbutter_?igsh=MTRkb3A2emZvdHE2aw=="
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-highlight-pink hover:text-white transition-colors"
+              className="flex items-center gap-2 text-[#FFFF00] hover:text-white transition-colors"
             >
               <Instagram className="w-4 h-4 flex-shrink-0" />
               <span className="text-sm font-medium">Follow us on Instagram</span>

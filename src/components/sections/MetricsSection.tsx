@@ -46,7 +46,7 @@ const metrics = [
 
 const MetricsSection = () => {
     return (
-        <section id="metrics" className="relative py-16 sm:py-20 md:py-24 bg-neutral-light overflow-hidden">
+        <section id="metrics" className="relative py-16 sm:py-20 md:py-24 bg-black overflow-hidden">
             <div className="container mx-auto px-4">
                 {/* Section Header */}
                 <motion.div
@@ -56,13 +56,13 @@ const MetricsSection = () => {
                     viewport={{ once: true }}
                     className="text-center mb-12 sm:mb-16"
                 >
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-neutral-dark mb-4">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
                         Numbers That{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-purple to-accent-green">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFFF00] to-[#FAFF00]">
                             Don&apos;t Lie
                         </span>
                     </h2>
-                    <p className="text-base sm:text-lg text-neutral-medium max-w-2xl mx-auto">
+                    <p className="text-base sm:text-lg text-neutral-400 max-w-2xl mx-auto">
                         Real results from real campaigns. Here&apos;s the proof that our creative chaos works.
                     </p>
                 </motion.div>
@@ -79,31 +79,31 @@ const MetricsSection = () => {
                             whileHover={{ scale: 1.03, y: -5 }}
                             className="group"
                         >
-                            <div className="relative bg-white rounded-2xl p-6 shadow-lg border-4 border-dashed border-primary-purple/20 hover:border-primary-purple/50 transition-all duration-300 text-center">
+                            <div className="relative bg-neutral-900 rounded-2xl p-6 shadow-lg border-4 border-dashed border-[#FFFF00]/20 hover:border-[#FFFF00]/50 transition-all duration-300 text-center">
                                 {/* Floating Emoji */}
-                                <div className="absolute -top-3 right-4 text-2xl bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md border-2 border-accent-green">
+                                <div className="absolute -top-3 right-4 text-2xl bg-neutral-800 rounded-full w-10 h-10 flex items-center justify-center shadow-md border-2 border-[#FFFF00]">
                                     {item.emoji}
                                 </div>
 
                                 {/* Icon */}
                                 <div className="flex justify-center mb-4">
-                                    <div className="w-14 h-14 bg-gradient-to-br from-primary-purple to-accent-green rounded-xl flex items-center justify-center shadow-lg">
-                                        <item.icon className="w-7 h-7 text-white" />
+                                    <div className="w-14 h-14 bg-gradient-to-br from-[#FFFF00] to-[#FAFF00] rounded-xl flex items-center justify-center shadow-lg">
+                                        <item.icon className="w-7 h-7 text-black" />
                                     </div>
                                 </div>
 
                                 {/* Metric Number */}
                                 <div className="mb-2">
-                                    <div className="text-3xl sm:text-4xl font-black text-neutral-dark">
+                                    <div className="text-3xl sm:text-4xl font-black text-white">
                                         <LiveCounter from={0} to={item.metric} suffix={item.suffix} />
                                     </div>
-                                    <p className="text-base font-bold text-neutral-dark mt-1">
+                                    <p className="text-base font-bold text-[#FFFF00] mt-1">
                                         {item.label}
                                     </p>
                                 </div>
 
                                 {/* Description */}
-                                <p className="text-sm text-neutral-medium">
+                                <p className="text-sm text-neutral-400">
                                     {item.description}
                                 </p>
                             </div>
@@ -119,7 +119,7 @@ const MetricsSection = () => {
                     viewport={{ once: true }}
                     className="text-center mt-12"
                 >
-                    <p className="text-base text-neutral-medium mb-4">
+                    <p className="text-base text-neutral-400 mb-4">
                         Ready to add your brand to these stats?
                     </p>
                     <motion.button
@@ -129,7 +129,7 @@ const MetricsSection = () => {
                             const element = document.querySelector("#contact");
                             if (element) element.scrollIntoView({ behavior: "smooth" });
                         }}
-                        className="bg-gradient-to-r from-primary-purple to-accent-green text-white px-8 py-4 rounded-full font-bold text-lg"
+                        className="bg-[#FFFF00] text-black px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-[#FFFF00]/20"
                     >
                         Let&apos;s Break Some Records! 🏆
                     </motion.button>
