@@ -1,6 +1,6 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import React from "react";
+import { motion, useMotionTemplate, useMotionValue, MotionValue } from "framer-motion";
 
 const services = [
   { title: "Meme Marketing", emoji: "😂", color: "#FFFF00", desc: "Viral content that spreads like wildfire", accent: "from-neutral-900 to-yellow-900/20" },
@@ -14,7 +14,7 @@ const services = [
   { title: "Social Media Management", emoji: "📱", color: "#FFFF00", desc: "Your brand, always on point", accent: "from-neutral-900 to-yellow-900/20" },
 ];
 
-const ServiceCard = ({ service, index, mouseX, mouseY }: { service: typeof services[0], index: number, mouseX: any, mouseY: any }) => {
+const ServiceCard = ({ service, mouseX, mouseY }: { service: typeof services[0], mouseX: MotionValue<number>, mouseY: MotionValue<number> }) => {
   return (
     <div
       className="group relative rounded-3xl cursor-pointer"
@@ -282,7 +282,6 @@ const ServicesSection = () => {
             <ServiceCard
               key={service.title}
               service={service}
-              index={index}
               mouseX={mouseX}
               mouseY={mouseY}
             />
